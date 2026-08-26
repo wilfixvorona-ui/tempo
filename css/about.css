@@ -1,0 +1,498 @@
+/* ===== About hero ===== */
+.about-hero {
+  background: var(--color-white);
+  padding-block: calc(var(--header-height) + clamp(24px, 3vw, 48px)) clamp(48px, 6vw, 96px);
+}
+
+.about-hero__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 80px);
+}
+
+.about-hero__content {
+  max-width: 520px;
+  flex-shrink: 0;
+}
+
+.about-hero__title {
+  font-size: clamp(30px, 3vw, 56px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: clamp(12px, 1.5vw, 20px);
+}
+
+.about-hero__subtitle {
+  font-size: clamp(14px, 1.2vw, 18px);
+  margin-bottom: clamp(24px, 2.6vw, 40px);
+}
+
+.about-hero__media {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
+.about-hero__logo {
+  width: clamp(260px, 32vw, 620px);
+  height: auto;
+  
+}
+
+/* ===== Story / Growth shared layout =====
+   Секції "Як все почалось" і "Як росло" (та їхній текст) стилізовані тут.
+   Текст самих речень редагуй в about.html — тут тільки вигляд (розмір/колір/відступи). */
+.about-story,
+.about-growth {
+  padding-block: clamp(40px, 5vw, 96px);
+  border-bottom: 1px solid #ececec;
+
+}
+
+.about-story__inner {
+  display: flex;
+  gap: clamp(32px, 5vw, 96px);
+  align-items: center;
+  
+}
+
+.about-growth__inner {
+  display: flex;
+  gap: clamp(32px, 5vw, 96px);
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Заголовки "Як все почалось" / "Як росло" / "Принципи які не змінились" —
+   один спільний розмір для всіх трьох (щоб заголовки секцій були однакові).
+   font-size = розмір, line-height = міжрядковий інтервал, letter-spacing = міжлітерний інтервал,
+   margin-bottom = відступ під заголовком до тексту нижче. Колір не заданий — беруться чорний з body. */
+.about-story__title,
+.about-growth__title,
+.about-principles__title {
+  font-size: clamp(30px, 3vw, 56px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: clamp(20px, 2.4vw, 36px);
+}
+
+/* Ширина текстової колонки "Як все почалось" відносно фото поруч (flex-пропорція,
+   не max-width): збільш число — колонка тексту стане ширшою, фото — вужчим. */
+.about-story__text {
+  flex: 1.1;
+  min-width: 0;
+}
+
+.about-story__paragraphs p:not(:last-child) {
+  margin-bottom: 1em;
+}
+
+.about-story__paragraphs p {
+  color: #1e1e1e;
+}
+
+.about-story__paragraphs p.about-story__paragraphs--muted {
+  color: #757575;
+}
+
+.about-growth__list {
+  color: #1e1e1e;
+}
+
+/* Розмір/колір/line-height/letter-spacing самих абзаців "Як все почалось" і списку
+   років "Як росло" беруться зі спільного класу .text-body — це CSS-змінні
+   --body-font-size / --body-color / --body-line-height / --body-letter-spacing
+   на початку css/style.css (шукай ":root" і коментар "Body text"). Зміниш там —
+   зміниться одразу і тут, і в схожих текстах на інших сторінках. */
+
+.about-story__media {
+  flex: 0.82;
+  min-width: 0;
+}
+
+.about-story__media img {
+  width: 100%;
+  height: auto;
+  border-radius: clamp(16px, 1.6vw, 24px);
+  object-fit: cover;
+}
+
+.about-growth__media {
+  flex: 0 0 clamp(200px, 24vw, 400px);
+}
+
+.about-growth__media img {
+  width: 100%;
+  height: auto;
+}
+
+/* Ширина текстової колонки "Як росло" — тут це max-width (560px), бо блок притиснутий
+   до правого краю секції. Зменш/збільш 560px, щоб зробити колонку вужчою/ширшою. */
+.about-growth__text {
+  flex: 0 1 560px;
+  min-width: 0;
+}
+
+.about-growth__list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1vw, 14px);
+}
+
+.about-growth__list li {
+  position: relative;
+  padding-left: 1.2em;
+}
+
+.about-growth__list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--color-text);
+}
+
+/* ===== Principles ===== */
+.about-principles {
+  padding-block: clamp(40px, 5vw, 96px);
+}
+
+/* max-width = ширина абзацу "Принципи які не змінились" (зменш/збільш 900px).
+   Розмір/колір/line-height/letter-spacing тексту — той самий спільний .text-body,
+   див. коментар вище і --body-* змінні у css/style.css. */
+.about-principles__text {
+  max-width: 800px;
+  color: #000;
+
+}
+
+/* ===== Today band ===== */
+.about-today {
+  background: #000000;
+  color: var(--color-white);
+  padding-block: clamp(56px, 7vw, 120px);
+  text-align: center;
+}
+
+.about-today__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Заголовок "Сьогодні" — тут усе прописано прямо (не через спільні змінні):
+   font-size = розмір, color = колір (var(--color-accent) = лаймовий бренд-колір),
+   letter-spacing = міжлітерний інтервал, margin-bottom = відступ до тексту нижче. */
+.about-today__title {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: clamp(28px, 2.6vw, 48px);
+  letter-spacing: -0.02em;
+  color: var(--color-accent);
+  margin-bottom: clamp(16px, 2vw, 28px);
+}
+
+/* Абзац "Сьогодні": font-size/line-height/letter-spacing/font-family беруться
+   зі спільного класу .subheading (він і так висить на цьому <p> в HTML) — той
+   самий розмір, що й в описі "Як все почалось". Тут задаємо лише те, що для
+   .subheading не підходить на чорному фоні:
+   max-width = ширина абзацу (текст центрується під ним),
+   color = колір (напівпрозорий білий rgba(255,255,255,0.75) — постав 1 замість 0.75
+   для суцільного білого). */
+.about-today__text {
+  max-width: 760px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Shared "Дивитись більше" footer used by .fleet and .about-team */
+.about-section-footer {
+  display: flex;
+  justify-content: center;
+  padding-top: clamp(16px, 1.7vw, 33px);
+}
+
+/* ===== Fleet ===== */
+.fleet {
+  background: var(--color-white);
+  padding-block: clamp(48px, 6vw, 116px) clamp(40px, 5vw, 96px);
+}
+
+.fleet__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 80px);
+  margin-bottom: clamp(32px, 3.6vw, 64px);
+}
+
+.fleet__title {
+  font-size: clamp(30px, 3vw, 56px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.fleet__desc {
+  max-width: 420px;
+  padding-top: clamp(4px, 0.6vw, 12px);
+  flex-shrink: 0;
+}
+
+.fleet__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(12px, 1.3vw, 24px);
+  margin-bottom: clamp(32px, 3.6vw, 64px);
+}
+
+.fleet__item {
+  aspect-ratio: 430 / 384;
+  border-radius: clamp(8px, 1vw, 16px);
+  overflow: hidden;
+}
+
+.fleet__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.fleet__item:hover img {
+  transform: scale(1.08);
+}
+
+/* ===== About team ===== */
+.about-team {
+  background: var(--color-white);
+  padding-block: clamp(48px, 6vw, 116px) clamp(40px, 5vw, 96px);
+}
+
+.about-team__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 80px);
+  margin-bottom: clamp(32px, 3.6vw, 64px);
+}
+
+.about-team__title {
+  font-size: clamp(30px, 3vw, 56px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.about-team__desc {
+  max-width: 420px;
+  padding-top: clamp(4px, 0.6vw, 12px);
+  flex-shrink: 0;
+}
+
+.about-team__list-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.about-team__vector {
+  position: absolute;
+  top: 0;
+  width: clamp(70px, 6.8vw, 131px);
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.about-team__vector--green {
+  left: 0;
+}
+
+.about-team__vector--black {
+  right: 0;
+  top: clamp(20px, 3vw, 60px);
+}
+
+.team-list {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid #ababab;
+}
+
+.team-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2vw, 32px);
+  padding-block: clamp(18px, 2.2vw, 34px);
+  border-bottom: 1px solid #ababab;
+}
+
+.team-row__avatar {
+  display: block;
+  width: clamp(70px, 8.5vw, 160px);
+  aspect-ratio: 1 / 1;
+  border-radius: clamp(8px, 0.8vw, 12px);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.team-row__avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.team-row__avatar:hover img {
+  transform: scale(1.08);
+}
+
+.team-row__name {
+  font-family: 'Onest', sans-serif;
+  font-weight: 400;
+  font-size: clamp(20px, 1.9vw, 34px);
+  color: var(--color-text);
+  flex-shrink: 0;
+  min-width: clamp(180px, 18vw, 320px);
+}
+
+.team-row__role {
+  flex: 1;
+  color: #9a9a9a;
+  font-family: 'Onest', sans-serif;
+  font-weight: 400;
+  font-size: clamp(16px, 1.4vw, 24px);
+  line-height: 1.4;
+  text-align: right;
+  padding-right: clamp(16px, 2vw, 32px);
+}
+
+.team-row__phone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(44px, 3.5vw, 68px);
+  height: clamp(44px, 3.5vw, 68px);
+  border: 1.5px solid var(--color-text);
+  border-radius: 50%;
+  color: var(--color-text);
+  flex-shrink: 0;
+  transition: background-color .2s ease, color .2s ease;
+}
+
+.team-row__phone:hover {
+  background: var(--color-text);
+  color: var(--color-white);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: clamp(28px, 3.4vw, 66px) 0;
+  margin-top: clamp(48px, 5.4vw, 96px);
+  margin-bottom: clamp(32px, 3.6vw, 64px);
+}
+
+.team-photo {
+  display: block;
+  width: clamp(140px, 11vw, 205px);
+  aspect-ratio: 7 / 6;
+  border-radius: 8px;
+  overflow: hidden;
+  justify-self: start;
+}
+
+.team-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.team-photo:hover img {
+  transform: scale(1.08);
+}
+
+/* ряди */
+.team-grid > :nth-child(-n+4)                { grid-row: 1; }
+.team-grid > :nth-child(n+5):nth-child(-n+8) { grid-row: 2; }
+.team-grid > :nth-child(n+9)                 { grid-row: 3; }
+
+/* колонки */
+.team-grid > :nth-child(1)  { grid-column: 1; }
+.team-grid > :nth-child(2)  { grid-column: 3; }
+.team-grid > :nth-child(3)  { grid-column: 5; }
+.team-grid > :nth-child(4)  { grid-column: 7; }
+
+.team-grid > :nth-child(5)  { grid-column: 2; }
+.team-grid > :nth-child(6)  { grid-column: 4; }
+.team-grid > :nth-child(7)  { grid-column: 6; }
+.team-grid > :nth-child(8)  { grid-column: 8; }
+
+.team-grid > :nth-child(9)  { grid-column: 1; }
+.team-grid > :nth-child(10) { grid-column: 3; }
+.team-grid > :nth-child(11) { grid-column: 5; }
+.team-grid > :nth-child(12) { grid-column: 7; }
+
+/* ===== Small screens fallback ===== */
+@media (max-width: 860px) {
+  .about-hero__inner {
+    flex-direction: column-reverse;
+    text-align: left;
+  }
+
+  .about-story__inner,
+  .about-growth__inner {
+    flex-direction: column;
+  }
+
+  .about-growth__inner {
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+  }
+
+  .about-growth__media {
+    flex: 0 0 auto;
+    max-width: 220px;
+  }
+
+  .about-growth__text {
+    flex: 1 1 auto;
+    max-width: none;
+  }
+
+  .fleet__header,
+  .about-team__header {
+    flex-direction: column;
+  }
+
+  .fleet__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .team-row {
+    flex-wrap: wrap;
+  }
+
+  .team-row__role {
+    text-align: left;
+    padding-right: 0;
+    flex-basis: 100%;
+    order: 3;
+    padding-left: calc(clamp(70px, 8.5vw, 160px) + clamp(16px, 2vw, 32px));
+  }
+
+}
+
+@media (max-width: 700px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .team-grid > * {
+    grid-row: auto;
+    grid-column: auto;
+    justify-self: center;
+  }
+}

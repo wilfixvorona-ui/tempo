@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Про нас — Tempo</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Onest:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/about.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo">
+        <span class="logo__icon" aria-hidden="true"></span>
+        <span>TEMPO</span>
+      </a>
+
+      <nav class="nav">
+        <ul class="nav__list">
+          <li><a href="index.html" class="nav__link">Головна</a></li>
+          <li><a href="about.html" class="nav__link is-active">Про нас</a></li>
+          <li><a href="prices.html" class="nav__link">Ціни</a></li>
+          <li><a href="reviews.html" class="nav__link">Відгуки</a></li>
+        </ul>
+
+        <button class="lang-switch" type="button">
+          <span class="lang-switch__flag" aria-hidden="true">
+            <svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
+              <rect width="20" height="7" fill="#005BBB"/>
+              <rect y="7" width="20" height="7" fill="#FFD500"/>
+            </svg>
+          </span>
+          <svg class="lang-switch__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </nav>
+
+      <a href="tel:+380011234567" class="phone">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 2h3l1.5 4-2 1.5a10 10 0 0 0 4.5 4.5l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A14 14 0 0 1 2.5 3.6 1.5 1.5 0 0 1 4 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+        </svg>
+        +380 (01) 123 45 67
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="about-hero" data-header-theme="light">
+      <div class="container about-hero__inner">
+        <div class="about-hero__content">
+          <h1 class="about-hero__title">Про нас</h1>
+          <p class="about-hero__subtitle subheading">Розкажемо про компанію, команду й автопарк — усе, що варто знати перед першим рейсом.</p>
+          <a href="#fleet" class="btn btn--primary">Подивитись автопарк</a>
+        </div>
+        <div class="about-hero__media">
+          <img src="assets/img/logo-for-aboutus.png" alt="" class="about-hero__logo">
+        </div>
+      </div>
+    </section>
+
+    <!--
+      СЕКЦІЯ "ЯК ВСЕ ПОЧАЛОСЬ"
+      Стилі цієї секції — у css/about.css, шукай блок "===== Story / Growth shared layout =====".
+      - Заголовок "Як все почалось" → клас .about-story__title
+          розмір шрифту: font-size (зараз clamp(30px, 3vw, 56px) — спільний з усіма заголовками секцій)
+          колір: успадковується з body (чорний), окремо не заданий
+          line-height, letter-spacing: рядки line-height / letter-spacing в тому ж правилі
+      - Три абзаци тексту нижче → клас .about-story__paragraphs (і спільний .text-body)
+          розмір/колір/line-height/letter-spacing для .text-body заданий один раз
+          через CSS-змінні у :root на початку style.css: --body-font-size, --body-color,
+          --body-line-height, --body-letter-spacing (шукай "Body text" у style.css)
+          ширина тексту (max-width) окремо не задана — блок займає всю свою колонку,
+          ширину колонки міняй через .about-story__text { flex: ... } нижче
+    -->
+    <section class="about-story" data-header-theme="light">
+      <div class="container about-story__inner">
+        <div class="about-story__text">
+          <h2 class="about-story__title" data-anim="wipe">Як все почалось</h2>
+          <div class="about-story__paragraphs text-body">
+            <p>Андрій Ковальчук до 2013 року працював логістом у великій експедиторській компанії. Щодня бачив те саме: замовлення бралося, потім передавалося субпідряднику, той — ще комусь, і на третій руці вантаж губився в графіку. Клієнт дзвонив і питав, де машина, а відповіді не було ні в кого.</p>
+            <p class="about-story__paragraphs--muted">Тарас Бенько прийшов з іншого боку — водій-міжнародник з десятилітнім стажем, знав маршрути, кордони й те, як реально працює документообіг на митниці.</p>
+            <p>У 2013 році вони купили два вживані тягачі й почали возити на Польщу самі. Правило було одне з першого дня: вантаж, який ми взяли, везе наша машина.</p>
+          </div>
+        </div>
+        <div class="about-story__media">
+          <img src="assets/img/how-it-started.png" alt="Засновники компанії Tempo біля вантажівки">
+        </div>
+      </div>
+    </section>
+
+    <!--
+      СЕКЦІЯ "ЯК РОСЛО"
+      Стилі — там само, css/about.css, той самий блок "Story / Growth shared layout".
+      - Заголовок "Як росло" → клас .about-growth__title (той самий розмір, що й у .about-story__title —
+          вони описані одним спільним правилом ".about-story__title, .about-growth__title, .about-principles__title")
+      - Список років (2013, 2015, 2017...) → клас .about-growth__list (і спільний .text-body,
+          розмір/колір/line-height — ті самі CSS-змінні --body-*, що й вище)
+      - Ширина текстового блоку та відступ від фото: .about-growth__text { flex: 0 1 560px }
+          зміни число 560px, щоб зробити колонку тексту ширшою/вужчою
+    -->
+    <section class="about-growth" data-header-theme="light">
+      <div class="container about-growth__inner">
+        <div class="about-growth__media">
+          <img src="assets/img/grow-about.png" alt="">
+        </div>
+        <div class="about-growth__text">
+          <h2 class="about-growth__title" data-anim="wipe">Як росло</h2>
+          <ul class="about-growth__list text-body" data-anim="stagger">
+            <li>2013 — два тягачі, один напрямок: Польща</li>
+            <li>2015 — перші рефрижератори, вихід на Чехію та Словаччину</li>
+            <li>2017 — 10 машин, відкриття власної ремонтної бази</li>
+            <li>2019 — ADR-допуск, перевезення небезпечних вантажів</li>
+            <li>2021 — 20 машин, Німеччина, Італія, Нідерланди</li>
+            <li>2023 — низькорамні трали для негабариту</li>
+            <li>2026 — 30 машин, 16 країн ЄС</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      СЕКЦІЯ "ПРИНЦИПИ ЯКІ НЕ ЗМІНИЛИСЬ"
+      Стилі — css/about.css, блок "===== Principles =====".
+      - Заголовок → клас .about-principles__title (той самий спільний розмір, див. вище)
+      - Абзац тексту → клас .about-principles__text (і спільний .text-body — розмір/колір/
+          line-height/letter-spacing через змінні --body-* у style.css)
+      - Ширина абзацу (щоб текст не розтягувався на весь екран) → .about-principles__text { max-width: 900px }
+          зменш/збільш 900px, щоб зробити колонку вужчою/ширшою
+    -->
+    <section class="about-principles" data-header-theme="light">
+      <div class="container">
+        <h2 class="about-principles__title" data-anim="wipe">Принципи які не змінились</h2>
+        <p class="about-principles__text text-body">Ми не передаємо вантаж субпідрядникам. Водії працюють у штаті, а не залучаються під рейс. Ціна фіксується в договорі й не змінюється після підписання. Документи оформлюємо на своєму боці — саме тому вантаж не стоїть на кордоні через чужу помилку.</p>
+      </div>
+    </section>
+
+    <!--
+      СЕКЦІЯ "СЬОГОДНІ" (темний блок)
+      Стилі — css/about.css, блок "===== Today band =====".
+      - Заголовок "Сьогодні" → клас .about-today__title, прописаний прямо в правилі:
+          font-size: clamp(28px, 2.6vw, 48px)
+          color: var(--color-accent) — це лаймовий колір бренду
+          letter-spacing: -0.02em
+      - Абзац тексту → клас .about-today__text, підключений до спільного .subheading
+          (css/style.css) — розмір/колір/line-height/letter-spacing ті самі, що й у
+          всіх підзаголовків сайту (--subheading-* змінні). В about.css лишається
+          тільки max-width: 760px — ширина абзацу, текст центрується під ним.
+    -->
+    <section class="about-today" data-header-theme="dark">
+      <div class="container about-today__inner">
+        <h2 class="about-today__title">Сьогодні</h2>
+        <p class="about-today__text subheading">48 людей у команді: 32 водії, 6 логістів, 4 менеджери з роботи з клієнтами, спеціаліст з митного оформлення, механіки, бухгалтерія. Офіс і ремонтна база у Львові. Машини на маршрутах щодня.</p>
+      </div>
+    </section>
+
+    <section class="fleet" data-header-theme="light">
+      <div class="container fleet__header">
+        <h2 class="fleet__title" data-anim="wipe">Наш<br>автопарк</h2>
+        <p class="fleet__desc subheading" data-anim="wipe">Увесь транспорт власний, не орендований. Середній вік машин — 4 роки, обслуговування на власній базі.</p>
+      </div>
+
+      <div class="container">
+        <div class="fleet__grid" id="fleetGrid" data-anim="stagger">
+          <div class="fleet__item"><img src="assets/img/track1.png" alt="Тентовий напівпричіп"></div>
+          <div class="fleet__item"><img src="assets/img/track2.png" alt="Низькорамний трал"></div>
+          <div class="fleet__item"><img src="assets/img/track3.png" alt="Тентовий напівпричіп під ADR"></div>
+          <div class="fleet__item"><img src="assets/img/track4.png" alt="Малотоннажний фургон"></div>
+          <div class="fleet__item"><img src="assets/img/track5.png" alt="Рефрижератор"></div>
+          <div class="fleet__item"><img src="assets/img/track1.png" alt="Тентовий напівпричіп"></div>
+          <div class="fleet__item"><img src="assets/img/track2.png" alt="Низькорамний трал"></div>
+          <div class="fleet__item"><img src="assets/img/track3.png" alt="Тентовий напівпричіп під ADR"></div>
+          <div class="fleet__item"><img src="assets/img/track4.png" alt="Малотоннажний фургон"></div>
+          <div class="fleet__item"><img src="assets/img/track5.png" alt="Рефрижератор"></div>
+          <div class="fleet__item"><img src="assets/img/track1.png" alt="Тентовий напівпричіп"></div>
+          <div class="fleet__item"><img src="assets/img/track2.png" alt="Низькорамний трал"></div>
+        </div>
+
+        <div class="about-section-footer">
+          <button type="button" class="btn btn--dark" id="fleetLoadMoreBtn">Дивитись більше</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-team" data-header-theme="light">
+      <div class="container about-team__header">
+        <h2 class="about-team__title" data-anim="wipe">Познайомтесь з<br>нашою командою</h2>
+        <p class="about-team__desc subheading" data-anim="wipe">48 людей у штаті — водії, логісти, менеджери й ті, хто оформлює документи. Кожен рейс веде конкретна людина.</p>
+      </div>
+
+      <div class="about-team__list-wrap">
+        <img src="assets/img/small-green-vector.png" alt="" class="about-team__vector about-team__vector--green" aria-hidden="true">
+        <img src="assets/img/small-black-vector.png" alt="" class="about-team__vector about-team__vector--black" aria-hidden="true">
+
+        <div class="container">
+          <ul class="team-list" data-anim="stagger">
+            <li class="team-row">
+              <span class="team-row__avatar"><img src="assets/img/Rectangle 24.png" alt="Андрій Ковальчук"></span>
+              <span class="team-row__name">Андрій Ковальчук</span>
+              <span class="team-row__role">співзасновник, директор</span>
+              <a href="tel:+380011234567" class="team-row__phone" aria-label="Подзвонити Андрію Ковальчуку">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 2h3l1.5 4-2 1.5a10 10 0 0 0 4.5 4.5l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A14 14 0 0 1 2.5 3.6 1.5 1.5 0 0 1 4 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </li>
+            <li class="team-row">
+              <span class="team-row__avatar"><img src="assets/img/Rectangle 24-1.png" alt="Тарас Бенько"></span>
+              <span class="team-row__name">Тарас Бенько</span>
+              <span class="team-row__role">співзасновник, керівник відділу логістики</span>
+              <a href="tel:+380011234567" class="team-row__phone" aria-label="Подзвонити Тарасу Бенько">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 2h3l1.5 4-2 1.5a10 10 0 0 0 4.5 4.5l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A14 14 0 0 1 2.5 3.6 1.5 1.5 0 0 1 4 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </li>
+            <li class="team-row">
+              <span class="team-row__avatar"><img src="assets/img/Rectangle 24-2.png" alt="Оксана Дмитрук"></span>
+              <span class="team-row__name">Оксана Дмитрук</span>
+              <span class="team-row__role">комерційна директорка</span>
+              <a href="tel:+380011234567" class="team-row__phone" aria-label="Подзвонити Оксані Дмитрук">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 2h3l1.5 4-2 1.5a10 10 0 0 0 4.5 4.5l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A14 14 0 0 1 2.5 3.6 1.5 1.5 0 0 1 4 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </li>
+            <li class="team-row">
+              <span class="team-row__avatar"><img src="assets/img/Rectangle 24-3.png" alt="Дмитро Левчук"></span>
+              <span class="team-row__name">Дмитро Левчук</span>
+              <span class="team-row__role">керівник відділу роботи з клієнтами</span>
+              <a href="tel:+380011234567" class="team-row__phone" aria-label="Подзвонити Дмитру Левчуку">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 2h3l1.5 4-2 1.5a10 10 0 0 0 4.5 4.5l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A14 14 0 0 1 2.5 3.6 1.5 1.5 0 0 1 4 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </li>
+            <li class="team-row">
+              <span class="team-row__avatar"><img src="assets/img/Rectangle 24-4.png" alt="Роман Сташек"></span>
+              <span class="team-row__name">Роман Сташек</span>
+              <span class="team-row__role">спеціаліст з митного оформлення</span>
+              <a href="tel:+380011234567" class="team-row__phone" aria-label="Подзвонити Роману Сташеку">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 2h3l1.5 4-2 1.5a10 10 0 0 0 4.5 4.5l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A14 14 0 0 1 2.5 3.6 1.5 1.5 0 0 1 4 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="team-grid" data-anim="stagger">
+          <span class="team-photo"><img src="assets/img/Rectangle 24-5.png" alt=""></span>
+          <span class="team-photo"><img src="assets/img/Rectangle 26.png" alt=""></span>
+          <span class="team-photo"><img src="assets/img/Rectangle 28.png" alt=""></span>
+          <span class="team-photo"><img src="assets/img/Rectangle 30.png" alt=""></span>
+          <span class="team-photo"><img src="assets/img/Rectangle 31.png" alt=""></span>
+          <span class="team-photo"><img src="assets/img/Rectangle 32.png" alt=""></span>
+          <span class="team-photo"><img src="assets/img/Rectangle 33.png" alt=""></span>
+          <span class="team-photo"><img src="assets/img/Rectangle 34.png" alt=""></span>
+          <span class="team-photo"><img src="assets/img/Rectangle 35.png" alt=""></span>
+          <span class="team-photo"><img src="assets/img/Rectangle 36.png" alt=""></span>
+          <span class="team-photo"><img src="assets/img/Rectangle 38.png" alt=""></span>
+          <span class="team-photo"><img src="assets/img/Rectangle 39.png" alt=""></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact" data-header-theme="light">
+      <img src="assets/img/vector-green2.png" alt="" class="contact__vector contact__vector--green" aria-hidden="true">
+      <img src="assets/img/vector-black2.png" alt="" class="contact__vector contact__vector--black" aria-hidden="true">
+
+      <div class="container">
+        <div class="contact-card">
+          <h2 class="contact-card__title" data-anim="wipe">Залишити заявку</h2>
+          <p class="contact-card__subtitle subheading" data-anim="wipe">Відповідаємо протягом години в робочий час</p>
+
+          <form class="contact-form" data-anim="stagger">
+            <div class="contact-form__row">
+              <div class="contact-form__field">
+                <label for="aboutFromCity">Звідки (місто або область)</label>
+                <input type="text" id="aboutFromCity" name="fromCity" placeholder="Київ">
+              </div>
+              <div class="contact-form__field">
+                <label for="aboutCargoType">Тип вантажу</label>
+                <select id="aboutCargoType" name="cargoType">
+                  <option value="" disabled selected>Оберіть тип</option>
+                  <option value="tent">Тентовий</option>
+                  <option value="fridge">Рефрижератор</option>
+                  <option value="trawl">Тральний</option>
+                  <option value="adr">ADR</option>
+                  <option value="groupage">Збірний</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="contact-form__row">
+              <div class="contact-form__field">
+                <label for="aboutToCity">Куди (місто або область)</label>
+                <input type="text" id="aboutToCity" name="toCity" placeholder="Париж">
+              </div>
+              <div class="contact-form__field">
+                <label for="aboutCargoWeight">Приблизна вага або об'єм вантажу</label>
+                <input type="text" id="aboutCargoWeight" name="cargoWeight" placeholder="10 тон">
+              </div>
+            </div>
+
+            <div class="contact-form__row">
+              <div class="contact-form__field">
+                <label for="aboutClientName">Ваше ім'я</label>
+                <input type="text" id="aboutClientName" name="clientName" placeholder="Данило">
+              </div>
+              <div class="contact-form__field">
+                <label for="aboutClientPhone">Ваш номер</label>
+                <input type="tel" id="aboutClientPhone" name="clientPhone" placeholder="+380 (XX) XXX XX XX">
+              </div>
+            </div>
+
+            <div class="contact-form__submit">
+              <button type="submit" class="btn btn--dark">Відправити форму</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" data-header-theme="light">
+    <div class="container footer__top">
+      <div class="footer__brand">
+        <a href="index.html" class="logo">
+          <img src="assets/img/tempo-logo-plus-text.png" alt="Tempo">
+        </a>
+        <p class="footer__tagline">Міжнародні вантажні перевезення Україна — ЄС з 2013 року</p>
+        <div class="footer__social">
+          <a href="#" class="footer__social-link" aria-label="Instagram"><img src="assets/icons/ri_instagram-fill.png" alt=""></a>
+          <a href="#" class="footer__social-link" aria-label="Facebook"><img src="assets/icons/ic_baseline-facebook.png" alt=""></a>
+          <a href="#" class="footer__social-link" aria-label="Telegram"><img src="assets/icons/ic_sharp-telegram.png" alt=""></a>
+          <a href="#" class="footer__social-link" aria-label="LinkedIn"><img src="assets/icons/mdi_linkedin.png" alt=""></a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h3 class="footer__col-title">Навігація</h3>
+        <ul class="footer__list">
+          <li><a href="index.html">Головна</a></li>
+          <li><a href="about.html">Про нас</a></li>
+          <li><a href="prices.html">Ціни</a></li>
+          <li><a href="reviews.html">Відгуки</a></li>
+        </ul>
+        <div class="footer__flags" aria-hidden="true">
+          <svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
+            <rect width="20" height="7" fill="#005BBB"/>
+            <rect y="7" width="20" height="7" fill="#FFD500"/>
+          </svg>
+          <svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
+            <rect width="20" height="14" fill="#012169"/>
+            <path d="M0 0L20 14M20 0L0 14" stroke="#fff" stroke-width="2"/>
+            <path d="M8.5 0V14M0 7H20" stroke="#fff" stroke-width="3"/>
+            <path d="M8.5 0V14M0 7H20" stroke="#C8102E" stroke-width="1.4"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h3 class="footer__col-title">Перевезення</h3>
+        <ul class="footer__list">
+          <li><a href="#">Тентові</a></li>
+          <li><a href="#">Рефрижератори</a></li>
+          <li><a href="#">Тральні</a></li>
+          <li><a href="#">ADR</a></li>
+          <li><a href="#">Збірні</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h3 class="footer__col-title">Документи</h3>
+        <ul class="footer__list">
+          <li><a href="#">Політика конфіденційності</a></li>
+          <li><a href="#">Умови надання послуг</a></li>
+          <li><a href="#">Ліцензія на міжнародні перевезення</a></li>
+          <li><a href="#">Дозвіл ЄКМТ</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer__contacts">
+      <span class="footer__contact-item">
+        <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 16s6-5.5 6-9.5A6 6 0 0 0 3 6.5C3 10.5 9 16 9 16Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+          <circle cx="9" cy="6.5" r="2" stroke="currentColor" stroke-width="1.3"/>
+        </svg>
+        вул. Транспортна, 47, м. Львів, 79000
+      </span>
+      <span class="footer__contact-item">
+        <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 2h3l1.5 4-2 1.5a10 10 0 0 0 4.5 4.5l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A14 14 0 0 1 2.5 3.6 1.5 1.5 0 0 1 4 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+        </svg>
+        +380 (67) 123 45 67
+      </span>
+      <span class="footer__contact-item">
+        <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="4" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M2.5 5l6.5 5 6.5-5" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+        </svg>
+        logistics@tempo.com.ua
+      </span>
+    </div>
+
+    <p class="footer__copyright">© <span id="footerYear">2026</span> Tempo - всі права захищено</p>
+
+    <img src="assets/img/TEMPO.png" alt="" class="footer__watermark" aria-hidden="true">
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
