@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tempo — Freight delivery from Ukraine to EU countries</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Onest:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo">
+        <span class="logo__icon" aria-hidden="true"></span>
+        <span>TEMPO</span>
+      </a>
+
+      <nav class="nav">
+        <ul class="nav__list">
+          <li><a href="index.html" class="nav__link is-active">Home</a></li>
+          <li><a href="about.html" class="nav__link">About us</a></li>
+          <li><a href="prices.html" class="nav__link">Pricing</a></li>
+          <li><a href="reviews.html" class="nav__link">Reviews</a></li>
+        </ul>
+
+        <div class="lang-switch">
+          <button class="lang-switch__btn" type="button" aria-expanded="false" aria-haspopup="true">
+            <span class="lang-switch__flag" aria-hidden="true">
+              <img src="../assets/img/uk-flag.png" alt="">
+            </span>
+            <svg class="lang-switch__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul class="lang-switch__menu">
+            <li><a href="../index.html" class="lang-switch__option">
+              <svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" class="lang-switch__option-flag">
+                <rect width="20" height="7" fill="#005BBB"/>
+                <rect y="7" width="20" height="7" fill="#FFD500"/>
+              </svg>
+              Українська
+            </a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <a href="tel:+380011234567" class="phone">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 2h3l1.5 4-2 1.5a10 10 0 0 0 4.5 4.5l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A14 14 0 0 1 2.5 3.6 1.5 1.5 0 0 1 4 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+        </svg>
+        +380 (01) 123 45 67
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" data-header-theme="dark">
+      <video class="hero__video" autoplay muted loop playsinline id="heroVideo">
+        <source src="../assets/video/main-video.mp4" type="video/mp4">
+      </video>
+      <div class="hero__overlay"></div>
+
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <h1 class="hero__title">Freight delivery from Ukraine to EU countries within a fixed timeframe</h1>
+          <p class="hero__subtitle subheading">Own fleet, GPS tracking, customs clearance. You know the exact unloading date before the truck leaves.</p>
+          <a href="#contact" class="btn btn--primary">Get a quote</a>
+        </div>
+      </div>
+
+      <div class="hero__progress" aria-hidden="true">
+        <div class="hero__progress-fill" id="videoProgress"></div>
+      </div>
+    </section>
+
+    <section class="countries" data-header-theme="light">
+      <div class="container countries__header">
+        <h2 class="countries__title" data-anim="wipe">Countries<br>we deliver to</h2>
+        <p class="countries__desc subheading" data-anim="wipe">We work with 16 EU countries. Routes are established, trucks run regularly, so there is no need to wait until a full load is collected.</p>
+      </div>
+
+      <div class="countries__grid" data-anim="stagger">
+        <div class="country-card">
+          <img src="../assets/img/germany.png" alt="Germany" class="country-card__flag">
+          <div class="country-card__overlay">
+            <div class="country-card__info">
+              <span class="country-card__label">Delivery time:</span>
+              <span class="country-card__days">3–5 days</span>
+              <ul class="country-card__cities">
+                <li>Berlin</li><li>Hamburg</li><li>Munich</li><li>Cologne</li><li>Frankfurt</li><li>Stuttgart</li>
+              </ul>
+            </div>
+            <h3 class="country-card__name">Germany</h3>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <img src="../assets/img/france.png" alt="France" class="country-card__flag">
+          <div class="country-card__overlay">
+            <div class="country-card__info">
+              <span class="country-card__label">Delivery time:</span>
+              <span class="country-card__days">6–8 days</span>
+              <ul class="country-card__cities">
+                <li>Paris</li><li>Lyon</li><li>Marseille</li><li>Toulouse</li><li>Nice</li><li>Nantes</li><li>Strasbourg</li>
+              </ul>
+            </div>
+            <h3 class="country-card__name">France</h3>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <img src="../assets/img/italy.png" alt="Italy" class="country-card__flag">
+          <div class="country-card__overlay">
+            <div class="country-card__info">
+              <span class="country-card__label">Delivery time:</span>
+              <span class="country-card__days">5–7 days</span>
+              <ul class="country-card__cities">
+                <li>Milan</li><li>Rome</li><li>Turin</li><li>Bologna</li><li>Verona</li><li>Naples</li><li>Florence</li>
+              </ul>
+            </div>
+            <h3 class="country-card__name">Italy</h3>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <img src="../assets/img/hungary.png" alt="Hungary" class="country-card__flag">
+          <div class="country-card__overlay">
+            <div class="country-card__info">
+              <span class="country-card__label">Delivery time:</span>
+              <span class="country-card__days">2–3 days</span>
+              <ul class="country-card__cities">
+                <li>Budapest</li><li>Debrecen</li><li>Szeged</li><li>Miskolc</li><li>Győr</li><li>Pécs</li>
+              </ul>
+            </div>
+            <h3 class="country-card__name">Hungary</h3>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <img src="../assets/img/switzland.png" alt="Switzerland" class="country-card__flag">
+          <div class="country-card__overlay">
+            <div class="country-card__info">
+              <span class="country-card__label">Delivery time:</span>
+              <span class="country-card__days">5–7 days</span>
+              <ul class="country-card__cities">
+                <li>Zurich</li><li>Geneva</li><li>Basel</li><li>Bern</li><li>Lausanne</li><li>Lucerne</li>
+              </ul>
+            </div>
+            <h3 class="country-card__name">Switzerland</h3>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <img src="../assets/img/spain.png" alt="Spain" class="country-card__flag">
+          <div class="country-card__overlay">
+            <div class="country-card__info">
+              <span class="country-card__label">Delivery time:</span>
+              <span class="country-card__days">8–10 days</span>
+              <ul class="country-card__cities">
+                <li>Madrid</li><li>Barcelona</li><li>Valencia</li><li>Zaragoza</li><li>Seville</li><li>Bilbao</li>
+              </ul>
+            </div>
+            <h3 class="country-card__name">Spain</h3>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <img src="../assets/img/poland.png" alt="Poland" class="country-card__flag">
+          <div class="country-card__overlay">
+            <div class="country-card__info">
+              <span class="country-card__label">Delivery time:</span>
+              <span class="country-card__days">2–3 days</span>
+              <ul class="country-card__cities">
+                <li>Warsaw</li><li>Krakow</li><li>Wrocław</li><li>Poznań</li><li>Gdańsk</li><li>Łódź</li><li>Katowice</li>
+              </ul>
+            </div>
+            <h3 class="country-card__name">Poland</h3>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <img src="../assets/img/romania.png" alt="Romania" class="country-card__flag">
+          <div class="country-card__overlay">
+            <div class="country-card__info">
+              <span class="country-card__label">Delivery time:</span>
+              <span class="country-card__days">3–4 days</span>
+              <ul class="country-card__cities">
+                <li>Bucharest</li><li>Cluj-Napoca</li><li>Timișoara</li><li>Iași</li><li>Constanța</li><li>Brașov</li>
+              </ul>
+            </div>
+            <h3 class="country-card__name">Romania</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="countries__footer">
+        <a href="#" class="btn btn--dark">View more</a>
+      </div>
+    </section>
+
+    <section class="carry" data-header-theme="light">
+      <div class="container carry__header">
+        <h2 class="carry__title" data-anim="wipe">What we<br>carry</h2>
+        <p class="carry__desc subheading" data-anim="wipe">Curtain-side trailers, refrigerated trailers, low-loaders for oversized cargo. We take both full loads and shipments from a single pallet.</p>
+      </div>
+
+      <div class="accordion" data-anim="stagger">
+        <div class="accordion-item">
+          <button class="accordion-item__header" type="button" aria-expanded="false">
+            <h3 class="accordion-item__title">Standard cargo</h3>
+            <p class="accordion-item__preview">curtain-side trailers, 20-22 t, 86-92 m³</p>
+            <span class="accordion-item__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 10H17M17 10L11 4M17 10L11 16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="accordion-item__panel">
+            <div class="accordion-item__panel-inner">
+              <div class="accordion-item__content">
+                <p>Curtain-side semi-trailer, 20–22 t, 86–92 m³, 33 europallets. Loading from the top, side or rear — the tarp and side rails come off, so long cargo and pallet-loaded equipment fit in easily. We carry building materials, furniture, appliances, packaged goods and components. Strapping and corner protectors are included in the price, anti-slip mats on request. Standard Poland–Germany direction — 2–5 days.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-item__header" type="button" aria-expanded="false">
+            <h3 class="accordion-item__title">Food and pharmaceuticals</h3>
+            <p class="accordion-item__preview">refrigerated trailers, from -20°C to +25°C</p>
+            <span class="accordion-item__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 10H17M17 10L11 4M17 10L11 16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="accordion-item__panel">
+            <div class="accordion-item__panel-inner">
+              <div class="accordion-item__content">
+                <p>Refrigerated trailers, 18–20 t, 76–82 m³, from -20°C to +25°C. Every truck has a temperature logger: the client gets a sensor report after the trip, not just the driver's word. Frozen and chilled food, confectionery, beverages, pharmaceuticals, cosmetics. Multi-temperature partitions for two zones in one truck. The fridge unit keeps running in the border queue too — we factor that into the trip cost instead of billing it separately later.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-item__header" type="button" aria-expanded="false">
+            <h3 class="accordion-item__title">Equipment and oversized cargo</h3>
+            <p class="accordion-item__preview">low-loader trailers</p>
+            <span class="accordion-item__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 10H17M17 10L11 4M17 10L11 16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="accordion-item__panel">
+            <div class="accordion-item__panel-inner">
+              <div class="accordion-item__content">
+                <p>Low-loader trailers up to 40 t. Height up to 4.3 m, width up to 3.5 m, length up to 24 m. Machine tools, construction and agricultural equipment, generators, steel structures, transformers. We handle the permits ourselves: on average 3–5 working days for a route through 2–3 countries. We plan the route around the specific load dimensions — checking bridges, tunnels and interchanges in advance, not finding out on the road.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-item__header" type="button" aria-expanded="false">
+            <h3 class="accordion-item__title">Dangerous goods</h3>
+            <p class="accordion-item__preview">ADR permits, certified drivers</p>
+            <span class="accordion-item__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 10H17M17 10L11 4M17 10L11 16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="accordion-item__panel">
+            <div class="accordion-item__panel-inner">
+              <div class="accordion-item__content">
+                <p>ADR certified since 2019. Tankers of 25–30 m³ and curtain-side semi-trailers for packaged ADR goods. Classes 2, 3, 4, 5, 6, 8, 9. Drivers hold ADR certificates, we have an in-house dangerous goods safety adviser (DGSA), and trucks carry a full emergency kit. We prepare the ADR documents and emergency cards. The client provides the safety data sheet — everything else is on our side.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-item__header" type="button" aria-expanded="false">
+            <h3 class="accordion-item__title">Small shipments</h3>
+            <p class="accordion-item__preview">groupage from a single pallet</p>
+            <span class="accordion-item__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 10H17M17 10L11 4M17 10L11 16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="accordion-item__panel">
+            <div class="accordion-item__panel-inner">
+              <div class="accordion-item__content">
+                <p>Groupage shipments from a single europallet. You only pay for the space you take: €80–150 per pallet up to 800 kg, or €50–90 per cubic metre. No need to wait for a full truck — routes to Poland, Germany and Czechia run on a weekly schedule. Delivery takes 1–3 days longer than a dedicated truck because of loading and unloading stops along the way.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="why" data-header-theme="light">
+      <div class="container why__header">
+        <h2 class="why__title" data-anim="wipe">Why the delivery date holds</h2>
+        <p class="why__desc subheading" data-anim="wipe">A fixed timeframe is not a promise, it is a result of how the work is set up. Here are four things that affect it</p>
+      </div>
+
+      <div class="why__list">
+        <div class="container" data-anim="stagger">
+          <div class="why-item">
+            <span class="why-item__line" aria-hidden="true"></span>
+            <span class="why-item__number">01</span>
+            <div class="why-item__body">
+              <h3 class="why-item__title">Own fleet, no subcontractors</h3>
+              <p class="why-item__desc text-body">We do not hand your cargo to another carrier mid-route. The truck that collected the cargo delivers it to the unloading point. This means the timeframe depends on our schedule, not on when a subcontractor finds a free vehicle.</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <span class="why-item__line" aria-hidden="true"></span>
+            <span class="why-item__number">02</span>
+            <div class="why-item__body">
+              <h3 class="why-item__title">In-house drivers</h3>
+              <p class="why-item__desc text-body">Our drivers work at the company permanently, they are not hired for a specific trip. They know the routes, know the border requirements and they do not go silent. We plan the schedule in advance, so the truck departs on the agreed date, not when a free driver turns up.</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <span class="why-item__line" aria-hidden="true"></span>
+            <span class="why-item__number">03</span>
+            <div class="why-item__body">
+              <h3 class="why-item__title">We handle the paperwork</h3>
+              <p class="why-item__desc text-body">The most common cause of border delays is an error in the documents. We prepare CMR, invoices, export declarations and ADR documentation on our side and check everything before departure. Cargo does not sit at customs because of an incorrectly filled form.</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <span class="why-item__line" aria-hidden="true"></span>
+            <span class="why-item__number">04</span>
+            <div class="why-item__body">
+              <h3 class="why-item__title">Real-time GPS tracking</h3>
+              <p class="why-item__desc text-body">You can see where the truck is without calls and follow-ups. If a delay occurs on the route — a border queue, weather, roadworks — you find out immediately, not after the fact. That gives you time to warn your consignee in advance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="steps" data-header-theme="dark">
+      <div class="container steps__inner">
+        <div class="steps__aside">
+          <h2 class="steps__title">How the<br>process works<br><span class="steps__title-accent">step by step</span></h2>
+          <img src="../assets/img/tempo-logo-stroke-only.png" alt="" class="steps__watermark" aria-hidden="true">
+        </div>
+
+        <div class="steps__timeline">
+          <div class="steps__track" aria-hidden="true">
+            <div class="steps__track-fill" id="stepsTrackFill"></div>
+          </div>
+
+          <ol class="steps__list">
+            <li class="steps__item">
+              <span class="steps__circle">1</span>
+              <div class="steps__card">
+                <h3 class="steps__card-title">Request</h3>
+                <p class="steps__card-desc text-body">You tell us where the cargo goes from and to, what it is and in what volume. Approximate figures are enough — we will confirm weight and dimensions along the way. We reply within an hour during working hours.</p>
+              </div>
+            </li>
+
+            <li class="steps__item">
+              <span class="steps__circle">2</span>
+              <div class="steps__card">
+                <h3 class="steps__card-title">Quote and contract</h3>
+                <p class="steps__card-desc text-body">We send the price, delivery time and vehicle type. The price is fixed — no surcharges for demurrage or fuel after signing. If everything suits you, we sign the contract and put the trip in the schedule.</p>
+              </div>
+            </li>
+
+            <li class="steps__item">
+              <span class="steps__circle">3</span>
+              <div class="steps__card">
+                <h3 class="steps__card-title">Loading</h3>
+                <p class="steps__card-desc text-body">The truck arrives on the agreed date. We prepare the CMR and export documents, check the cargo securing and send you photos of the loaded vehicle.</p>
+              </div>
+            </li>
+
+            <li class="steps__item">
+              <span class="steps__circle">4</span>
+              <div class="steps__card">
+                <h3 class="steps__card-title">Delivery</h3>
+                <p class="steps__card-desc text-body">You receive a GPS tracking link and updates at every stage — departure, border, arrival. After unloading we send you the signed documents.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="achievements" data-header-theme="dark">
+      <div class="container achievements__grid">
+        <div class="achievement">
+          <span class="achievement__number" data-target="10" data-suffix="+">0+</span>
+          <p class="achievement__label">years on international routes</p>
+        </div>
+        <div class="achievement">
+          <span class="achievement__number" data-target="48" data-suffix="">0</span>
+          <p class="achievement__label">trucks in our own fleet</p>
+        </div>
+        <div class="achievement">
+          <span class="achievement__number" data-target="16" data-suffix="">0</span>
+          <p class="achievement__label">EU countries</p>
+        </div>
+        <div class="achievement">
+          <span class="achievement__number" data-target="97" data-suffix="%">0%</span>
+          <p class="achievement__label">of deliveries within the agreed timeframe</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="reviews" data-header-theme="light">
+      <div class="reviews__marquee reviews__marquee--row1">
+        <div class="reviews__track">
+          <div class="reviews__set">
+            <article class="review-card">
+              <div class="review-card__top">
+                <div class="review-card__stars" aria-hidden="true">
+                  <img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-grey.png" alt="" class="star-icon">
+                </div>
+                <span class="review-card__score">4<span class="review-card__score-max">/5</span></span>
+              </div>
+              <p class="review-card__text text-body">We needed to urgently send a shipment to Romania and had just two days for everything. They found a truck, handled the paperwork and got it out on time. Not every carrier is willing to take on such deadlines.</p>
+              <div class="review-card__footer">
+                <img src="../assets/img/user-icon.png" alt="" class="review-card__avatar">
+                <span class="review-card__name">Dmytro Lysenko</span>
+                <img src="../assets/img/google-logo.png" alt="Google" class="review-card__platform">
+              </div>
+            </article>
+
+            <article class="review-card">
+              <div class="review-card__top">
+                <div class="review-card__stars" aria-hidden="true">
+                  <img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-grey.png" alt="" class="star-icon">
+                </div>
+                <span class="review-card__score">4<span class="review-card__score-max">/5</span></span>
+              </div>
+              <p class="review-card__text text-body">We regularly ship consolidated loads to Italy. It's convenient that they accept shipments starting from a single pallet — previously we either had to wait for a full truckload or pay extra. They stick to the schedule.</p>
+              <div class="review-card__footer">
+                <img src="../assets/img/user-icon.png" alt="" class="review-card__avatar">
+                <span class="review-card__name">Tetiana Hrytsenko</span>
+                <img src="../assets/img/logos_facebook.png" alt="Facebook" class="review-card__platform">
+              </div>
+            </article>
+
+            <article class="review-card">
+              <div class="review-card__top">
+                <div class="review-card__stars" aria-hidden="true">
+                  <img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon">
+                </div>
+                <span class="review-card__score">5<span class="review-card__score-max">/5</span></span>
+              </div>
+              <p class="review-card__text text-body">We transported chemicals, an ADR shipment. We used to have problems with this — half the companies simply don't have the clearance. Here everything was ready: labeling, permits, a certified driver. We crossed the border without delays.</p>
+              <div class="review-card__footer">
+                <img src="../assets/img/user-icon.png" alt="" class="review-card__avatar">
+                <span class="review-card__name">Ihor Savchenko</span>
+                <img src="../assets/img/logos_facebook.png" alt="Facebook" class="review-card__platform">
+              </div>
+            </article>
+          </div>
+
+          <div class="reviews__set" aria-hidden="true">
+            <article class="review-card">
+              <div class="review-card__top">
+                <div class="review-card__stars" aria-hidden="true">
+                  <img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-grey.png" alt="" class="star-icon">
+                </div>
+                <span class="review-card__score">4<span class="review-card__score-max">/5</span></span>
+              </div>
+              <p class="review-card__text text-body">We needed to urgently send a shipment to Romania and had just two days for everything. They found a truck, handled the paperwork and got it out on time. Not every carrier is willing to take on such deadlines.</p>
+              <div class="review-card__footer">
+                <img src="../assets/img/user-icon.png" alt="" class="review-card__avatar">
+                <span class="review-card__name">Dmytro Lysenko</span>
+                <img src="../assets/img/google-logo.png" alt="Google" class="review-card__platform">
+              </div>
+            </article>
+
+            <article class="review-card">
+              <div class="review-card__top">
+                <div class="review-card__stars" aria-hidden="true">
+                  <img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-grey.png" alt="" class="star-icon">
+                </div>
+                <span class="review-card__score">4<span class="review-card__score-max">/5</span></span>
+              </div>
+              <p class="review-card__text text-body">We regularly ship consolidated loads to Italy. It's convenient that they accept shipments starting from a single pallet — previously we either had to wait for a full truckload or pay extra. They stick to the schedule.</p>
+              <div class="review-card__footer">
+                <img src="../assets/img/user-icon.png" alt="" class="review-card__avatar">
+                <span class="review-card__name">Tetiana Hrytsenko</span>
+                <img src="../assets/img/logos_facebook.png" alt="Facebook" class="review-card__platform">
+              </div>
+            </article>
+
+            <article class="review-card">
+              <div class="review-card__top">
+                <div class="review-card__stars" aria-hidden="true">
+                  <img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon">
+                </div>
+                <span class="review-card__score">5<span class="review-card__score-max">/5</span></span>
+              </div>
+              <p class="review-card__text text-body">We transported chemicals, an ADR shipment. We used to have problems with this — half the companies simply don't have the clearance. Here everything was ready: labeling, permits, a certified driver. We crossed the border without delays.</p>
+              <div class="review-card__footer">
+                <img src="../assets/img/user-icon.png" alt="" class="review-card__avatar">
+                <span class="review-card__name">Ihor Savchenko</span>
+                <img src="../assets/img/logos_facebook.png" alt="Facebook" class="review-card__platform">
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <div class="reviews__marquee reviews__marquee--row2">
+        <div class="reviews__track">
+          <div class="reviews__set">
+            <article class="review-card">
+              <div class="review-card__top">
+                <div class="review-card__stars" aria-hidden="true">
+                  <img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon">
+                </div>
+                <span class="review-card__score">4.9<span class="review-card__score-max">/5</span></span>
+              </div>
+              <p class="review-card__text text-body">We ship textiles to Spain. What we liked was that the price was quoted upfront and it didn't change on the final invoice. No surcharges for fuel or downtime, as often happens elsewhere.</p>
+              <div class="review-card__footer">
+                <img src="../assets/img/user-icon.png" alt="" class="review-card__avatar">
+                <span class="review-card__name">Oksana Kovalchuk</span>
+                <img src="../assets/img/logos_facebook.png" alt="Facebook" class="review-card__platform">
+              </div>
+            </article>
+
+            <article class="review-card">
+              <div class="review-card__top">
+                <div class="review-card__stars" aria-hidden="true">
+                  <img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon">
+                </div>
+                <span class="review-card__score">4.9<span class="review-card__score-max">/5</span></span>
+              </div>
+              <p class="review-card__text text-body">We transport construction materials to Poland roughly once every two weeks. The truck arrives on the agreed date — not once has the schedule slipped in a year and a half. That matters most to us, because a crew is waiting on site.</p>
+              <div class="review-card__footer">
+                <img src="../assets/img/user-icon.png" alt="" class="review-card__avatar">
+                <span class="review-card__name">Roman Shevchuk</span>
+                <img src="../assets/img/google-logo.png" alt="Google" class="review-card__platform">
+              </div>
+            </article>
+
+            <article class="review-card">
+              <div class="review-card__top">
+                <div class="review-card__stars" aria-hidden="true">
+                  <img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon">
+                </div>
+                <span class="review-card__score">4.9<span class="review-card__score-max">/5</span></span>
+              </div>
+              <p class="review-card__text text-body">We ship textiles to Spain. What we liked was that the price was quoted upfront and it didn't change on the final invoice. No surcharges for fuel or downtime, as often happens elsewhere.</p>
+              <div class="review-card__footer">
+                <img src="../assets/img/user-icon.png" alt="" class="review-card__avatar">
+                <span class="review-card__name">Viktoriia Panasiuk</span>
+                <img src="../assets/img/google-logo.png" alt="Google" class="review-card__platform">
+              </div>
+            </article>
+          </div>
+
+          <div class="reviews__set" aria-hidden="true">
+            <article class="review-card">
+              <div class="review-card__top">
+                <div class="review-card__stars" aria-hidden="true">
+                  <img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon">
+                </div>
+                <span class="review-card__score">4.9<span class="review-card__score-max">/5</span></span>
+              </div>
+              <p class="review-card__text text-body">We ship textiles to Spain. What we liked was that the price was quoted upfront and it didn't change on the final invoice. No surcharges for fuel or downtime, as often happens elsewhere.</p>
+              <div class="review-card__footer">
+                <img src="../assets/img/user-icon.png" alt="" class="review-card__avatar">
+                <span class="review-card__name">Oksana Kovalchuk</span>
+                <img src="../assets/img/logos_facebook.png" alt="Facebook" class="review-card__platform">
+              </div>
+            </article>
+
+            <article class="review-card">
+              <div class="review-card__top">
+                <div class="review-card__stars" aria-hidden="true">
+                  <img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon">
+                </div>
+                <span class="review-card__score">4.9<span class="review-card__score-max">/5</span></span>
+              </div>
+              <p class="review-card__text text-body">We transport construction materials to Poland roughly once every two weeks. The truck arrives on the agreed date — not once has the schedule slipped in a year and a half. That matters most to us, because a crew is waiting on site.</p>
+              <div class="review-card__footer">
+                <img src="../assets/img/user-icon.png" alt="" class="review-card__avatar">
+                <span class="review-card__name">Roman Shevchuk</span>
+                <img src="../assets/img/google-logo.png" alt="Google" class="review-card__platform">
+              </div>
+            </article>
+
+            <article class="review-card">
+              <div class="review-card__top">
+                <div class="review-card__stars" aria-hidden="true">
+                  <img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon"><img src="../assets/img/star-yellow.png" alt="" class="star-icon">
+                </div>
+                <span class="review-card__score">4.9<span class="review-card__score-max">/5</span></span>
+              </div>
+              <p class="review-card__text text-body">We ship textiles to Spain. What we liked was that the price was quoted upfront and it didn't change on the final invoice. No surcharges for fuel or downtime, as often happens elsewhere.</p>
+              <div class="review-card__footer">
+                <img src="../assets/img/user-icon.png" alt="" class="review-card__avatar">
+                <span class="review-card__name">Viktoriia Panasiuk</span>
+                <img src="../assets/img/google-logo.png" alt="Google" class="review-card__platform">
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <div class="reviews__footer">
+        <a href="reviews.html" class="btn btn--dark">See more reviews</a>
+      </div>
+    </section>
+
+    <section class="contact" id="contact" data-header-theme="light">
+      <img src="../assets/img/vector-green2.png" alt="" class="contact__vector contact__vector--green" aria-hidden="true">
+      <img src="../assets/img/vector-black2.png" alt="" class="contact__vector contact__vector--black" aria-hidden="true">
+
+      <div class="container">
+        <div class="contact-card">
+          <h2 class="contact-card__title" data-anim="wipe">Submit a request</h2>
+          <p class="contact-card__subtitle subheading" data-anim="wipe">We reply within an hour during working hours</p>
+
+          <form class="contact-form" data-anim="stagger">
+            <div class="contact-form__row">
+              <div class="contact-form__field">
+                <label for="fromCity">From (city or region)</label>
+                <input type="text" id="fromCity" name="fromCity" placeholder="Kyiv">
+              </div>
+              <div class="contact-form__field">
+                <label for="cargoType">Cargo type</label>
+                <select id="cargoType" name="cargoType">
+                  <option value="" disabled selected>Select type</option>
+                  <option value="tent">Curtain-side</option>
+                  <option value="fridge">Refrigerated</option>
+                  <option value="trawl">Low-loader</option>
+                  <option value="adr">ADR</option>
+                  <option value="groupage">Groupage</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="contact-form__row">
+              <div class="contact-form__field">
+                <label for="toCity">To (city or region)</label>
+                <input type="text" id="toCity" name="toCity" placeholder="Paris">
+              </div>
+              <div class="contact-form__field">
+                <label for="cargoWeight">Approximate weight or volume</label>
+                <input type="text" id="cargoWeight" name="cargoWeight" placeholder="10 t">
+              </div>
+            </div>
+
+            <div class="contact-form__row">
+              <div class="contact-form__field">
+                <label for="clientName">Your name:</label>
+                <input type="text" id="clientName" name="clientName" placeholder="Danylo">
+              </div>
+              <div class="contact-form__field">
+                <label for="clientPhone">Your phone</label>
+                <input type="tel" id="clientPhone" name="clientPhone" placeholder="+380 (XX) XXX XX XX">
+              </div>
+            </div>
+
+            <div class="contact-form__submit">
+              <button type="submit" class="btn btn--dark">Send request</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" data-header-theme="light">
+    <div class="container footer__top">
+      <div class="footer__brand">
+        <a href="index.html" class="logo">
+          <img src="../assets/img/tempo-logo-plus-text.png" alt="Tempo">
+        </a>
+        <p class="footer__tagline">International freight transport Ukraine to EU since 2013</p>
+        <div class="footer__social">
+          <a href="#" class="footer__social-link" aria-label="Instagram"><img src="../assets/icons/ri_instagram-fill.png" alt=""></a>
+          <a href="#" class="footer__social-link" aria-label="Facebook"><img src="../assets/icons/ic_baseline-facebook.png" alt=""></a>
+          <a href="#" class="footer__social-link" aria-label="Telegram"><img src="../assets/icons/ic_sharp-telegram.png" alt=""></a>
+          <a href="#" class="footer__social-link" aria-label="LinkedIn"><img src="../assets/icons/mdi_linkedin.png" alt=""></a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h3 class="footer__col-title">Navigation</h3>
+        <ul class="footer__list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="prices.html">Pricing</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+        </ul>
+        <div class="footer__flags">
+          <a href="index.html" class="is-active" aria-label="English">
+            <img src="../assets/img/uk-flag.png" alt="">
+          </a>
+          <a href="../index.html" aria-label="Українська">
+            <svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
+              <rect width="20" height="7" fill="#005BBB"/>
+              <rect y="7" width="20" height="7" fill="#FFD500"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h3 class="footer__col-title">Transport</h3>
+        <ul class="footer__list">
+          <li><a href="#">Curtain-side</a></li>
+          <li><a href="#">Refrigerated</a></li>
+          <li><a href="#">Low-loaders</a></li>
+          <li><a href="#">ADR</a></li>
+          <li><a href="#">Groupage</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h3 class="footer__col-title">Documents</h3>
+        <ul class="footer__list">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">International transport licence</a></li>
+          <li><a href="#">ECMT permit</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer__contacts">
+      <span class="footer__contact-item">
+        <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 16s6-5.5 6-9.5A6 6 0 0 0 3 6.5C3 10.5 9 16 9 16Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+          <circle cx="9" cy="6.5" r="2" stroke="currentColor" stroke-width="1.3"/>
+        </svg>
+        47 Transportna St, Lviv, 79000, Ukraine
+      </span>
+      <span class="footer__contact-item">
+        <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 2h3l1.5 4-2 1.5a10 10 0 0 0 4.5 4.5l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A14 14 0 0 1 2.5 3.6 1.5 1.5 0 0 1 4 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+        </svg>
+        +380 (67) 123 45 67
+      </span>
+      <span class="footer__contact-item">
+        <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="4" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M2.5 5l6.5 5 6.5-5" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+        </svg>
+        logistics@tempo.com.ua
+      </span>
+    </div>
+
+    <p class="footer__copyright">© <span id="footerYear">2026</span> Tempo — all rights reserved</p>
+
+    <img src="../assets/img/TEMPO.png" alt="" class="footer__watermark" aria-hidden="true">
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+</html>

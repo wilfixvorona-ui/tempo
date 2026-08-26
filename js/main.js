@@ -10,7 +10,40 @@ document.addEventListener('DOMContentLoaded', () => {
   initFleetLoadMore();
   initCasesToggle();
   initScrollAnimations();
+  initLangSwitch();
 });
+
+function initLangSwitch() {
+  const wraps = document.querySelectorAll('.lang-switch');
+  if (!wraps.length) return;
+
+  function closeAll() {
+    wraps.forEach((w) => {
+      w.classList.remove('is-open');
+      w.querySelector('.lang-switch__btn')?.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  wraps.forEach((wrap) => {
+    const btn = wrap.querySelector('.lang-switch__btn');
+    if (!btn) return;
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = wrap.classList.contains('is-open');
+      closeAll();
+      if (!isOpen) {
+        wrap.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  document.addEventListener('click', closeAll);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeAll();
+  });
+}
 
 function initVideoProgress() {
   const video = document.getElementById('heroVideo');
@@ -210,12 +243,23 @@ function initFleetLoadMore() {
   const btn = document.getElementById('fleetLoadMoreBtn');
   if (!grid || !btn) return;
 
-  const images = [
-    { src: 'assets/img/track1.png', alt: 'Тентовий напівпричіп' },
-    { src: 'assets/img/track2.png', alt: 'Низькорамний трал' },
-    { src: 'assets/img/track3.png', alt: 'Тентовий напівпричіп під ADR' },
-    { src: 'assets/img/track4.png', alt: 'Малотоннажний фургон' },
-    { src: 'assets/img/track5.png', alt: 'Рефрижератор' },
+  const isEn = document.documentElement.lang === 'en';
+  const assetBase = isEn ? '../' : '';
+  const LABEL_MORE = isEn ? 'See more' : 'Дивитись більше';
+  const LABEL_LESS = isEn ? 'Show less' : 'Показати менше';
+
+  const images = isEn ? [
+    { src: `${assetBase}assets/img/track1.png`, alt: 'Curtain-side semi-trailer' },
+    { src: `${assetBase}assets/img/track2.png`, alt: 'Low-loader trailer' },
+    { src: `${assetBase}assets/img/track3.png`, alt: 'Curtain-side semi-trailer for ADR' },
+    { src: `${assetBase}assets/img/track4.png`, alt: 'Rigid box truck' },
+    { src: `${assetBase}assets/img/track5.png`, alt: 'Refrigerated trailer' },
+  ] : [
+    { src: `${assetBase}assets/img/track1.png`, alt: 'Тентовий напівпричіп' },
+    { src: `${assetBase}assets/img/track2.png`, alt: 'Низькорамний трал' },
+    { src: `${assetBase}assets/img/track3.png`, alt: 'Тентовий напівпричіп під ADR' },
+    { src: `${assetBase}assets/img/track4.png`, alt: 'Малотоннажний фургон' },
+    { src: `${assetBase}assets/img/track5.png`, alt: 'Рефрижератор' },
   ];
 
   const initialCount = grid.children.length;
@@ -241,7 +285,7 @@ function initFleetLoadMore() {
     }
     step = 0;
     nextIndex = initialCount;
-    btn.textContent = 'Дивитись більше';
+    btn.textContent = LABEL_MORE;
   }
 
   btn.addEventListener('click', () => {
@@ -249,7 +293,7 @@ function initFleetLoadMore() {
       addBatch();
       step++;
       if (step === maxSteps) {
-        btn.textContent = 'Показати менше';
+        btn.textContent = LABEL_LESS;
       }
     } else {
       collapse();
@@ -263,6 +307,10 @@ function initCasesToggle() {
   const hidden = document.querySelectorAll('.case--hidden');
   if (!btn || !hidden.length) return;
 
+  const isEn = document.documentElement.lang === 'en';
+  const LABEL_MORE = isEn ? 'See more' : 'Дивитись більше';
+  const LABEL_LESS = isEn ? 'Collapse' : 'Згорнути';
+
   let expanded = false;
 
   btn.addEventListener('click', () => {
@@ -270,7 +318,7 @@ function initCasesToggle() {
     hidden.forEach(el => {
       el.style.display = expanded ? 'block' : 'none';
     });
-    btn.textContent = expanded ? 'Згорнути' : 'Дивитись більше';
+    btn.textContent = expanded ? LABEL_LESS : LABEL_MORE;
     btn.setAttribute('aria-expanded', String(expanded));
 
     if (!expanded) {

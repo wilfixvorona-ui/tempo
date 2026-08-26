@@ -325,6 +325,12 @@ code, pre, .mono {
 }
 
 .lang-switch {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.lang-switch__btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -335,7 +341,7 @@ code, pre, .mono {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   color: var(--color-white);
-  flex-shrink: 0;
+  cursor: pointer;
   transition: background-color .2s ease, color .2s ease;
 }
 
@@ -345,12 +351,23 @@ code, pre, .mono {
   overflow: hidden;
 }
 
-.lang-switch__chevron {
-  color: rgba(255, 255, 255, 0.7);
-  transition: color .2s ease;
+.lang-switch__flag img {
+  display: block;
+  width: 20px;
+  height: 14px;
+  object-fit: cover;
 }
 
-.header.is-light .lang-switch {
+.lang-switch__chevron {
+  color: rgba(255, 255, 255, 0.7);
+  transition: color .2s ease, transform .2s ease;
+}
+
+.lang-switch.is-open .lang-switch__chevron {
+  transform: rotate(180deg);
+}
+
+.header.is-light .lang-switch__btn {
   background: #f3f3f3;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
@@ -359,6 +376,58 @@ code, pre, .mono {
 
 .header.is-light .lang-switch__chevron {
   color: #0a0a0a;
+}
+
+.lang-switch__menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 100%;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--color-white);
+  border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(10, 10, 10, 0.18);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+  z-index: 30;
+}
+
+.lang-switch.is-open .lang-switch__menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.lang-switch__option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 7px;
+  font-family: 'Onest', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #0a0a0a;
+  white-space: nowrap;
+  transition: background-color .15s ease;
+}
+
+.lang-switch__option:hover {
+  background: #f3f3f3;
+}
+
+.lang-switch__option-flag {
+  display: block;
+  width: 20px;
+  height: 14px;
+  border-radius: 3px;
+  overflow: hidden;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
 .phone {
@@ -1331,9 +1400,25 @@ code, pre, .mono {
   margin-top: clamp(10px, 1.2vw, 16px);
 }
 
-.footer__flags svg {
+.footer__flags a {
+  display: flex;
   border-radius: 3px;
   overflow: hidden;
+  opacity: 0.6;
+  transition: opacity .2s ease;
+}
+
+.footer__flags a:hover,
+.footer__flags a.is-active {
+  opacity: 1;
+}
+
+.footer__flags img,
+.footer__flags svg {
+  display: block;
+  width: 20px;
+  height: 14px;
+  object-fit: cover;
 }
 
 .footer__contacts {

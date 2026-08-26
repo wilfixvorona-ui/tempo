@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About us — Tempo</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Onest:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/about.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo">
+        <span class="logo__icon" aria-hidden="true"></span>
+        <span>TEMPO</span>
+      </a>
+
+      <nav class="nav">
+        <ul class="nav__list">
+          <li><a href="index.html" class="nav__link">Home</a></li>
+          <li><a href="about.html" class="nav__link is-active">About us</a></li>
+          <li><a href="prices.html" class="nav__link">Pricing</a></li>
+          <li><a href="reviews.html" class="nav__link">Reviews</a></li>
+        </ul>
+
+        <div class="lang-switch">
+          <button class="lang-switch__btn" type="button" aria-expanded="false" aria-haspopup="true">
+            <span class="lang-switch__flag" aria-hidden="true">
+              <img src="../assets/img/uk-flag.png" alt="">
+            </span>
+            <svg class="lang-switch__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul class="lang-switch__menu">
+            <li><a href="../about.html" class="lang-switch__option">
+              <svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" class="lang-switch__option-flag">
+                <rect width="20" height="7" fill="#005BBB"/>
+                <rect y="7" width="20" height="7" fill="#FFD500"/>
+              </svg>
+              Українська
+            </a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <a href="tel:+380011234567" class="phone">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 2h3l1.5 4-2 1.5a10 10 0 0 0 4.5 4.5l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A14 14 0 0 1 2.5 3.6 1.5 1.5 0 0 1 4 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+        </svg>
+        +380 (01) 123 45 67
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="about-hero" data-header-theme="light">
+      <div class="container about-hero__inner">
+        <div class="about-hero__content">
+          <h1 class="about-hero__title">About us</h1>
+          <p class="about-hero__subtitle subheading">A look at the company, the team and the fleet: everything worth knowing before your first shipment.</p>
+          <a href="#fleet" class="btn btn--primary">See our fleet</a>
+        </div>
+        <div class="about-hero__media">
+          <img src="../assets/img/logo-for-aboutus.png" alt="" class="about-hero__logo">
+        </div>
+      </div>
+    </section>
+
+    <section class="about-story" data-header-theme="light">
+      <div class="container about-story__inner">
+        <div class="about-story__text">
+          <h2 class="about-story__title" data-anim="wipe">How it started</h2>
+          <div class="about-story__paragraphs text-body">
+            <p>Until 2013, Andrii Kovalchuk worked as a logistics manager at a large freight forwarding company. Every day he saw the same thing: an order came in, was handed to a subcontractor, who passed it to someone else, and by the third pair of hands the load had slipped off schedule. The client would call asking where the truck was, and nobody had an answer.</p>
+            <p class="about-story__paragraphs--muted">Taras Benko came at it from the other side. A long-haul international driver with ten years behind the wheel, he knew the routes, the border crossings, and how customs paperwork actually works.</p>
+            <p>In 2013 they bought two used tractor units and started running to Poland themselves. There was one rule from day one: a load we take is carried by our own truck.</p>
+          </div>
+        </div>
+        <div class="about-story__media">
+          <img src="../assets/img/how-it-started.png" alt="Tempo's founders next to a truck">
+        </div>
+      </div>
+    </section>
+
+    <section class="about-growth" data-header-theme="light">
+      <div class="container about-growth__inner">
+        <div class="about-growth__media">
+          <img src="../assets/img/grow-about.png" alt="">
+        </div>
+        <div class="about-growth__text">
+          <h2 class="about-growth__title" data-anim="wipe">How it grew</h2>
+          <ul class="about-growth__list text-body" data-anim="stagger">
+            <li>2013: two tractor units, one route, Poland</li>
+            <li>2015: first refrigerated trailers, expansion into Czechia and Slovakia</li>
+            <li>2017: 10 trucks, opening of our own repair facility</li>
+            <li>2019: ADR certification, transport of dangerous goods</li>
+            <li>2021: 20 trucks, Germany, Italy, the Netherlands</li>
+            <li>2023: low-loader trailers for oversized cargo</li>
+            <li>2026: 30 trucks, 16 EU countries</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-principles" data-header-theme="light">
+      <div class="container">
+        <h2 class="about-principles__title" data-anim="wipe">Principles that haven't changed</h2>
+        <p class="about-principles__text text-body">We don't hand loads over to subcontractors. Our drivers are on staff, not hired for a single trip. The price is fixed in the contract and doesn't change after signing. We handle the paperwork on our side, which is why a load never sits at the border because of someone else's mistake.</p>
+      </div>
+    </section>
+
+    <section class="about-today" data-header-theme="dark">
+      <div class="container about-today__inner">
+        <h2 class="about-today__title">Today</h2>
+        <p class="about-today__text subheading">48 people on the team: 32 drivers, 6 logistics coordinators, 4 client managers, a customs clearance specialist, mechanics and accounting. Office and repair base in Lviv. Trucks on the road every day.</p>
+      </div>
+    </section>
+
+    <section class="fleet" data-header-theme="light">
+      <div class="container fleet__header">
+        <h2 class="fleet__title" data-anim="wipe">Our<br>fleet</h2>
+        <p class="fleet__desc subheading" data-anim="wipe">Every vehicle is our own, none of it rented. The average truck is 4 years old and serviced at our own facility.</p>
+      </div>
+
+      <div class="container">
+        <div class="fleet__grid" id="fleetGrid" data-anim="stagger">
+          <div class="fleet__item"><img src="../assets/img/track1.png" alt="Curtain-side semi-trailer"></div>
+          <div class="fleet__item"><img src="../assets/img/track2.png" alt="Low-loader trailer"></div>
+          <div class="fleet__item"><img src="../assets/img/track3.png" alt="Curtain-side semi-trailer for ADR"></div>
+          <div class="fleet__item"><img src="../assets/img/track4.png" alt="Rigid box truck"></div>
+          <div class="fleet__item"><img src="../assets/img/track5.png" alt="Refrigerated trailer"></div>
+          <div class="fleet__item"><img src="../assets/img/track1.png" alt="Curtain-side semi-trailer"></div>
+          <div class="fleet__item"><img src="../assets/img/track2.png" alt="Low-loader trailer"></div>
+          <div class="fleet__item"><img src="../assets/img/track3.png" alt="Curtain-side semi-trailer for ADR"></div>
+          <div class="fleet__item"><img src="../assets/img/track4.png" alt="Rigid box truck"></div>
+          <div class="fleet__item"><img src="../assets/img/track5.png" alt="Refrigerated trailer"></div>
+          <div class="fleet__item"><img src="../assets/img/track1.png" alt="Curtain-side semi-trailer"></div>
+          <div class="fleet__item"><img src="../assets/img/track2.png" alt="Low-loader trailer"></div>
+        </div>
+
+        <div class="about-section-footer">
+          <button type="button" class="btn btn--dark" id="fleetLoadMoreBtn">See more</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-team" data-header-theme="light">
+      <div class="container about-team__header">
+        <h2 class="about-team__title" data-anim="wipe">Meet<br>our team</h2>
+        <p class="about-team__desc subheading" data-anim="wipe">48 people on staff — drivers, logistics coordinators, managers and the people who handle the documents. Every trip is run by a specific person.</p>
+      </div>
+
+      <div class="about-team__list-wrap">
+        <img src="../assets/img/small-green-vector.png" alt="" class="about-team__vector about-team__vector--green" aria-hidden="true">
+        <img src="../assets/img/small-black-vector.png" alt="" class="about-team__vector about-team__vector--black" aria-hidden="true">
+
+        <div class="container">
+          <ul class="team-list" data-anim="stagger">
+            <li class="team-row">
+              <span class="team-row__avatar"><img src="../assets/img/Rectangle 24.png" alt="Andrii Kovalchuk"></span>
+              <span class="team-row__name">Andrii Kovalchuk</span>
+              <span class="team-row__role">co-founder, director</span>
+              <a href="tel:+380011234567" class="team-row__phone" aria-label="Call Andrii Kovalchuk">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 2h3l1.5 4-2 1.5a10 10 0 0 0 4.5 4.5l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A14 14 0 0 1 2.5 3.6 1.5 1.5 0 0 1 4 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </li>
+            <li class="team-row">
+              <span class="team-row__avatar"><img src="../assets/img/Rectangle 24-1.png" alt="Taras Benko"></span>
+              <span class="team-row__name">Taras Benko</span>
+              <span class="team-row__role">co-founder, head of logistics</span>
+              <a href="tel:+380011234567" class="team-row__phone" aria-label="Call Taras Benko">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 2h3l1.5 4-2 1.5a10 10 0 0 0 4.5 4.5l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A14 14 0 0 1 2.5 3.6 1.5 1.5 0 0 1 4 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </li>
+            <li class="team-row">
+              <span class="team-row__avatar"><img src="../assets/img/Rectangle 24-2.png" alt="Oksana Dmytruk"></span>
+              <span class="team-row__name">Oksana Dmytruk</span>
+              <span class="team-row__role">commercial director</span>
+              <a href="tel:+380011234567" class="team-row__phone" aria-label="Call Oksana Dmytruk">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 2h3l1.5 4-2 1.5a10 10 0 0 0 4.5 4.5l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A14 14 0 0 1 2.5 3.6 1.5 1.5 0 0 1 4 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </li>
+            <li class="team-row">
+              <span class="team-row__avatar"><img src="../assets/img/Rectangle 24-3.png" alt="Dmytro Levchuk"></span>
+              <span class="team-row__name">Dmytro Levchuk</span>
+              <span class="team-row__role">head of client relations</span>
+              <a href="tel:+380011234567" class="team-row__phone" aria-label="Call Dmytro Levchuk">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 2h3l1.5 4-2 1.5a10 10 0 0 0 4.5 4.5l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A14 14 0 0 1 2.5 3.6 1.5 1.5 0 0 1 4 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </li>
+            <li class="team-row">
+              <span class="team-row__avatar"><img src="../assets/img/Rectangle 24-4.png" alt="Roman Stashek"></span>
+              <span class="team-row__name">Roman Stashek</span>
+              <span class="team-row__role">customs clearance specialist</span>
+              <a href="tel:+380011234567" class="team-row__phone" aria-label="Call Roman Stashek">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 2h3l1.5 4-2 1.5a10 10 0 0 0 4.5 4.5l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A14 14 0 0 1 2.5 3.6 1.5 1.5 0 0 1 4 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="team-grid" data-anim="stagger">
+          <span class="team-photo"><img src="../assets/img/Rectangle 24-5.png" alt=""></span>
+          <span class="team-photo"><img src="../assets/img/Rectangle 26.png" alt=""></span>
+          <span class="team-photo"><img src="../assets/img/Rectangle 28.png" alt=""></span>
+          <span class="team-photo"><img src="../assets/img/Rectangle 30.png" alt=""></span>
+          <span class="team-photo"><img src="../assets/img/Rectangle 31.png" alt=""></span>
+          <span class="team-photo"><img src="../assets/img/Rectangle 32.png" alt=""></span>
+          <span class="team-photo"><img src="../assets/img/Rectangle 33.png" alt=""></span>
+          <span class="team-photo"><img src="../assets/img/Rectangle 34.png" alt=""></span>
+          <span class="team-photo"><img src="../assets/img/Rectangle 35.png" alt=""></span>
+          <span class="team-photo"><img src="../assets/img/Rectangle 36.png" alt=""></span>
+          <span class="team-photo"><img src="../assets/img/Rectangle 38.png" alt=""></span>
+          <span class="team-photo"><img src="../assets/img/Rectangle 39.png" alt=""></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact" data-header-theme="light">
+      <img src="../assets/img/vector-green2.png" alt="" class="contact__vector contact__vector--green" aria-hidden="true">
+      <img src="../assets/img/vector-black2.png" alt="" class="contact__vector contact__vector--black" aria-hidden="true">
+
+      <div class="container">
+        <div class="contact-card">
+          <h2 class="contact-card__title" data-anim="wipe">Submit a request</h2>
+          <p class="contact-card__subtitle subheading" data-anim="wipe">We reply within an hour during working hours</p>
+
+          <form class="contact-form" data-anim="stagger">
+            <div class="contact-form__row">
+              <div class="contact-form__field">
+                <label for="aboutFromCity">From (city or region)</label>
+                <input type="text" id="aboutFromCity" name="fromCity" placeholder="Kyiv">
+              </div>
+              <div class="contact-form__field">
+                <label for="aboutCargoType">Cargo type</label>
+                <select id="aboutCargoType" name="cargoType">
+                  <option value="" disabled selected>Select type</option>
+                  <option value="tent">Curtain-side</option>
+                  <option value="fridge">Refrigerated</option>
+                  <option value="trawl">Low-loader</option>
+                  <option value="adr">ADR</option>
+                  <option value="groupage">Groupage</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="contact-form__row">
+              <div class="contact-form__field">
+                <label for="aboutToCity">To (city or region)</label>
+                <input type="text" id="aboutToCity" name="toCity" placeholder="Paris">
+              </div>
+              <div class="contact-form__field">
+                <label for="aboutCargoWeight">Approximate weight or volume</label>
+                <input type="text" id="aboutCargoWeight" name="cargoWeight" placeholder="10 t">
+              </div>
+            </div>
+
+            <div class="contact-form__row">
+              <div class="contact-form__field">
+                <label for="aboutClientName">Your name:</label>
+                <input type="text" id="aboutClientName" name="clientName" placeholder="Danylo">
+              </div>
+              <div class="contact-form__field">
+                <label for="aboutClientPhone">Your phone</label>
+                <input type="tel" id="aboutClientPhone" name="clientPhone" placeholder="+380 (XX) XXX XX XX">
+              </div>
+            </div>
+
+            <div class="contact-form__submit">
+              <button type="submit" class="btn btn--dark">Send request</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" data-header-theme="light">
+    <div class="container footer__top">
+      <div class="footer__brand">
+        <a href="index.html" class="logo">
+          <img src="../assets/img/tempo-logo-plus-text.png" alt="Tempo">
+        </a>
+        <p class="footer__tagline">International freight transport Ukraine to EU since 2013</p>
+        <div class="footer__social">
+          <a href="#" class="footer__social-link" aria-label="Instagram"><img src="../assets/icons/ri_instagram-fill.png" alt=""></a>
+          <a href="#" class="footer__social-link" aria-label="Facebook"><img src="../assets/icons/ic_baseline-facebook.png" alt=""></a>
+          <a href="#" class="footer__social-link" aria-label="Telegram"><img src="../assets/icons/ic_sharp-telegram.png" alt=""></a>
+          <a href="#" class="footer__social-link" aria-label="LinkedIn"><img src="../assets/icons/mdi_linkedin.png" alt=""></a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h3 class="footer__col-title">Navigation</h3>
+        <ul class="footer__list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="prices.html">Pricing</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+        </ul>
+        <div class="footer__flags">
+          <a href="about.html" class="is-active" aria-label="English">
+            <img src="../assets/img/uk-flag.png" alt="">
+          </a>
+          <a href="../about.html" aria-label="Українська">
+            <svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
+              <rect width="20" height="7" fill="#005BBB"/>
+              <rect y="7" width="20" height="7" fill="#FFD500"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h3 class="footer__col-title">Transport</h3>
+        <ul class="footer__list">
+          <li><a href="#">Curtain-side</a></li>
+          <li><a href="#">Refrigerated</a></li>
+          <li><a href="#">Low-loaders</a></li>
+          <li><a href="#">ADR</a></li>
+          <li><a href="#">Groupage</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h3 class="footer__col-title">Documents</h3>
+        <ul class="footer__list">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">International transport licence</a></li>
+          <li><a href="#">ECMT permit</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer__contacts">
+      <span class="footer__contact-item">
+        <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 16s6-5.5 6-9.5A6 6 0 0 0 3 6.5C3 10.5 9 16 9 16Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+          <circle cx="9" cy="6.5" r="2" stroke="currentColor" stroke-width="1.3"/>
+        </svg>
+        47 Transportna St, Lviv, 79000, Ukraine
+      </span>
+      <span class="footer__contact-item">
+        <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 2h3l1.5 4-2 1.5a10 10 0 0 0 4.5 4.5l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A14 14 0 0 1 2.5 3.6 1.5 1.5 0 0 1 4 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+        </svg>
+        +380 (67) 123 45 67
+      </span>
+      <span class="footer__contact-item">
+        <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="4" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M2.5 5l6.5 5 6.5-5" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+        </svg>
+        logistics@tempo.com.ua
+      </span>
+    </div>
+
+    <p class="footer__copyright">© <span id="footerYear">2026</span> Tempo — all rights reserved</p>
+
+    <img src="../assets/img/TEMPO.png" alt="" class="footer__watermark" aria-hidden="true">
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+</html>
