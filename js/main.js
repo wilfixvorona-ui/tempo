@@ -11,7 +11,73 @@ document.addEventListener('DOMContentLoaded', () => {
   initCasesToggle();
   initScrollAnimations();
   initLangSwitch();
+  initMobileNav();
+  initCountryCardToggle();
+  initReviewsScrollbar();
 });
+
+function initMobileNav() {
+  const toggle = document.getElementById('navToggle');
+  const panel = document.getElementById('mobileNav');
+  if (!toggle || !panel) return;
+
+  function close() {
+    toggle.classList.remove('is-open');
+    panel.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = toggle.classList.contains('is-open');
+    if (isOpen) {
+      close();
+    } else {
+      toggle.classList.add('is-open');
+      panel.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  panel.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', close);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!panel.contains(e.target) && !toggle.contains(e.target)) close();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') close();
+  });
+}
+
+function initCountryCardToggle() {
+  const cards = document.querySelectorAll('.country-card');
+  if (!cards.length) return;
+
+  cards.forEach((card) => {
+    card.addEventListener('click', () => {
+      card.classList.toggle('is-open');
+    });
+  });
+}
+
+function initReviewsScrollbar() {
+  const scroller = document.querySelector('.reviews__marquee--row1');
+  const fill = document.getElementById('reviewsScrollbarFill');
+  if (!scroller || !fill) return;
+
+  function update() {
+    const max = scroller.scrollWidth - scroller.clientWidth;
+    const percent = max > 0 ? (scroller.scrollLeft / max) * 100 : 0;
+    fill.style.width = `${Math.max(12, percent)}%`;
+  }
+
+  scroller.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+}
 
 function initLangSwitch() {
   const wraps = document.querySelectorAll('.lang-switch');

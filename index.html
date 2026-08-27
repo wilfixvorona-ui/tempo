@@ -52,6 +52,19 @@
         </svg>
         +380 (01) 123 45 67
       </a>
+
+      <button class="nav-toggle" type="button" id="navToggle" aria-label="Меню" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobile-nav" id="mobileNav">
+      <ul class="mobile-nav__list">
+        <li><a href="index.html" class="is-active">Головна</a></li>
+        <li><a href="about.html">Про нас</a></li>
+        <li><a href="prices.html">Ціни</a></li>
+        <li><a href="reviews.html">Відгуки</a></li>
+      </ul>
     </div>
   </header>
 
@@ -518,6 +531,10 @@
             </article>
           </div>
         </div>
+      </div>
+
+      <div class="reviews__scrollbar" id="reviewsScrollbar" aria-hidden="true">
+        <div class="reviews__scrollbar-fill" id="reviewsScrollbarFill"></div>
       </div>
 
       <div class="reviews__marquee reviews__marquee--row2">
