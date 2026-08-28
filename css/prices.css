@@ -248,8 +248,8 @@
   color: var(--color-text);
 }
 
-/* ===== Small screens fallback ===== */
-@media (max-width: 860px) {
+/* ===== Small screens fallback (tablet) ===== */
+@media (min-width: 641px) and (max-width: 860px) {
   .prices-example__header {
     flex-direction: column;
   }
@@ -278,5 +278,132 @@
 
   .prices-example__grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Mobile (≤640px) ===== */
+@media (max-width: 640px) {
+  .prices-hero {
+    padding-block: calc(var(--header-height) + 24px) 40px;
+  }
+
+  .prices-hero__title {
+    font-size: 30px;
+  }
+
+  .prices-hero__subtitle {
+    font-size: 13px;
+  }
+
+  .prices-marquee__img {
+    height: 64px;
+    width: auto;
+    max-width: none;
+  }
+
+  /* ----- Calculator ----- */
+  .prices-calculator {
+    padding-block: 40px;
+  }
+
+  .calculator-card {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+
+  .calculator-card__title {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .calculator-card__subtitle {
+    text-align: center;
+  }
+
+  .calculator-form__submit .btn {
+    width: 100%;
+  }
+
+  /* ----- Route example ----- */
+  .prices-example__header {
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .prices-example {
+    padding: 24px 20px;
+    margin-top: 20px;
+  }
+
+  .prices-example__route {
+    font-size: 26px;
+  }
+
+  .prices-example__note {
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .prices-example__grid {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+  }
+
+  /* ----- Rates tables ----- */
+  .rates,
+  .rates--groupage {
+    padding-block: 40px 32px;
+  }
+
+  .rates__header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .rates__title {
+    font-size: 28px;
+  }
+
+  .rates__desc {
+    max-width: 100%;
+  }
+
+  .rates-table__row--head {
+    display: none;
+  }
+
+  .rates-table__row,
+  .rates-table--two-col .rates-table__row {
+    grid-template-columns: 1fr;
+    row-gap: 12px;
+    padding-block: 22px;
+  }
+
+  .rates-table__name,
+  .rates-table__capacity,
+  .rates-table__price {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    text-align: left;
+  }
+
+  .rates-table__name::after,
+  .rates-table__capacity::after,
+  .rates-table__price::after {
+    content: attr(data-label);
+    flex-shrink: 0;
+    font-family: 'Fira Code', monospace;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    color: #9a9a9a;
+    text-align: right;
+  }
+
+  .rates-table__price {
+    font-size: 20px;
   }
 }

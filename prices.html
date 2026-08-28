@@ -53,6 +53,19 @@
         </svg>
         +380 (01) 123 45 67
       </a>
+
+      <button class="nav-toggle" type="button" id="navToggle" aria-label="Меню" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobile-nav" id="mobileNav">
+      <ul class="mobile-nav__list">
+        <li><a href="index.html">Головна</a></li>
+        <li><a href="about.html">Про нас</a></li>
+        <li><a href="prices.html" class="is-active">Ціни</a></li>
+        <li><a href="reviews.html">Відгуки</a></li>
+      </ul>
     </div>
   </header>
 
@@ -154,29 +167,29 @@
             <span>Ставка за 1 км</span>
           </div>
           <div class="rates-table__row">
-            <span class="rates-table__name">Тентовий напівпричіп</span>
-            <span class="rates-table__capacity">20-22 т, 86-92 м³</span>
-            <span class="rates-table__price">€0,95 – 1,20</span>
+            <span class="rates-table__name" data-label="Тип транспорту">Тентовий напівпричіп</span>
+            <span class="rates-table__capacity" data-label="Вантажопідйомність">20-22 т, 86-92 м³</span>
+            <span class="rates-table__price" data-label="Ставка за 1 км">€0,95 – 1,20</span>
           </div>
           <div class="rates-table__row">
-            <span class="rates-table__name">Рефрижератор</span>
-            <span class="rates-table__capacity">18-20 т, 76-82 м³</span>
-            <span class="rates-table__price">€1,20 – 1,50</span>
+            <span class="rates-table__name" data-label="Тип транспорту">Рефрижератор</span>
+            <span class="rates-table__capacity" data-label="Вантажопідйомність">18-20 т, 76-82 м³</span>
+            <span class="rates-table__price" data-label="Ставка за 1 км">€1,20 – 1,50</span>
           </div>
           <div class="rates-table__row">
-            <span class="rates-table__name">Низькорамний трал</span>
-            <span class="rates-table__capacity">до 40 т</span>
-            <span class="rates-table__price">€1,80 – 2,50</span>
+            <span class="rates-table__name" data-label="Тип транспорту">Низькорамний трал</span>
+            <span class="rates-table__capacity" data-label="Вантажопідйомність">до 40 т</span>
+            <span class="rates-table__price" data-label="Ставка за 1 км">€1,80 – 2,50</span>
           </div>
           <div class="rates-table__row">
-            <span class="rates-table__name">Цистерна ADR</span>
-            <span class="rates-table__capacity">25-30 м³</span>
-            <span class="rates-table__price">€1,40 – 1,80</span>
+            <span class="rates-table__name" data-label="Тип транспорту">Цистерна ADR</span>
+            <span class="rates-table__capacity" data-label="Вантажопідйомність">25-30 м³</span>
+            <span class="rates-table__price" data-label="Ставка за 1 км">€1,40 – 1,80</span>
           </div>
           <div class="rates-table__row">
-            <span class="rates-table__name">Жорсткий фургон</span>
-            <span class="rates-table__capacity">до 5 т, 35-40 м³</span>
-            <span class="rates-table__price">€0,70 – 0,90</span>
+            <span class="rates-table__name" data-label="Тип транспорту">Жорсткий фургон</span>
+            <span class="rates-table__capacity" data-label="Вантажопідйомність">до 5 т, 35-40 м³</span>
+            <span class="rates-table__price" data-label="Ставка за 1 км">€0,70 – 0,90</span>
           </div>
         </div>
       </div>
@@ -195,16 +208,16 @@
             <span>Ціна</span>
           </div>
           <div class="rates-table__row">
-            <span class="rates-table__name">Європалета до 800 кг</span>
-            <span class="rates-table__price">€80 – 150</span>
+            <span class="rates-table__name" data-label="Одиниця">Європалета до 800 кг</span>
+            <span class="rates-table__price" data-label="Ціна">€80 – 150</span>
           </div>
           <div class="rates-table__row">
-            <span class="rates-table__name">За кубометр</span>
-            <span class="rates-table__price">€50 – 90</span>
+            <span class="rates-table__name" data-label="Одиниця">За кубометр</span>
+            <span class="rates-table__price" data-label="Ціна">€50 – 90</span>
           </div>
           <div class="rates-table__row">
-            <span class="rates-table__name">Мінімальне відправлення</span>
-            <span class="rates-table__price">від 1 палети</span>
+            <span class="rates-table__name" data-label="Одиниця">Мінімальне відправлення</span>
+            <span class="rates-table__price" data-label="Ціна">від 1 палети</span>
           </div>
         </div>
       </div>

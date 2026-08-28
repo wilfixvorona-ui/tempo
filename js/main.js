@@ -14,7 +14,22 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initCountryCardToggle();
   initReviewsScrollbar();
+  initTeamGridLoadMore();
 });
+
+function initTeamGridLoadMore() {
+  const grid = document.querySelector('.team-grid');
+  const btn = document.getElementById('teamGridLoadMoreBtn');
+  if (!grid || !btn) return;
+
+  btn.addEventListener('click', () => {
+    const expanded = grid.classList.toggle('is-expanded');
+    btn.textContent = expanded ? 'Показати менше' : 'Дивитись більше';
+    if (!expanded) {
+      grid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
+}
 
 function initMobileNav() {
   const toggle = document.getElementById('navToggle');
