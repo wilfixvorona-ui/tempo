@@ -1965,6 +1965,10 @@ code, pre, .mono {
     width: 100%;
   }
 
+  .contact__vector {
+    display: none;
+  }
+
   /* ----- Footer ----- */
   .footer__top {
     flex-direction: column;
@@ -1979,6 +1983,10 @@ code, pre, .mono {
     align-items: center;
   }
 
+  .footer__tagline {
+    font-size: 16px;
+  }
+
   .footer__social {
     justify-content: center;
   }
@@ -1987,12 +1995,30 @@ code, pre, .mono {
     width: 100%;
   }
 
+  .footer__col-title {
+    font-size: 20px;
+  }
+
   .footer__list {
     align-items: center;
   }
 
+  .footer__list a {
+    font-size: 16px;
+  }
+
   .footer__flags {
     justify-content: center;
+  }
+
+  .footer__flags img,
+  .footer__flags svg {
+    width: 24px;
+    height: 17px;
+  }
+
+  .footer__copyright {
+    font-size: 14px;
   }
 
   .footer__contacts {
@@ -2002,5 +2028,6 @@ code, pre, .mono {
 
   .footer__contact-item {
     justify-content: center;
+    font-size: 14px;
   }
 }
