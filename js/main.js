@@ -291,10 +291,12 @@ function initHeaderTheme() {
   const sections = document.querySelectorAll('[data-header-theme]');
   if (!header || !sections.length) return;
 
-  let ticking = false;
-
+  // Свідомо без requestAnimationFrame-троттлінгу: у фонових/прихованих вкладках
+  // rAF може взагалі не викликатись (document.hidden === true), і хедер
+  // назавжди застрягає в неправильній темі (наприклад, темна іконка на темному
+  // фоні — невидима). Пряме виконання на scroll/resize безпечне: тут лише
+  // кілька getBoundingClientRect() без важких обчислень.
   const update = () => {
-    ticking = false;
     const probeY = header.getBoundingClientRect().bottom - 1;
     let theme = 'dark';
 
@@ -308,15 +310,10 @@ function initHeaderTheme() {
     header.classList.toggle('is-light', theme === 'light');
   };
 
-  const requestUpdate = () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(update);
-  };
-
   update();
-  window.addEventListener('scroll', requestUpdate, { passive: true });
-  window.addEventListener('resize', requestUpdate);
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  document.addEventListener('visibilitychange', update);
 }
 
 function initFleetLoadMore() {
