@@ -607,17 +607,23 @@ function initPreloader() {
   html.classList.add('is-preloading');
   html.style.overflow = 'hidden';
 
-  let amp = window.innerWidth >= 1024 ? 50 : 25;
+  let amp = 0;
   let w = 0;
   let h = 0;
   let phase = 0;
 
   function resizeCanvas() {
-    amp = window.innerWidth >= 1024 ? 50 : 25;
     // Розміри беремо з .preloader__logo, а не з canvas: без явних CSS
     // width/height canvas визначає власний розмір по інтринзик 300x150.
     w = logoEl.offsetWidth;
-    h = logoEl.offsetHeight + 1.75 * amp;
+    const logoHeight = logoEl.offsetHeight;
+    // amp пропорційний висоті вордмарка (не фіксоване число px) — інакше
+    // на вузькому мобільному вордмарку (~40-50px заввишки) та сама
+    // амплітуда, що й на десктопі, займає більше половини висоти й хвиля
+    // виглядає хаотично, а не органічно. 0.36 — те саме відношення
+    // amp/висота, що й було на десктопі (50 / ~140px).
+    amp = logoHeight * 0.36;
+    h = logoHeight + 1.75 * amp;
     const dpr = window.devicePixelRatio || 1;
     canvas.width = Math.round(w * dpr);
     canvas.height = Math.round(h * dpr);
