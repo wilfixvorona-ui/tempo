@@ -41,9 +41,7 @@
   
 }
 
-/* ===== Story / Growth shared layout =====
-   Секції "Як все почалось" і "Як росло" (та їхній текст) стилізовані тут.
-   Текст самих речень редагуй в about.html — тут тільки вигляд (розмір/колір/відступи). */
+/* ===== Story / Growth shared layout ===== */
 .about-story,
 .about-growth {
   padding-block: clamp(40px, 5vw, 96px);
@@ -65,10 +63,7 @@
   justify-content: flex-end;
 }
 
-/* Заголовки "Як все почалось" / "Як росло" / "Принципи які не змінились" —
-   один спільний розмір для всіх трьох (щоб заголовки секцій були однакові).
-   font-size = розмір, line-height = міжрядковий інтервал, letter-spacing = міжлітерний інтервал,
-   margin-bottom = відступ під заголовком до тексту нижче. Колір не заданий — беруться чорний з body. */
+/* Один спільний розмір для заголовків трьох секцій нижче. */
 .about-story__title,
 .about-growth__title,
 .about-principles__title {
@@ -78,8 +73,6 @@
   margin-bottom: clamp(20px, 2.4vw, 36px);
 }
 
-/* Ширина текстової колонки "Як все почалось" відносно фото поруч (flex-пропорція,
-   не max-width): збільш число — колонка тексту стане ширшою, фото — вужчим. */
 .about-story__text {
   flex: 1.1;
   min-width: 0;
@@ -100,12 +93,6 @@
 .about-growth__list {
   color: #1e1e1e;
 }
-
-/* Розмір/колір/line-height/letter-spacing самих абзаців "Як все почалось" і списку
-   років "Як росло" беруться зі спільного класу .text-body — це CSS-змінні
-   --body-font-size / --body-color / --body-line-height / --body-letter-spacing
-   на початку css/style.css (шукай ":root" і коментар "Body text"). Зміниш там —
-   зміниться одразу і тут, і в схожих текстах на інших сторінках. */
 
 .about-story__media {
   flex: 0.82;
@@ -128,8 +115,6 @@
   height: auto;
 }
 
-/* Ширина текстової колонки "Як росло" — тут це max-width (560px), бо блок притиснутий
-   до правого краю секції. Зменш/збільш 560px, щоб зробити колонку вужчою/ширшою. */
 .about-growth__text {
   flex: 0 1 560px;
   min-width: 0;
@@ -158,9 +143,6 @@
   padding-block: clamp(40px, 5vw, 96px);
 }
 
-/* max-width = ширина абзацу "Принципи які не змінились" (зменш/збільш 900px).
-   Розмір/колір/line-height/letter-spacing тексту — той самий спільний .text-body,
-   див. коментар вище і --body-* змінні у css/style.css. */
 .about-principles__text {
   max-width: 800px;
   color: #000;
@@ -181,9 +163,6 @@
   align-items: center;
 }
 
-/* Заголовок "Сьогодні" — тут усе прописано прямо (не через спільні змінні):
-   font-size = розмір, color = колір (var(--color-accent) = лаймовий бренд-колір),
-   letter-spacing = міжлітерний інтервал, margin-bottom = відступ до тексту нижче. */
 .about-today__title {
   font-family: 'Unbounded', sans-serif;
   font-weight: 700;
@@ -193,13 +172,6 @@
   margin-bottom: clamp(16px, 2vw, 28px);
 }
 
-/* Абзац "Сьогодні": font-size/line-height/letter-spacing/font-family беруться
-   зі спільного класу .subheading (він і так висить на цьому <p> в HTML) — той
-   самий розмір, що й в описі "Як все почалось". Тут задаємо лише те, що для
-   .subheading не підходить на чорному фоні:
-   max-width = ширина абзацу (текст центрується під ним),
-   color = колір (напівпрозорий білий rgba(255,255,255,0.75) — постав 1 замість 0.75
-   для суцільного білого). */
 .about-today__text {
   max-width: 760px;
   color: rgba(255, 255, 255, 0.75);
@@ -517,7 +489,10 @@
   }
 
   .about-hero__subtitle {
-    font-size: 13px;
+    font-size: var(--mobile-text-subheading);
+    line-height: var(--mobile-text-subheading-line-height);
+    letter-spacing: var(--mobile-text-subheading-letter-spacing);
+    color: var(--mobile-text-subheading-color);
   }
 
   .about-hero__media {
@@ -532,7 +507,10 @@
   .about-story__title,
   .about-growth__title,
   .about-principles__title {
-    font-size: 26px;
+    font-size: var(--mobile-text-heading);
+    line-height: var(--mobile-text-heading-line-height);
+    letter-spacing: var(--mobile-text-heading-letter-spacing);
+    color: var(--mobile-text-heading-color);
     margin-bottom: 20px;
   }
 
@@ -554,18 +532,50 @@
     padding-block: 32px;
   }
 
+  .about-today {
+    padding-block: 64px;
+  }
+
   .about-today__title {
-    font-size: 30px;
+    /* Колір навмисно акцентовий (не --mobile-text-heading-color), лише розмір/інтервали спільні. */
+    font-size: var(--mobile-text-heading);
+    line-height: var(--mobile-text-heading-line-height);
+    letter-spacing: var(--mobile-text-heading-letter-spacing);
+    color: var(--color-accent);
+  }
+
+  .about-today__text {
+    font-size: var(--mobile-text-subheading);
+    line-height: var(--mobile-text-subheading-line-height);
+    letter-spacing: var(--mobile-text-subheading-letter-spacing);
   }
 
   .fleet__header,
   .about-team__header {
-    margin-bottom: 24px;
+    margin-bottom: 40px;
+    gap: var(--mobile-heading-gap);
   }
 
   .fleet__title,
   .about-team__title {
-    font-size: 30px;
+    font-size: var(--mobile-text-heading);
+    line-height: var(--mobile-text-heading-line-height);
+    letter-spacing: var(--mobile-text-heading-letter-spacing);
+    color: var(--mobile-text-heading-color);
+  }
+
+  .fleet__desc {
+    font-size: var(--mobile-text-subheading);
+    line-height: var(--mobile-text-subheading-line-height);
+    letter-spacing: var(--mobile-text-subheading-letter-spacing);
+    color: var(--mobile-text-subheading-color);
+  }
+
+  .about-team__desc {
+    font-size: var(--mobile-text-body);
+    line-height: var(--mobile-text-body-line-height);
+    letter-spacing: var(--mobile-text-body-letter-spacing);
+    color: var(--mobile-text-body-color);
   }
 
   .fleet {
@@ -577,6 +587,12 @@
   }
 
   /* ----- Team rows ----- */
+  /* Той самий прийом, що й у .rates-table: розтягуємо список на всю ширину від'ємним margin. */
+  .team-list {
+    margin-inline: calc(-1 * var(--container-padding));
+  }
+
+  /* padding-inline тут, а НЕ на .team-list — інакше border-bottom кожного рядка не доходить до країв. */
   .team-row {
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -584,12 +600,15 @@
     column-gap: 16px;
     row-gap: 2px;
     padding-block: 16px;
+    padding-inline: var(--container-padding);
   }
 
   .team-row__avatar {
     grid-column: 1;
     grid-row: 1 / 3;
-    width: 64px;
+    /* Той самий розмір/скруглення, що й .team-photo в сітці нижче. */
+    width: 67px;
+    border-radius: 4px;
     align-self: center;
   }
 
@@ -606,7 +625,10 @@
     text-align: left;
     padding-right: 0;
     padding-left: 0;
-    font-size: 14px;
+    font-size: var(--mobile-text-body);
+    line-height: var(--mobile-text-body-line-height);
+    letter-spacing: var(--mobile-text-body-letter-spacing);
+    color: var(--mobile-text-body-color);
   }
 
   .team-row__phone {
@@ -618,15 +640,27 @@
   }
 
   /* ----- Team photo brick grid ----- */
+  /* minmax(0, 1fr), не 1fr — інакше колонки розтягуються під ширину вмісту.
+     5 колонок, не 6: фото стоять лише в 1,3,5 і 2,4 — 6-та завжди порожня і зсуває сітку вліво. */
   .team-grid {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     row-gap: 14px;
     column-gap: 0;
     margin-top: 40px;
   }
 
+  /* Прибираємо Y-зсув стандартної stagger-анімації: у grid-розкладці з
+     nth-child позиціонуванням він іноді застрягає і зсуває рядки нерівномірно. */
+  .team-grid[data-anim="stagger"] > * {
+    transform: none;
+    transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
   .team-photo {
-    width: 96px;
+    width: 100%;
+    justify-self: stretch;
+    aspect-ratio: 1 / 1;
+    border-radius: 4px;
   }
 
   .team-grid > :nth-child(1)  { grid-row: 1 !important; grid-column: 1 !important; }
@@ -641,6 +675,7 @@
   .team-grid > :nth-child(10) { grid-row: 4 !important; grid-column: 4 !important; }
   .team-grid > :nth-child(11) { grid-row: 5 !important; grid-column: 1 !important; }
   .team-grid > :nth-child(12) { grid-row: 5 !important; grid-column: 3 !important; }
+  .team-grid > :nth-child(13) { grid-row: 5 !important; grid-column: 5 !important; }
 
   .team-grid > :nth-child(n+9) {
     display: none;
@@ -652,7 +687,7 @@
 
   .about-section-footer--team-grid {
     display: flex;
-    padding-top: 24px;
+    padding-top: 12px;
   }
 
   .about-team__vector {

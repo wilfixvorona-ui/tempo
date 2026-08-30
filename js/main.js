@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // initScrollAnimations() викликається зсередини initPreloader() (після
+  // finish()), а не тут напряму — інакше анімації секцій програються ще
+  // під прелоадером.
+  initPreloader();
+  initInternalLinkSkip();
   initVideoProgress();
   initCountryNameFit();
   initAccordion();
@@ -9,12 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeaderTheme();
   initFleetLoadMore();
   initCasesToggle();
-  initScrollAnimations();
   initLangSwitch();
   initMobileNav();
   initCountryCardToggle();
   initReviewsScrollbar();
   initTeamGridLoadMore();
+  initCountriesLoadMore();
 });
 
 function initTeamGridLoadMore() {
@@ -24,7 +29,25 @@ function initTeamGridLoadMore() {
 
   btn.addEventListener('click', () => {
     const expanded = grid.classList.toggle('is-expanded');
-    btn.textContent = expanded ? 'Показати менше' : 'Дивитись більше';
+    btn.textContent = expanded ? 'Згорнути' : 'Дивитись більше';
+    if (!expanded) {
+      grid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
+}
+
+function initCountriesLoadMore() {
+  const grid = document.querySelector('.countries__grid');
+  const btn = document.getElementById('countriesLoadMoreBtn');
+  if (!grid || !btn) return;
+
+  // Текст кнопки — з data-атрибутів HTML, щоб той самий JS працював і в UA, і в EN версії.
+  const collapsedLabel = btn.dataset.labelCollapsed || btn.textContent;
+  const expandedLabel = btn.dataset.labelExpanded || btn.textContent;
+
+  btn.addEventListener('click', () => {
+    const expanded = grid.classList.toggle('is-expanded');
+    btn.textContent = expanded ? expandedLabel : collapsedLabel;
     if (!expanded) {
       grid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
@@ -161,6 +184,13 @@ function initCountryNameFit() {
   if (!names.length) return;
 
   const fitAll = () => {
+    // На мобілці розмір фіксований в CSS, не адаптивний — інлайновий
+    // font-size звідси зламав би верстку картки.
+    if (window.innerWidth < 641) {
+      names.forEach((el) => { el.style.fontSize = ''; });
+      return;
+    }
+
     names.forEach((el) => {
       el.style.fontSize = '';
       const targetWidth = el.clientWidth;
@@ -291,11 +321,8 @@ function initHeaderTheme() {
   const sections = document.querySelectorAll('[data-header-theme]');
   if (!header || !sections.length) return;
 
-  // Свідомо без requestAnimationFrame-троттлінгу: у фонових/прихованих вкладках
-  // rAF може взагалі не викликатись (document.hidden === true), і хедер
-  // назавжди застрягає в неправильній темі (наприклад, темна іконка на темному
-  // фоні — невидима). Пряме виконання на scroll/resize безпечне: тут лише
-  // кілька getBoundingClientRect() без важких обчислень.
+  // Без rAF-троттлінгу навмисно: у фонових вкладках rAF може не викликатись
+  // взагалі, і хедер застрягне в неправильній темі.
   const update = () => {
     const probeY = header.getBoundingClientRect().bottom - 1;
     let theme = 'dark';
@@ -405,7 +432,309 @@ function initCasesToggle() {
   });
 }
 
+// Розбиває заголовок/підзаголовок на слова для ефекту "слова знизу"
+// (.fx-word-wrap > .fx-word-inner, див. CSS). Йде по childNodes, а не
+// textContent, щоб зберегти ручні <br>.
+function buildWords(el) {
+  if (el.dataset.wordsBuilt) return;
+  el.dataset.wordsBuilt = '1';
+
+  let wordIndex = 0;
+
+  function wrapWord(text) {
+    const wrap = document.createElement('span');
+    wrap.className = 'fx-word-wrap';
+    const inner = document.createElement('span');
+    inner.className = 'fx-word-inner';
+    inner.style.transitionDelay = `${wordIndex * 70}ms`;
+    inner.textContent = text;
+    wrap.appendChild(inner);
+    wordIndex++;
+    return wrap;
+  }
+
+  function processTextNode(node) {
+    const frag = document.createDocumentFragment();
+    const parts = node.textContent.split(/(\s+)/);
+    parts.forEach((tok) => {
+      if (!tok) return;
+      if (/^\s+$/.test(tok)) {
+        frag.appendChild(document.createTextNode(tok));
+        return;
+      }
+      frag.appendChild(wrapWord(tok));
+    });
+    return frag;
+  }
+
+  function processNode(node) {
+    if (node.nodeType === Node.TEXT_NODE) return processTextNode(node);
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      if (node.tagName === 'BR') return node.cloneNode(true);
+      const clone = node.cloneNode(false);
+      Array.from(node.childNodes).forEach((child) => {
+        clone.appendChild(processNode(child));
+      });
+      return clone;
+    }
+    return node.cloneNode(true);
+  }
+
+  const frag = document.createDocumentFragment();
+  Array.from(el.childNodes).forEach((child) => {
+    frag.appendChild(processNode(child));
+  });
+  el.innerHTML = '';
+  el.appendChild(frag);
+}
+
+// Перед переходом по внутрішньому лінку (навігація, перемикач мови) —
+// ставимо прапорець в sessionStorage, який inline-скрипт у <head>
+// наступної сторінки зчитує й не показує прелоадер. Без прапорця
+// прелоадер показується завжди (прямий вхід, F5).
+function initInternalLinkSkip() {
+  document.addEventListener('click', (e) => {
+    if (e.defaultPrevented) return;
+    if (e.button !== 0) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+    const a = e.target.closest('a');
+    if (!a || !a.href) return;
+    if (a.target === '_blank') return;
+    if (a.hasAttribute('download')) return;
+
+    const rawHref = a.getAttribute('href') || '';
+    if (rawHref.startsWith('#')) return;
+    if (/^(mailto|tel):/i.test(rawHref)) return;
+
+    let url;
+    try {
+      url = new URL(a.href, window.location.href);
+    } catch (err) {
+      return;
+    }
+    if (url.origin !== window.location.origin) return;
+
+    try {
+      sessionStorage.setItem('tempoSkipPreloader', '1');
+    } catch (err) {
+      // sessionStorage недоступний — не критично.
+    }
+  });
+}
+
+// Прелоадер: вордмарк «Tempo» заливається білою хвилею знизу вгору
+// (canvas + CSS-маска на .preloader__logo), під ним лічильник відсотків.
+// Показується на кожен вхід/F5, окрім переходу по внутрішньому лінку
+// (див. initInternalLinkSkip). prefers-reduced-motion — статичний білий
+// вордмарк без хвилі й зуму.
+function initPreloader() {
+  const root = document.querySelector('.preloader');
+
+  // Відео на хіро — без autoplay в HTML, стартує рівно тут, коли зникає
+  // прелоадер.
+  function playHeroVideo() {
+    const heroVideo = document.getElementById('heroVideo');
+    if (heroVideo) {
+      heroVideo.play().catch(() => {});
+    }
+  }
+
+  if (!root) {
+    playHeroVideo();
+    initScrollAnimations();
+    return;
+  }
+
+  const html = document.documentElement;
+  const logoEl = root.querySelector('.preloader__logo');
+  const canvas = root.querySelector('.preloader__canvas');
+  const counterWrap = root.querySelector('.preloader__counter');
+  const counterEl = counterWrap ? counterWrap.querySelector('span') : null;
+  const ctx = canvas ? canvas.getContext('2d') : null;
+
+  // is-preloading вже виставив (або ні) синхронний inline-скрипт у <head>.
+  const shouldShowPreloader = html.classList.contains('is-preloading');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let finished = false;
+  let resizeTimer = null;
+
+  function onWindowResize() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resizeCanvas, 200);
+  }
+
+  function finish() {
+    if (finished) return;
+    finished = true;
+    window.removeEventListener('resize', onWindowResize);
+    html.classList.remove('is-preloading');
+    html.style.overflow = '';
+    root.remove();
+    playHeroVideo();
+    initScrollAnimations();
+  }
+
+  // ---- Скорочений шлях: prefers-reduced-motion ----
+  // Без хвилі й без лічильника, лише фейд оверлею геть.
+  function runShortPath(fadeMs) {
+    if (counterWrap) counterWrap.style.display = 'none';
+    if (logoEl) logoEl.style.background = '#fff';
+    root.style.transitionDuration = `${fadeMs}ms`;
+    // Форсуємо reflow замість чекання на rAF — той у фоновій вкладці може довго не спрацювати.
+    void root.offsetHeight;
+    root.classList.add('is-out');
+    setTimeout(finish, fadeMs);
+  }
+
+  if (!shouldShowPreloader) {
+    finish();
+    return;
+  }
+
+  if (reduceMotion) {
+    runShortPath(300);
+    return;
+  }
+
+  // ---- Повна версія: хвиля на canvas + гібридний прогрес ----
+  if (!canvas || !ctx) {
+    finish();
+    return;
+  }
+
+  html.classList.add('is-preloading');
+  html.style.overflow = 'hidden';
+
+  let amp = window.innerWidth >= 1024 ? 50 : 25;
+  let w = 0;
+  let h = 0;
+  let phase = 0;
+
+  function resizeCanvas() {
+    amp = window.innerWidth >= 1024 ? 50 : 25;
+    // Розміри беремо з .preloader__logo, а не з canvas: без явних CSS
+    // width/height canvas визначає власний розмір по інтринзик 300x150.
+    w = logoEl.offsetWidth;
+    h = logoEl.offsetHeight + 1.75 * amp;
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    canvas.style.width = `${w}px`;
+    canvas.style.height = `${h}px`;
+    // Скидання трансформації перед scale() — інакше на кожному ресайзі масштаб компонувався б.
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+  }
+
+  // p: 1 = порожньо, 0 = залито повністю.
+  function draw(p) {
+    ctx.clearRect(0, 0, w, h);
+    ctx.beginPath();
+    ctx.fillStyle = '#fff';
+    ctx.moveTo(0, h);
+    // Крок вибірки 3px (x*3) — межа циклу w/3 рівно покриває ширину канваса.
+    for (let x = 0; x < w / 3; x++) {
+      const y = h * p - Math.sin(0.02 * x + phase) * Math.sin(0.01 * x + phase) * Math.sin(0.05 * x + phase) * amp;
+      ctx.lineTo(x * 3, y);
+    }
+    ctx.lineTo(w, h);
+    ctx.lineTo(0, h);
+    ctx.closePath();
+    ctx.fill();
+    phase += 0.03;
+  }
+
+  resizeCanvas();
+  window.addEventListener('resize', onWindowResize);
+
+  // Фіксуємо ширину лічильника по "100", щоб цифри 0→100 не "стрибали".
+  if (counterEl) {
+    counterEl.textContent = '100';
+    counterEl.style.width = `${counterEl.offsetWidth}px`;
+    counterEl.textContent = '0';
+  }
+
+  const START_DELAY = 500;
+  const RAMP_DURATION = 3000;
+  const SOFT_CAP = 95;
+  const HARD_TIMEOUT = 6000;
+
+  const heroVideo = document.getElementById('heroVideo');
+  let loadFired = document.readyState === 'complete';
+  let videoFired = !heroVideo || heroVideo.readyState >= 3; // HAVE_FUTURE_DATA ~ canplaythrough
+  let ready = loadFired && videoFired;
+
+  window.addEventListener('load', () => {
+    loadFired = true;
+    ready = loadFired && videoFired;
+  });
+  if (heroVideo && !videoFired) {
+    heroVideo.addEventListener('canplaythrough', () => {
+      videoFired = true;
+      ready = loadFired && videoFired;
+    }, { once: true });
+  }
+
+  const hardTimeoutId = setTimeout(() => { ready = true; }, HARD_TIMEOUT);
+
+  let startTime = null;
+  let displayProgress = 0;
+  let exitStarted = false;
+
+  function tick(now) {
+    if (startTime === null) startTime = now;
+    const elapsed = now - startTime;
+
+    if (elapsed >= START_DELAY) {
+      const t = Math.min((elapsed - START_DELAY) / RAMP_DURATION, 1);
+      const rampValue = t * 100;
+      displayProgress = ready ? Math.max(displayProgress, rampValue) : Math.min(rampValue, SOFT_CAP);
+    }
+
+    draw(1 - displayProgress / 100);
+    if (counterEl) counterEl.textContent = String(Math.round(displayProgress));
+
+    if (displayProgress >= 100 && !exitStarted) {
+      exitStarted = true;
+      clearTimeout(hardTimeoutId);
+      startExit();
+      return;
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  function startExit() {
+    // 1) лічильник — фейд 250мс
+    if (counterWrap) counterWrap.classList.add('is-out');
+
+    // 2) фон вордмарка → суцільний білий, 200мс
+    if (logoEl) logoEl.classList.add('is-filled');
+
+    // 3) на ~90% тривалості кроку 2 — вордмарк зникає + зумиться, 1с
+    setTimeout(() => {
+      if (!logoEl) return;
+      const factor = (window.innerWidth / logoEl.offsetWidth) * 2;
+      logoEl.style.transform = `scale(${factor})`;
+      logoEl.classList.add('is-zoom');
+    }, 180);
+
+    // 4) весь оверлей — фейд геть, потім прибрати з DOM
+    setTimeout(() => {
+      root.style.transitionDuration = '350ms';
+      root.classList.add('is-out');
+      setTimeout(finish, 350);
+    }, 180 + 1000);
+  }
+
+  requestAnimationFrame(tick);
+}
+
 function initScrollAnimations() {
+  document.querySelectorAll('[data-anim="wipe"]').forEach(buildWords);
+
   const targets = document.querySelectorAll('[data-anim]');
   if (!targets.length) return;
 
@@ -417,11 +746,8 @@ function initScrollAnimations() {
 
   const pending = new Set(targets);
 
-  // Фолбек-перевірка на голому getBoundingClientRect: у деяких станах вкладки
-  // (згорнута/фонова, DevTools відкриті певним чином тощо) IntersectionObserver
-  // не встигає доставити колбек вчасно чи взагалі, і заголовки лишаються
-  // невидимими назавжди. Ця перевірка на scroll/resize/visibilitychange —
-  // страховка, яка не залежить від таймінгу рендер-пайплайна.
+  // Фолбек: IntersectionObserver іноді не встигає спрацювати вчасно (фонова
+  // вкладка, DevTools) — тоді елементи лишаються невидимими назавжди.
   function revealVisible() {
     const vh = window.innerHeight || document.documentElement.clientHeight;
     pending.forEach(el => {

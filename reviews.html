@@ -5,6 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Відгуки клієнтів — Tempo</title>
 
+  <style>
+    html.is-preloading { overflow: hidden; }
+    html:not(.is-preloading) .preloader { display: none; }
+    .preloader { position: fixed; inset: 0; z-index: 999; display: flex; align-items: center; justify-content: center; background: #0E0E0E; }
+  </style>
+  <script>
+    // Синхронно, ДО першого пофарбування body: прелоадер показується на
+    // КОЖЕН вхід/перезавантаження сайту, ОКРІМ переходу з іншої сторінки
+    // сайту по внутрішньому лінку (навігація, перемикач мови) — js/main.js
+    // (клік-хендлер initInternalLinkSkip) перед таким переходом виставляє
+    // прапорець tempoSkipPreloader в sessionStorage; тут він одноразово
+    // читається й одразу видаляється, щоб не вплинути на наступне
+    // перезавантаження. Клас is-preloading додається лише коли прапорця
+    // немає — саме він визначає, чи взагалі показувати прелоадер (і тут,
+    // і далі в js/main.js: initPreloader читає той самий клас).
+    (function () {
+      try {
+        if (sessionStorage.getItem('tempoSkipPreloader') === '1') {
+          sessionStorage.removeItem('tempoSkipPreloader');
+        } else {
+          document.documentElement.classList.add('is-preloading');
+        }
+      } catch (e) {
+        document.documentElement.classList.add('is-preloading');
+      }
+    })();
+  </script>
+
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Onest:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
@@ -13,6 +42,13 @@
   <link rel="stylesheet" href="css/reviews.css">
 </head>
 <body>
+
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <div class="preloader__logo"><canvas class="preloader__canvas"></canvas></div>
+      <p class="preloader__counter">loading... <span>0</span> %</p>
+    </div>
+  </div>
 
   <header class="header">
     <div class="container header__inner">
@@ -74,7 +110,7 @@
       <div class="container reviews-hero__inner">
         <div class="reviews-hero__content">
           <h1 class="reviews-hero__title">Відгуки<br>клієнтів</h1>
-          <p class="reviews-hero__subtitle">4.8 з 5 на основі 127 оцінок у Google і на Lardi-Trans</p>
+          <p class="reviews-hero__subtitle">4.8 з&nbsp;5 на&nbsp;основі 127 оцінок у&nbsp;Google і&nbsp;на&nbsp;Lardi-Trans</p>
           <a href="#" class="btn btn--primary">Написати відгук</a>
         </div>
         <img src="assets/img/reviews-photo.png" alt="" class="reviews-hero__media" aria-hidden="true">
@@ -120,7 +156,7 @@
       <div class="container">
         <div class="cases__header">
           <h2 class="cases__title" data-anim="wipe">Наші кейси</h2>
-          <p class="cases__desc" data-anim="wipe">Рейси, де було не все просто<br>— і як ми це вирішили.</p>
+          <p class="cases__desc" data-anim="wipe">Рейси, де було не&nbsp;все просто<br>— і&nbsp;як&nbsp;ми це&nbsp;вирішили.</p>
         </div>
       </div>
 
@@ -129,7 +165,7 @@
         <div class="case__inner">
           <article class="case-item">
             <div class="case-item__header">
-              <h3 class="case-item__title">Верстат 14 тонн у Прагу за 5 днів</h3>
+              <h3 class="case-item__title">Верстат 14 тонн у&nbsp;Прагу за&nbsp;5 днів</h3>
               <span class="case-item__date">Березень 2026</span>
             </div>
             <div class="case-item__body">
@@ -137,11 +173,14 @@
               <p class="case-item__result"><strong>Результат:</strong> прибуття за 5 днів замість запланованих 7. Монтаж почався за графіком.</p>
 
               <div class="case-stats">
-                <img src="assets/img/1700km-text.png" alt="" class="case-stat__img">
+                <img src="assets/img/1700km-text.png" alt="" class="case-stat__img case-stat__img--desktop">
+                <img src="assets/img/1 700 км-mobile.png" alt="" class="case-stat__img case-stat__img--mobile">
                 <div class="case-stats__divider"></div>
-                <img src="assets/img/Харків → Прага-text.png" alt="" class="case-stat__img">
+                <img src="assets/img/Харків → Прага-text.png" alt="" class="case-stat__img case-stat__img--desktop">
+                <img src="assets/img/Харків → Прага-mobile.png" alt="" class="case-stat__img case-stat__img--mobile">
                 <div class="case-stats__divider"></div>
-                <img src="assets/img/14t-text.png" alt="" class="case-stat__img">
+                <img src="assets/img/14t-text.png" alt="" class="case-stat__img case-stat__img--desktop">
+                <img src="assets/img/14 т-mobile.png" alt="" class="case-stat__img case-stat__img--mobile">
               </div>
             </div>
           </article>
@@ -152,7 +191,7 @@
         <div class="case__inner">
           <article class="case-item">
             <div class="case-item__header">
-              <h3 class="case-item__title">47 рейсів без розриву температурного ланцюга</h3>
+              <h3 class="case-item__title">47 рейсів без&nbsp;розриву температурного ланцюга</h3>
               <span class="case-item__date">Лютий 2026</span>
             </div>
             <div class="case-item__body">
@@ -160,9 +199,11 @@
               <p class="case-item__result"><strong>Результат:</strong> 47 рейсів за рік, жодного відхилення від режиму. Контракт продовжено.</p>
 
               <div class="case-stats">
-                <img src="assets/img/1400km-text.png" alt="" class="case-stat__img">
+                <img src="assets/img/1400km-text.png" alt="" class="case-stat__img case-stat__img--desktop">
+                <img src="assets/img/1 400 км-mobile.png" alt="" class="case-stat__img case-stat__img--mobile">
                 <div class="case-stats__divider"></div>
-                <img src="assets/img/Львів → Гамбург-text.png" alt="" class="case-stat__img">
+                <img src="assets/img/Львів → Гамбург-text.png" alt="" class="case-stat__img case-stat__img--desktop">
+                <img src="assets/img/Львів → Гамбург-mobile.png" alt="" class="case-stat__img case-stat__img--mobile">
                 <div class="case-stats__divider"></div>
                 <img src="assets/img/47рейсів-text.png" alt="" class="case-stat__img">
               </div>
@@ -174,7 +215,7 @@
         <div class="case__inner">
           <article class="case-item">
             <div class="case-item__header">
-              <h3 class="case-item__title">Верстат 14 тонн у Прагу за 5 днів</h3>
+              <h3 class="case-item__title">Верстат 14 тонн у&nbsp;Прагу за&nbsp;5 днів</h3>
               <span class="case-item__date">Березень 2026</span>
             </div>
             <div class="case-item__body">
@@ -182,11 +223,14 @@
               <p class="case-item__result"><strong>Результат:</strong> прибуття за 5 днів замість запланованих 7. Монтаж почався за графіком.</p>
 
               <div class="case-stats">
-                <img src="assets/img/1700km-text.png" alt="" class="case-stat__img">
+                <img src="assets/img/1700km-text.png" alt="" class="case-stat__img case-stat__img--desktop">
+                <img src="assets/img/1 700 км-mobile.png" alt="" class="case-stat__img case-stat__img--mobile">
                 <div class="case-stats__divider"></div>
-                <img src="assets/img/Харків → Прага-text.png" alt="" class="case-stat__img">
+                <img src="assets/img/Харків → Прага-text.png" alt="" class="case-stat__img case-stat__img--desktop">
+                <img src="assets/img/Харків → Прага-mobile.png" alt="" class="case-stat__img case-stat__img--mobile">
                 <div class="case-stats__divider"></div>
-                <img src="assets/img/14t-text.png" alt="" class="case-stat__img">
+                <img src="assets/img/14t-text.png" alt="" class="case-stat__img case-stat__img--desktop">
+                <img src="assets/img/14 т-mobile.png" alt="" class="case-stat__img case-stat__img--mobile">
               </div>
             </div>
           </article>
@@ -197,7 +241,7 @@
         <div class="case__inner">
           <article class="case-item">
             <div class="case-item__header">
-              <h3 class="case-item__title">47 рейсів без розриву температурного ланцюга</h3>
+              <h3 class="case-item__title">47 рейсів без&nbsp;розриву температурного ланцюга</h3>
               <span class="case-item__date">Лютий 2026</span>
             </div>
             <div class="case-item__body">
@@ -205,9 +249,11 @@
               <p class="case-item__result"><strong>Результат:</strong> 47 рейсів за рік, жодного відхилення від режиму. Контракт продовжено.</p>
 
               <div class="case-stats">
-                <img src="assets/img/1400km-text.png" alt="" class="case-stat__img">
+                <img src="assets/img/1400km-text.png" alt="" class="case-stat__img case-stat__img--desktop">
+                <img src="assets/img/1 400 км-mobile.png" alt="" class="case-stat__img case-stat__img--mobile">
                 <div class="case-stats__divider"></div>
-                <img src="assets/img/Львів → Гамбург-text.png" alt="" class="case-stat__img">
+                <img src="assets/img/Львів → Гамбург-text.png" alt="" class="case-stat__img case-stat__img--desktop">
+                <img src="assets/img/Львів → Гамбург-mobile.png" alt="" class="case-stat__img case-stat__img--mobile">
                 <div class="case-stats__divider"></div>
                 <img src="assets/img/47рейсів-text.png" alt="" class="case-stat__img">
               </div>
@@ -232,7 +278,7 @@
       <div class="container">
         <div class="contact-card">
           <h2 class="contact-card__title" data-anim="wipe">Залишити заявку</h2>
-          <p class="contact-card__subtitle subheading" data-anim="wipe">Відповідаємо протягом години в робочий час</p>
+          <p class="contact-card__subtitle subheading" data-anim="wipe">Відповідаємо протягом години в&nbsp;робочий час</p>
 
           <form class="contact-form" data-anim="stagger">
             <div class="contact-form__row">

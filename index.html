@@ -5,6 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tempo — Доставка вантажів з України в країни ЄС</title>
 
+  <style>
+    html.is-preloading { overflow: hidden; }
+    html:not(.is-preloading) .preloader { display: none; }
+    .preloader { position: fixed; inset: 0; z-index: 999; display: flex; align-items: center; justify-content: center; background: #0E0E0E; }
+  </style>
+  <script>
+    // Синхронно, ДО першого пофарбування body: прелоадер показується на
+    // КОЖЕН вхід/перезавантаження сайту, ОКРІМ переходу з іншої сторінки
+    // сайту по внутрішньому лінку (навігація, перемикач мови) — js/main.js
+    // (клік-хендлер initInternalLinkSkip) перед таким переходом виставляє
+    // прапорець tempoSkipPreloader в sessionStorage; тут він одноразово
+    // читається й одразу видаляється, щоб не вплинути на наступне
+    // перезавантаження. Клас is-preloading додається лише коли прапорця
+    // немає — саме він визначає, чи взагалі показувати прелоадер (і тут,
+    // і далі в js/main.js: initPreloader читає той самий клас).
+    (function () {
+      try {
+        if (sessionStorage.getItem('tempoSkipPreloader') === '1') {
+          sessionStorage.removeItem('tempoSkipPreloader');
+        } else {
+          document.documentElement.classList.add('is-preloading');
+        }
+      } catch (e) {
+        document.documentElement.classList.add('is-preloading');
+      }
+    })();
+  </script>
+
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Onest:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
@@ -12,6 +41,13 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <div class="preloader__logo"><canvas class="preloader__canvas"></canvas></div>
+      <p class="preloader__counter">loading... <span>0</span> %</p>
+    </div>
+  </div>
 
   <header class="header">
     <div class="container header__inner">
@@ -70,15 +106,15 @@
 
   <main>
     <section class="hero" data-header-theme="dark">
-      <video class="hero__video" autoplay muted loop playsinline id="heroVideo">
+      <video class="hero__video" muted loop playsinline preload="auto" id="heroVideo">
         <source src="assets/video/main-video.mp4" type="video/mp4">
       </video>
       <div class="hero__overlay"></div>
 
       <div class="container hero__inner">
         <div class="hero__content">
-          <h1 class="hero__title">Доставка вантажів з України в країни ЄС за фіксований термін</h1>
-          <p class="hero__subtitle subheading">Власний автопарк, GPS-трекінг, митне оформлення. Ви знаєте точну дату розвантаження ще до виїзду машини.</p>
+          <h1 class="hero__title">Доставка вантажів з&nbsp;України в&nbsp;країни ЄС за&nbsp;фіксований термін</h1>
+          <p class="hero__subtitle subheading">Власний автопарк, GPS-трекінг, митне оформлення. Ви знаєте точну дату розвантаження ще до&nbsp;виїзду машини.</p>
           <a href="#contact" class="btn btn--primary">Отримати прорахунок</a>
         </div>
       </div>
@@ -91,132 +127,164 @@
     <section class="countries" data-header-theme="light">
       <div class="container countries__header">
         <h2 class="countries__title" data-anim="wipe">Країни, куди<br>доставляємо</h2>
-        <p class="countries__desc subheading" data-anim="wipe">Працюємо з 16 країнами ЄС. Маршрути відпрацьовані, машини йдуть регулярно — не потрібно чекати, поки збереться завантаження.</p>
+        <p class="countries__desc subheading" data-anim="wipe">Працюємо з&nbsp;16 країнами ЄС. Маршрути відпрацьовані, машини йдуть регулярно — не&nbsp;потрібно чекати, поки збереться завантаження.</p>
       </div>
 
       <div class="countries__grid" data-anim="stagger">
         <div class="country-card">
           <img src="assets/img/germany.png" alt="Німеччина" class="country-card__flag">
           <div class="country-card__overlay">
-            <div class="country-card__info">
-              <span class="country-card__label">Термін доставки:</span>
-              <span class="country-card__days">3–5 днів</span>
+            <div class="country-card__overlay-inner">
+              <div class="country-card__info">
+              <div class="country-card__top">
+                <span class="country-card__label">Термін доставки:</span>
+                <span class="country-card__days">3–5 днів</span>
+              </div>
               <ul class="country-card__cities">
                 <li>Берлін</li><li>Гамбург</li><li>Мюнхен</li><li>Кельн</li><li>Франкфурт</li><li>Штутгарт</li>
               </ul>
             </div>
             <h3 class="country-card__name">Німеччина</h3>
+            </div>
           </div>
         </div>
 
         <div class="country-card">
           <img src="assets/img/france.png" alt="Франція" class="country-card__flag">
           <div class="country-card__overlay">
-            <div class="country-card__info">
-              <span class="country-card__label">Термін доставки:</span>
-              <span class="country-card__days">6–8 днів</span>
+            <div class="country-card__overlay-inner">
+              <div class="country-card__info">
+              <div class="country-card__top">
+                <span class="country-card__label">Термін доставки:</span>
+                <span class="country-card__days">6–8 днів</span>
+              </div>
               <ul class="country-card__cities">
                 <li>Париж</li><li>Ліон</li><li>Марсель</li><li>Тулуза</li><li>Ніцца</li><li>Нант</li><li>Страсбур</li>
               </ul>
             </div>
             <h3 class="country-card__name">Франція</h3>
+            </div>
           </div>
         </div>
 
         <div class="country-card">
           <img src="assets/img/italy.png" alt="Італія" class="country-card__flag">
           <div class="country-card__overlay">
-            <div class="country-card__info">
-              <span class="country-card__label">Термін доставки:</span>
-              <span class="country-card__days">5–7 днів</span>
+            <div class="country-card__overlay-inner">
+              <div class="country-card__info">
+              <div class="country-card__top">
+                <span class="country-card__label">Термін доставки:</span>
+                <span class="country-card__days">5–7 днів</span>
+              </div>
               <ul class="country-card__cities">
                 <li>Мілан</li><li>Рим</li><li>Турин</li><li>Болонья</li><li>Верона</li><li>Неаполь</li><li>Флоренція</li>
               </ul>
             </div>
             <h3 class="country-card__name">Італія</h3>
+            </div>
           </div>
         </div>
 
         <div class="country-card">
           <img src="assets/img/hungary.png" alt="Угорщина" class="country-card__flag">
           <div class="country-card__overlay">
-            <div class="country-card__info">
-              <span class="country-card__label">Термін доставки:</span>
-              <span class="country-card__days">2–3 дні</span>
+            <div class="country-card__overlay-inner">
+              <div class="country-card__info">
+              <div class="country-card__top">
+                <span class="country-card__label">Термін доставки:</span>
+                <span class="country-card__days">2–3 дні</span>
+              </div>
               <ul class="country-card__cities">
                 <li>Будапешт</li><li>Дебрецен</li><li>Сегед</li><li>Мішкольц</li><li>Дьйор</li><li>Печ</li>
               </ul>
             </div>
             <h3 class="country-card__name">Угорщина</h3>
+            </div>
           </div>
         </div>
 
         <div class="country-card">
           <img src="assets/img/switzland.png" alt="Швейцарія" class="country-card__flag">
           <div class="country-card__overlay">
-            <div class="country-card__info">
-              <span class="country-card__label">Термін доставки:</span>
-              <span class="country-card__days">5–7 днів</span>
+            <div class="country-card__overlay-inner">
+              <div class="country-card__info">
+              <div class="country-card__top">
+                <span class="country-card__label">Термін доставки:</span>
+                <span class="country-card__days">5–7 днів</span>
+              </div>
               <ul class="country-card__cities">
                 <li>Цюрих</li><li>Женева</li><li>Базель</li><li>Берн</li><li>Лозанна</li><li>Люцерн</li>
               </ul>
             </div>
             <h3 class="country-card__name">Швейцарія</h3>
+            </div>
           </div>
         </div>
 
         <div class="country-card">
           <img src="assets/img/spain.png" alt="Іспанія" class="country-card__flag">
           <div class="country-card__overlay">
-            <div class="country-card__info">
-              <span class="country-card__label">Термін доставки:</span>
-              <span class="country-card__days">8–10 днів</span>
+            <div class="country-card__overlay-inner">
+              <div class="country-card__info">
+              <div class="country-card__top">
+                <span class="country-card__label">Термін доставки:</span>
+                <span class="country-card__days">8–10 днів</span>
+              </div>
               <ul class="country-card__cities">
                 <li>Мадрид</li><li>Барселона</li><li>Валенсія</li><li>Сарагоса</li><li>Севілья</li><li>Більбао</li>
               </ul>
             </div>
             <h3 class="country-card__name">Іспанія</h3>
+            </div>
           </div>
         </div>
 
         <div class="country-card">
           <img src="assets/img/poland.png" alt="Польща" class="country-card__flag">
           <div class="country-card__overlay">
-            <div class="country-card__info">
-              <span class="country-card__label">Термін доставки:</span>
-              <span class="country-card__days">2–3 дні</span>
+            <div class="country-card__overlay-inner">
+              <div class="country-card__info">
+              <div class="country-card__top">
+                <span class="country-card__label">Термін доставки:</span>
+                <span class="country-card__days">2–3 дні</span>
+              </div>
               <ul class="country-card__cities">
                 <li>Варшава</li><li>Краків</li><li>Вроцлав</li><li>Познань</li><li>Гданськ</li><li>Лодзь</li><li>Катовіце</li>
               </ul>
             </div>
             <h3 class="country-card__name">Польща</h3>
+            </div>
           </div>
         </div>
 
         <div class="country-card">
           <img src="assets/img/romania.png" alt="Румунія" class="country-card__flag">
           <div class="country-card__overlay">
-            <div class="country-card__info">
-              <span class="country-card__label">Термін доставки:</span>
-              <span class="country-card__days">3–4 дні</span>
+            <div class="country-card__overlay-inner">
+              <div class="country-card__info">
+              <div class="country-card__top">
+                <span class="country-card__label">Термін доставки:</span>
+                <span class="country-card__days">3–4 дні</span>
+              </div>
               <ul class="country-card__cities">
                 <li>Бухарест</li><li>Клуж-Напока</li><li>Тімішоара</li><li>Ясси</li><li>Констанца</li><li>Брашов</li>
               </ul>
             </div>
             <h3 class="country-card__name">Румунія</h3>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="countries__footer">
-        <a href="#" class="btn btn--dark">Дивитись більше</a>
+        <button type="button" class="btn btn--dark" id="countriesLoadMoreBtn" data-label-collapsed="Дивитись більше" data-label-expanded="Показати менше">Дивитись більше</button>
       </div>
     </section>
 
     <section class="carry" data-header-theme="light">
       <div class="container carry__header">
-        <h2 class="carry__title" data-anim="wipe">Що ми<br>возимо</h2>
-        <p class="carry__desc subheading" data-anim="wipe">Тентові напівпричепи, рефрижератори, трали для негабариту. Беремо як повне завантаження, так і партії від однієї палети.</p>
+        <h2 class="carry__title" data-anim="wipe">Що ми возимо</h2>
+        <p class="carry__desc subheading" data-anim="wipe">Тентові напівпричепи, рефрижератори, трали для&nbsp;негабариту. Беремо як&nbsp;повне завантаження, так і&nbsp;партії від&nbsp;однієї палети.</p>
       </div>
 
       <div class="accordion" data-anim="stagger">
@@ -241,7 +309,7 @@
 
         <div class="accordion-item">
           <button class="accordion-item__header" type="button" aria-expanded="false">
-            <h3 class="accordion-item__title">Продукти й ліки</h3>
+            <h3 class="accordion-item__title">Продукти й&nbsp;ліки</h3>
             <p class="accordion-item__preview">рефрижератори, режим від -20°C до +25°C</p>
             <span class="accordion-item__icon" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -260,7 +328,7 @@
 
         <div class="accordion-item">
           <button class="accordion-item__header" type="button" aria-expanded="false">
-            <h3 class="accordion-item__title">Обладнання й негабарит</h3>
+            <h3 class="accordion-item__title">Обладнання й&nbsp;негабарит</h3>
             <p class="accordion-item__preview">низькорамні трали</p>
             <span class="accordion-item__icon" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -319,8 +387,8 @@
 
     <section class="why" data-header-theme="light">
       <div class="container why__header">
-        <h2 class="why__title" data-anim="wipe">Чому термін не зривається</h2>
-        <p class="why__desc subheading" data-anim="wipe">Фіксований термін — це не обіцянка, а наслідок того, як побудована робота. Ось чотири речі, які на це впливають</p>
+        <h2 class="why__title" data-anim="wipe">Чому термін не&nbsp;зривається</h2>
+        <p class="why__desc subheading" data-anim="wipe">Фіксований термін — це&nbsp;не&nbsp;обіцянка, а&nbsp;наслідок того, як&nbsp;побудована робота. Ось чотири речі, які на&nbsp;це&nbsp;впливають</p>
       </div>
 
       <div class="why__list">
@@ -329,7 +397,7 @@
             <span class="why-item__line" aria-hidden="true"></span>
             <span class="why-item__number">01</span>
             <div class="why-item__body">
-              <h3 class="why-item__title">Власний автопарк, без субпідрядників</h3>
+              <h3 class="why-item__title">Власний автопарк, без&nbsp;субпідрядників</h3>
               <p class="why-item__desc text-body">Ми не передаємо ваш вантаж іншому перевізнику посеред маршруту. Машина, яка забрала вантаж у вас, довозить його до точки розвантаження. Це означає, що термін залежить від нашого графіка, а не від того, коли субпідрядник знайде вільне авто.</p>
             </div>
           </div>
@@ -338,7 +406,7 @@
             <span class="why-item__line" aria-hidden="true"></span>
             <span class="why-item__number">02</span>
             <div class="why-item__body">
-              <h3 class="why-item__title">Водії в штаті</h3>
+              <h3 class="why-item__title">Водії в&nbsp;штаті</h3>
               <p class="why-item__desc text-body">Наші водії працюють у компанії постійно, а не залучаються під конкретний рейс. Вони знають маршрути, знають вимоги на кордонах і не зникають на звʼязку. Ми плануємо графік наперед, тому машина виїжджає в узгоджену дату, а не коли знайдеться вільний водій.</p>
             </div>
           </div>
@@ -356,7 +424,7 @@
             <span class="why-item__line" aria-hidden="true"></span>
             <span class="why-item__number">04</span>
             <div class="why-item__body">
-              <h3 class="why-item__title">GPS-моніторинг у реальному часі</h3>
+              <h3 class="why-item__title">GPS-моніторинг у&nbsp;реальному часі</h3>
               <p class="why-item__desc text-body">Ви бачите, де машина, без дзвінків і уточнень. Якщо на маршруті виникає затримка — черга на кордоні, погода, ремонт дороги — ви дізнаєтесь про це одразу, а не за фактом. Це дає час попередити свого отримувача заздалегідь.</p>
             </div>
           </div>
@@ -367,7 +435,7 @@
     <section class="steps" data-header-theme="dark">
       <div class="container steps__inner">
         <div class="steps__aside">
-          <h2 class="steps__title">Як усе<br>проходить<br><span class="steps__title-accent">поетапно</span></h2>
+          <h2 class="steps__title">Як&nbsp;усе<br>проходить<br><span class="steps__title-accent">поетапно</span></h2>
           <img src="assets/img/tempo-logo-stroke-only.png" alt="" class="steps__watermark" aria-hidden="true">
         </div>
 
@@ -388,7 +456,7 @@
             <li class="steps__item">
               <span class="steps__circle">2</span>
               <div class="steps__card">
-                <h3 class="steps__card-title">Розрахунок і договір</h3>
+                <h3 class="steps__card-title">Розрахунок і&nbsp;договір</h3>
                 <p class="steps__card-desc text-body">Надсилаємо вартість, термін доставки й тип транспорту. Ціна фіксована — без надбавок за простій чи паливо після підписання. Якщо все влаштовує, підписуємо договір і ставимо рейс у графік.</p>
               </div>
             </li>
@@ -692,7 +760,7 @@
       <div class="container">
         <div class="contact-card">
           <h2 class="contact-card__title" data-anim="wipe">Залишити заявку</h2>
-          <p class="contact-card__subtitle subheading" data-anim="wipe">Відповідаємо протягом години в робочий час</p>
+          <p class="contact-card__subtitle subheading" data-anim="wipe">Відповідаємо протягом години в&nbsp;робочий час</p>
 
           <form class="contact-form" data-anim="stagger">
             <div class="contact-form__row">

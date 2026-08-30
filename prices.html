@@ -5,6 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ціни на перевезення — Tempo</title>
 
+  <style>
+    html.is-preloading { overflow: hidden; }
+    html:not(.is-preloading) .preloader { display: none; }
+    .preloader { position: fixed; inset: 0; z-index: 999; display: flex; align-items: center; justify-content: center; background: #0E0E0E; }
+  </style>
+  <script>
+    // Синхронно, ДО першого пофарбування body: прелоадер показується на
+    // КОЖЕН вхід/перезавантаження сайту, ОКРІМ переходу з іншої сторінки
+    // сайту по внутрішньому лінку (навігація, перемикач мови) — js/main.js
+    // (клік-хендлер initInternalLinkSkip) перед таким переходом виставляє
+    // прапорець tempoSkipPreloader в sessionStorage; тут він одноразово
+    // читається й одразу видаляється, щоб не вплинути на наступне
+    // перезавантаження. Клас is-preloading додається лише коли прапорця
+    // немає — саме він визначає, чи взагалі показувати прелоадер (і тут,
+    // і далі в js/main.js: initPreloader читає той самий клас).
+    (function () {
+      try {
+        if (sessionStorage.getItem('tempoSkipPreloader') === '1') {
+          sessionStorage.removeItem('tempoSkipPreloader');
+        } else {
+          document.documentElement.classList.add('is-preloading');
+        }
+      } catch (e) {
+        document.documentElement.classList.add('is-preloading');
+      }
+    })();
+  </script>
+
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Onest:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
@@ -13,6 +42,13 @@
   <link rel="stylesheet" href="css/prices.css">
 </head>
 <body>
+
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <div class="preloader__logo"><canvas class="preloader__canvas"></canvas></div>
+      <p class="preloader__counter">loading... <span>0</span> %</p>
+    </div>
+  </div>
 
   <header class="header">
     <div class="container header__inner">
@@ -72,8 +108,8 @@
   <main>
     <section class="prices-hero" data-header-theme="light">
       <div class="container prices-hero__inner">
-        <h1 class="prices-hero__title">Ціни на<br>перевезення</h1>
-        <p class="prices-hero__subtitle subheading">Ціна за 1 км перевезення залежить від багатьох факторів: сезону, типу перевезення та того, що саме перевозимо, — але ми намагаємось надавати актуальний прайс на цій сторінці та даємо можливість розрахувати приблизну вартість послуги прямо на сайті.</p>
+        <h1 class="prices-hero__title">Ціни<br>на&nbsp;перевезення</h1>
+        <p class="prices-hero__subtitle subheading">Ціна за&nbsp;1 км перевезення залежить від&nbsp;багатьох факторів: сезону, типу перевезення та&nbsp;того, що&nbsp;саме перевозимо, — але ми намагаємось надавати актуальний прайс на&nbsp;цій сторінці та&nbsp;даємо можливість розрахувати приблизну вартість послуги прямо на&nbsp;сайті.</p>
         <a href="#calculator" class="btn btn--primary">Розрахувати вартість</a>
       </div>
     </section>
@@ -89,64 +125,70 @@
       <div class="container">
         <div class="calculator-card">
           <h2 class="calculator-card__title" data-anim="wipe">Калькулятор вартості</h2>
-          <p class="calculator-card__subtitle subheading" data-anim="wipe">Оберіть напрямок і тип транспорту — покажемо орієнтовну ціну</p>
+          <p class="calculator-card__subtitle subheading" data-anim="wipe">Оберіть напрямок і&nbsp;тип транспорту — покажемо орієнтовну ціну</p>
 
-          <form class="calculator-form" data-anim="stagger">
+          <form class="calculator-form" data-anim="stagger" id="calculatorForm" novalidate>
             <div class="contact-form__row">
-              <div class="contact-form__field">
+              <div class="contact-form__field" id="fromCityField">
                 <label for="priceFromCity">Звідки (місто або область)</label>
-                <input type="text" id="priceFromCity" name="fromCity" placeholder="Київ">
+                <input type="text" id="priceFromCity" name="fromCity" placeholder="Київ" autocomplete="off" list="fromCitySuggestions">
+                <datalist id="fromCitySuggestions"></datalist>
+                <span class="field-error" id="fromCityError"></span>
               </div>
-              <div class="contact-form__field">
+              <div class="contact-form__field" id="cargoTypeField">
                 <label for="priceCargoType">Тип вантажу</label>
                 <select id="priceCargoType" name="cargoType">
                   <option value="" disabled selected>Оберіть тип</option>
-                  <option value="tent">Тентовий</option>
-                  <option value="fridge">Рефрижератор</option>
-                  <option value="trawl">Тральний</option>
-                  <option value="adr">ADR</option>
-                  <option value="groupage">Збірний</option>
+                  <option value="general">Генеральний вантаж</option>
+                  <option value="refrigerated">Температурний режим</option>
+                  <option value="fragile">Крихкий вантаж</option>
+                  <option value="oversized">Негабаритний</option>
+                  <option value="dangerous">Небезпечний (ADR)</option>
                 </select>
+                <span class="field-error" id="cargoTypeError"></span>
               </div>
             </div>
 
             <div class="contact-form__row">
-              <div class="contact-form__field">
+              <div class="contact-form__field" id="toCityField">
                 <label for="priceToCity">Куди (місто або область)</label>
-                <input type="text" id="priceToCity" name="toCity" placeholder="Париж">
+                <input type="text" id="priceToCity" name="toCity" placeholder="Париж" autocomplete="off" list="toCitySuggestions">
+                <datalist id="toCitySuggestions"></datalist>
+                <span class="field-error" id="toCityError"></span>
               </div>
-              <div class="contact-form__field">
+              <div class="contact-form__field" id="loadTypeField">
                 <label for="priceLoadType">Тип завантаження</label>
                 <select id="priceLoadType" name="loadType">
                   <option value="" disabled selected>Оберіть тип</option>
-                  <option value="full">Повна фура</option>
-                  <option value="partial">Часткове завантаження</option>
+                  <option value="ftl">Повна фура</option>
+                  <option value="ltl">Догруз</option>
                 </select>
+                <span class="field-error" id="loadTypeError"></span>
               </div>
             </div>
 
             <div class="calculator-form__submit">
-              <button type="submit" class="btn btn--dark" disabled title="Скоро запрацює">Обчислити приблизну вартість</button>
+              <button type="submit" class="btn btn--dark">Обчислити приблизну вартість</button>
             </div>
           </form>
         </div>
 
         <div class="prices-example">
           <div class="prices-example__header">
-            <h3 class="prices-example__route"><span>Київ -- Париж</span></h3>
+            <h3 class="prices-example__route"><span id="resultRoute">Київ → Париж</span></h3>
             <p class="prices-example__note">Остаточна ціна залежить від дати, характеру вантажу й наявності зворотного завантаження.</p>
           </div>
 
           <div class="prices-example__grid">
             <ul class="prices-example__list">
-              <li>Відстань: ~2400 км</li>
-              <li>Транспорт: тентовий напівпричіп</li>
-              <li>Завантаження: повна фура</li>
+              <li id="resultDistance">Відстань: ~2400 км</li>
+              <li id="resultTransport">Транспорт: тентовий напівпричіп</li>
+              <li id="resultLoading">Завантаження: повна фура</li>
             </ul>
             <ul class="prices-example__list">
-              <li>Орієнтовна вартість: €2900-3000</li>
-              <li>Термін доставки: 6-8 днів</li>
-              <li>Дата прибуття: 27.08.26</li>
+              <li id="resultPrice">Орієнтовна вартість: €2900-3000</li>
+              <li id="resultDays">Термін доставки: 6-8 днів</li>
+              <li id="resultArrival">Дата прибуття: 27.08.26</li>
             </ul>
           </div>
         </div>
@@ -155,8 +197,8 @@
 
     <section class="rates" data-header-theme="light">
       <div class="container rates__header">
-        <h2 class="rates__title" data-anim="wipe">Орієнтовані<br>ставки за 1 км</h2>
-        <p class="rates__desc subheading" data-anim="wipe">Ставки орієнтовні й залежать від напрямку, сезону та наявності зворотного завантаження. Точну ціну рахуємо під конкретний рейс.</p>
+        <h2 class="rates__title" data-anim="wipe">Орієнтовані<br>ставки за&nbsp;1 км</h2>
+        <p class="rates__desc subheading" data-anim="wipe">Ставки орієнтовні й&nbsp;залежать від&nbsp;напрямку, сезону та&nbsp;наявності зворотного завантаження. Точну ціну рахуємо під&nbsp;конкретний рейс.</p>
       </div>
 
       <div class="container">
@@ -198,7 +240,7 @@
     <section class="rates rates--groupage" data-header-theme="light">
       <div class="container rates__header">
         <h2 class="rates__title" data-anim="wipe">Збірні<br>вантажі</h2>
-        <p class="rates__desc subheading" data-anim="wipe">Якщо вантаж не заповнює цілу фуру — платите тільки за зайняте місце.</p>
+        <p class="rates__desc subheading" data-anim="wipe">Якщо вантаж не&nbsp;заповнює цілу фуру — платите тільки за&nbsp;зайняте місце.</p>
       </div>
 
       <div class="container">
@@ -230,7 +272,7 @@
       <div class="container">
         <div class="contact-card">
           <h2 class="contact-card__title" data-anim="wipe">Залишити заявку</h2>
-          <p class="contact-card__subtitle subheading" data-anim="wipe">Відповідаємо протягом години в робочий час</p>
+          <p class="contact-card__subtitle subheading" data-anim="wipe">Відповідаємо протягом години в&nbsp;робочий час</p>
 
           <form class="contact-form" data-anim="stagger">
             <div class="contact-form__row">
@@ -369,5 +411,6 @@
   </footer>
 
   <script src="js/main.js" defer></script>
+  <script type="module" src="js/calculator.js"></script>
 </body>
 </html>

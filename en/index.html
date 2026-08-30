@@ -5,6 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tempo — Freight delivery from Ukraine to EU countries</title>
 
+  <style>
+    html.is-preloading { overflow: hidden; }
+    html:not(.is-preloading) .preloader { display: none; }
+    .preloader { position: fixed; inset: 0; z-index: 999; display: flex; align-items: center; justify-content: center; background: #0E0E0E; }
+  </style>
+  <script>
+    // Синхронно, ДО першого пофарбування body: прелоадер показується на
+    // КОЖЕН вхід/перезавантаження сайту, ОКРІМ переходу з іншої сторінки
+    // сайту по внутрішньому лінку (навігація, перемикач мови) — js/main.js
+    // (клік-хендлер initInternalLinkSkip) перед таким переходом виставляє
+    // прапорець tempoSkipPreloader в sessionStorage; тут він одноразово
+    // читається й одразу видаляється, щоб не вплинути на наступне
+    // перезавантаження. Клас is-preloading додається лише коли прапорця
+    // немає — саме він визначає, чи взагалі показувати прелоадер (і тут,
+    // і далі в js/main.js: initPreloader читає той самий клас).
+    (function () {
+      try {
+        if (sessionStorage.getItem('tempoSkipPreloader') === '1') {
+          sessionStorage.removeItem('tempoSkipPreloader');
+        } else {
+          document.documentElement.classList.add('is-preloading');
+        }
+      } catch (e) {
+        document.documentElement.classList.add('is-preloading');
+      }
+    })();
+  </script>
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Onest:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
@@ -12,6 +41,13 @@
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <div class="preloader__logo"><canvas class="preloader__canvas"></canvas></div>
+      <p class="preloader__counter">loading... <span>0</span> %</p>
+    </div>
+  </div>
 
   <header class="header">
     <div class="container header__inner">
@@ -60,15 +96,15 @@
 
   <main>
     <section class="hero" data-header-theme="dark">
-      <video class="hero__video" autoplay muted loop playsinline id="heroVideo">
+      <video class="hero__video" muted loop playsinline preload="auto" id="heroVideo">
         <source src="../assets/video/main-video.mp4" type="video/mp4">
       </video>
       <div class="hero__overlay"></div>
 
       <div class="container hero__inner">
         <div class="hero__content">
-          <h1 class="hero__title">Freight delivery from Ukraine to EU countries within a fixed timeframe</h1>
-          <p class="hero__subtitle subheading">Own fleet, GPS tracking, customs clearance. You know the exact unloading date before the truck leaves.</p>
+          <h1 class="hero__title">Freight delivery from Ukraine to&nbsp;EU countries within a&nbsp;fixed timeframe</h1>
+          <p class="hero__subtitle subheading">Own fleet, GPS tracking, customs clearance. You know the&nbsp;exact unloading date before the&nbsp;truck leaves.</p>
           <a href="#contact" class="btn btn--primary">Get a quote</a>
         </div>
       </div>
@@ -80,133 +116,165 @@
 
     <section class="countries" data-header-theme="light">
       <div class="container countries__header">
-        <h2 class="countries__title" data-anim="wipe">Countries<br>we deliver to</h2>
-        <p class="countries__desc subheading" data-anim="wipe">We work with 16 EU countries. Routes are established, trucks run regularly, so there is no need to wait until a full load is collected.</p>
+        <h2 class="countries__title" data-anim="wipe">Countries<br>we&nbsp;deliver to</h2>
+        <p class="countries__desc subheading" data-anim="wipe">We&nbsp;work with 16 EU countries. Routes are established, trucks run regularly, so there is&nbsp;no need to&nbsp;wait until a&nbsp;full load is&nbsp;collected.</p>
       </div>
 
       <div class="countries__grid" data-anim="stagger">
         <div class="country-card">
           <img src="../assets/img/germany.png" alt="Germany" class="country-card__flag">
           <div class="country-card__overlay">
-            <div class="country-card__info">
-              <span class="country-card__label">Delivery time:</span>
-              <span class="country-card__days">3–5 days</span>
+            <div class="country-card__overlay-inner">
+              <div class="country-card__info">
+              <div class="country-card__top">
+                <span class="country-card__label">Delivery time:</span>
+                <span class="country-card__days">3–5 days</span>
+              </div>
               <ul class="country-card__cities">
                 <li>Berlin</li><li>Hamburg</li><li>Munich</li><li>Cologne</li><li>Frankfurt</li><li>Stuttgart</li>
               </ul>
             </div>
             <h3 class="country-card__name">Germany</h3>
+            </div>
           </div>
         </div>
 
         <div class="country-card">
           <img src="../assets/img/france.png" alt="France" class="country-card__flag">
           <div class="country-card__overlay">
-            <div class="country-card__info">
-              <span class="country-card__label">Delivery time:</span>
-              <span class="country-card__days">6–8 days</span>
+            <div class="country-card__overlay-inner">
+              <div class="country-card__info">
+              <div class="country-card__top">
+                <span class="country-card__label">Delivery time:</span>
+                <span class="country-card__days">6–8 days</span>
+              </div>
               <ul class="country-card__cities">
                 <li>Paris</li><li>Lyon</li><li>Marseille</li><li>Toulouse</li><li>Nice</li><li>Nantes</li><li>Strasbourg</li>
               </ul>
             </div>
             <h3 class="country-card__name">France</h3>
+            </div>
           </div>
         </div>
 
         <div class="country-card">
           <img src="../assets/img/italy.png" alt="Italy" class="country-card__flag">
           <div class="country-card__overlay">
-            <div class="country-card__info">
-              <span class="country-card__label">Delivery time:</span>
-              <span class="country-card__days">5–7 days</span>
+            <div class="country-card__overlay-inner">
+              <div class="country-card__info">
+              <div class="country-card__top">
+                <span class="country-card__label">Delivery time:</span>
+                <span class="country-card__days">5–7 days</span>
+              </div>
               <ul class="country-card__cities">
                 <li>Milan</li><li>Rome</li><li>Turin</li><li>Bologna</li><li>Verona</li><li>Naples</li><li>Florence</li>
               </ul>
             </div>
             <h3 class="country-card__name">Italy</h3>
+            </div>
           </div>
         </div>
 
         <div class="country-card">
           <img src="../assets/img/hungary.png" alt="Hungary" class="country-card__flag">
           <div class="country-card__overlay">
-            <div class="country-card__info">
-              <span class="country-card__label">Delivery time:</span>
-              <span class="country-card__days">2–3 days</span>
+            <div class="country-card__overlay-inner">
+              <div class="country-card__info">
+              <div class="country-card__top">
+                <span class="country-card__label">Delivery time:</span>
+                <span class="country-card__days">2–3 days</span>
+              </div>
               <ul class="country-card__cities">
                 <li>Budapest</li><li>Debrecen</li><li>Szeged</li><li>Miskolc</li><li>Győr</li><li>Pécs</li>
               </ul>
             </div>
             <h3 class="country-card__name">Hungary</h3>
+            </div>
           </div>
         </div>
 
         <div class="country-card">
           <img src="../assets/img/switzland.png" alt="Switzerland" class="country-card__flag">
           <div class="country-card__overlay">
-            <div class="country-card__info">
-              <span class="country-card__label">Delivery time:</span>
-              <span class="country-card__days">5–7 days</span>
+            <div class="country-card__overlay-inner">
+              <div class="country-card__info">
+              <div class="country-card__top">
+                <span class="country-card__label">Delivery time:</span>
+                <span class="country-card__days">5–7 days</span>
+              </div>
               <ul class="country-card__cities">
                 <li>Zurich</li><li>Geneva</li><li>Basel</li><li>Bern</li><li>Lausanne</li><li>Lucerne</li>
               </ul>
             </div>
             <h3 class="country-card__name">Switzerland</h3>
+            </div>
           </div>
         </div>
 
         <div class="country-card">
           <img src="../assets/img/spain.png" alt="Spain" class="country-card__flag">
           <div class="country-card__overlay">
-            <div class="country-card__info">
-              <span class="country-card__label">Delivery time:</span>
-              <span class="country-card__days">8–10 days</span>
+            <div class="country-card__overlay-inner">
+              <div class="country-card__info">
+              <div class="country-card__top">
+                <span class="country-card__label">Delivery time:</span>
+                <span class="country-card__days">8–10 days</span>
+              </div>
               <ul class="country-card__cities">
                 <li>Madrid</li><li>Barcelona</li><li>Valencia</li><li>Zaragoza</li><li>Seville</li><li>Bilbao</li>
               </ul>
             </div>
             <h3 class="country-card__name">Spain</h3>
+            </div>
           </div>
         </div>
 
         <div class="country-card">
           <img src="../assets/img/poland.png" alt="Poland" class="country-card__flag">
           <div class="country-card__overlay">
-            <div class="country-card__info">
-              <span class="country-card__label">Delivery time:</span>
-              <span class="country-card__days">2–3 days</span>
+            <div class="country-card__overlay-inner">
+              <div class="country-card__info">
+              <div class="country-card__top">
+                <span class="country-card__label">Delivery time:</span>
+                <span class="country-card__days">2–3 days</span>
+              </div>
               <ul class="country-card__cities">
                 <li>Warsaw</li><li>Krakow</li><li>Wrocław</li><li>Poznań</li><li>Gdańsk</li><li>Łódź</li><li>Katowice</li>
               </ul>
             </div>
             <h3 class="country-card__name">Poland</h3>
+            </div>
           </div>
         </div>
 
         <div class="country-card">
           <img src="../assets/img/romania.png" alt="Romania" class="country-card__flag">
           <div class="country-card__overlay">
-            <div class="country-card__info">
-              <span class="country-card__label">Delivery time:</span>
-              <span class="country-card__days">3–4 days</span>
+            <div class="country-card__overlay-inner">
+              <div class="country-card__info">
+              <div class="country-card__top">
+                <span class="country-card__label">Delivery time:</span>
+                <span class="country-card__days">3–4 days</span>
+              </div>
               <ul class="country-card__cities">
                 <li>Bucharest</li><li>Cluj-Napoca</li><li>Timișoara</li><li>Iași</li><li>Constanța</li><li>Brașov</li>
               </ul>
             </div>
             <h3 class="country-card__name">Romania</h3>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="countries__footer">
-        <a href="#" class="btn btn--dark">View more</a>
+        <button type="button" class="btn btn--dark" id="countriesLoadMoreBtn" data-label-collapsed="View more" data-label-expanded="View less">View more</button>
       </div>
     </section>
 
     <section class="carry" data-header-theme="light">
       <div class="container carry__header">
-        <h2 class="carry__title" data-anim="wipe">What we<br>carry</h2>
-        <p class="carry__desc subheading" data-anim="wipe">Curtain-side trailers, refrigerated trailers, low-loaders for oversized cargo. We take both full loads and shipments from a single pallet.</p>
+        <h2 class="carry__title" data-anim="wipe">What<br>we&nbsp;carry</h2>
+        <p class="carry__desc subheading" data-anim="wipe">Curtain-side trailers, refrigerated trailers, low-loaders for&nbsp;oversized cargo. We&nbsp;take both full loads and&nbsp;shipments from a&nbsp;single pallet.</p>
       </div>
 
       <div class="accordion" data-anim="stagger">
@@ -231,7 +299,7 @@
 
         <div class="accordion-item">
           <button class="accordion-item__header" type="button" aria-expanded="false">
-            <h3 class="accordion-item__title">Food and pharmaceuticals</h3>
+            <h3 class="accordion-item__title">Food and&nbsp;pharmaceuticals</h3>
             <p class="accordion-item__preview">refrigerated trailers, from -20°C to +25°C</p>
             <span class="accordion-item__icon" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -250,7 +318,7 @@
 
         <div class="accordion-item">
           <button class="accordion-item__header" type="button" aria-expanded="false">
-            <h3 class="accordion-item__title">Equipment and oversized cargo</h3>
+            <h3 class="accordion-item__title">Equipment and&nbsp;oversized cargo</h3>
             <p class="accordion-item__preview">low-loader trailers</p>
             <span class="accordion-item__icon" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -309,8 +377,8 @@
 
     <section class="why" data-header-theme="light">
       <div class="container why__header">
-        <h2 class="why__title" data-anim="wipe">Why the delivery date holds</h2>
-        <p class="why__desc subheading" data-anim="wipe">A fixed timeframe is not a promise, it is a result of how the work is set up. Here are four things that affect it</p>
+        <h2 class="why__title" data-anim="wipe">Why the&nbsp;delivery date holds</h2>
+        <p class="why__desc subheading" data-anim="wipe">A&nbsp;fixed timeframe is&nbsp;not a&nbsp;promise, it&nbsp;is a&nbsp;result of&nbsp;how the&nbsp;work is&nbsp;set up. Here are four things that affect it</p>
       </div>
 
       <div class="why__list">
@@ -337,7 +405,7 @@
             <span class="why-item__line" aria-hidden="true"></span>
             <span class="why-item__number">03</span>
             <div class="why-item__body">
-              <h3 class="why-item__title">We handle the paperwork</h3>
+              <h3 class="why-item__title">We&nbsp;handle the&nbsp;paperwork</h3>
               <p class="why-item__desc text-body">The most common cause of border delays is an error in the documents. We prepare CMR, invoices, export declarations and ADR documentation on our side and check everything before departure. Cargo does not sit at customs because of an incorrectly filled form.</p>
             </div>
           </div>
@@ -357,7 +425,7 @@
     <section class="steps" data-header-theme="dark">
       <div class="container steps__inner">
         <div class="steps__aside">
-          <h2 class="steps__title">How the<br>process works<br><span class="steps__title-accent">step by step</span></h2>
+          <h2 class="steps__title">How<br>the&nbsp;process works<br><span class="steps__title-accent">step by&nbsp;step</span></h2>
           <img src="../assets/img/tempo-logo-stroke-only.png" alt="" class="steps__watermark" aria-hidden="true">
         </div>
 
@@ -378,7 +446,7 @@
             <li class="steps__item">
               <span class="steps__circle">2</span>
               <div class="steps__card">
-                <h3 class="steps__card-title">Quote and contract</h3>
+                <h3 class="steps__card-title">Quote and&nbsp;contract</h3>
                 <p class="steps__card-desc text-body">We send the price, delivery time and vehicle type. The price is fixed — no surcharges for demurrage or fuel after signing. If everything suits you, we sign the contract and put the trip in the schedule.</p>
               </div>
             </li>
@@ -632,8 +700,8 @@
 
       <div class="container">
         <div class="contact-card">
-          <h2 class="contact-card__title" data-anim="wipe">Submit a request</h2>
-          <p class="contact-card__subtitle subheading" data-anim="wipe">We reply within an hour during working hours</p>
+          <h2 class="contact-card__title" data-anim="wipe">Submit a&nbsp;request</h2>
+          <p class="contact-card__subtitle subheading" data-anim="wipe">We&nbsp;reply within an&nbsp;hour during working hours</p>
 
           <form class="contact-form" data-anim="stagger">
             <div class="contact-form__row">

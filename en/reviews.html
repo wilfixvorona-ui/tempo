@@ -5,6 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Client Reviews — Tempo</title>
 
+  <style>
+    html.is-preloading { overflow: hidden; }
+    html:not(.is-preloading) .preloader { display: none; }
+    .preloader { position: fixed; inset: 0; z-index: 999; display: flex; align-items: center; justify-content: center; background: #0E0E0E; }
+  </style>
+  <script>
+    // Синхронно, ДО першого пофарбування body: прелоадер показується на
+    // КОЖЕН вхід/перезавантаження сайту, ОКРІМ переходу з іншої сторінки
+    // сайту по внутрішньому лінку (навігація, перемикач мови) — js/main.js
+    // (клік-хендлер initInternalLinkSkip) перед таким переходом виставляє
+    // прапорець tempoSkipPreloader в sessionStorage; тут він одноразово
+    // читається й одразу видаляється, щоб не вплинути на наступне
+    // перезавантаження. Клас is-preloading додається лише коли прапорця
+    // немає — саме він визначає, чи взагалі показувати прелоадер (і тут,
+    // і далі в js/main.js: initPreloader читає той самий клас).
+    (function () {
+      try {
+        if (sessionStorage.getItem('tempoSkipPreloader') === '1') {
+          sessionStorage.removeItem('tempoSkipPreloader');
+        } else {
+          document.documentElement.classList.add('is-preloading');
+        }
+      } catch (e) {
+        document.documentElement.classList.add('is-preloading');
+      }
+    })();
+  </script>
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Onest:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
@@ -13,6 +42,13 @@
   <link rel="stylesheet" href="../css/reviews.css">
 </head>
 <body>
+
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <div class="preloader__logo"><canvas class="preloader__canvas"></canvas></div>
+      <p class="preloader__counter">loading... <span>0</span> %</p>
+    </div>
+  </div>
 
   <header class="header">
     <div class="container header__inner">
@@ -64,7 +100,7 @@
       <div class="container reviews-hero__inner">
         <div class="reviews-hero__content">
           <h1 class="reviews-hero__title">Client<br>reviews</h1>
-          <p class="reviews-hero__subtitle">4.8 out of 5 based on 127 ratings on Google and Lardi-Trans</p>
+          <p class="reviews-hero__subtitle">4.8 out of&nbsp;5 based on&nbsp;127 ratings on&nbsp;Google and&nbsp;Lardi-Trans</p>
           <a href="#" class="btn btn--primary">Write a review</a>
         </div>
         <img src="../assets/img/reviews-photo.png" alt="" class="reviews-hero__media" aria-hidden="true">
@@ -110,7 +146,7 @@
       <div class="container">
         <div class="cases__header">
           <h2 class="cases__title" data-anim="wipe">Our cases</h2>
-          <p class="cases__desc" data-anim="wipe">Trips where things weren't simple<br>— and how we solved it.</p>
+          <p class="cases__desc" data-anim="wipe">Trips where things weren't simple<br>— and&nbsp;how we&nbsp;solved it.</p>
         </div>
       </div>
 
@@ -119,7 +155,7 @@
         <div class="case__inner">
           <article class="case-item">
             <div class="case-item__header">
-              <h3 class="case-item__title">A 14-tonne machine tool to Prague in 5 days</h3>
+              <h3 class="case-item__title">A&nbsp;14-tonne machine tool to&nbsp;Prague in&nbsp;5 days</h3>
               <span class="case-item__date">March 2026</span>
             </div>
             <div class="case-item__body">
@@ -127,9 +163,11 @@
               <p class="case-item__result"><strong>Result:</strong> arrival in 5 days instead of the planned 7. Installation started on schedule.</p>
 
               <div class="case-stats">
-                <img src="../assets/img/1 700 km.png" alt="1700 km" class="case-stat__img">
+                <img src="../assets/img/1 700 km.png" alt="1700 km" class="case-stat__img case-stat__img--desktop">
+                <img src="../assets/img/1 700 km-mobile-en.png" alt="1700 km" class="case-stat__img case-stat__img--mobile">
                 <div class="case-stats__divider"></div>
-                <img src="../assets/img/Kharkiv→ Prague.png" alt="Kharkiv → Prague" class="case-stat__img">
+                <img src="../assets/img/Kharkiv→ Prague.png" alt="Kharkiv → Prague" class="case-stat__img case-stat__img--desktop">
+                <img src="../assets/img/Kharkiv → Prague-mobile-en.png" alt="Kharkiv → Prague" class="case-stat__img case-stat__img--mobile">
                 <div class="case-stats__divider"></div>
                 <img src="../assets/img/14 T.png" alt="14 t" class="case-stat__img">
               </div>
@@ -142,7 +180,7 @@
         <div class="case__inner">
           <article class="case-item">
             <div class="case-item__header">
-              <h3 class="case-item__title">47 trips without breaking the cold chain</h3>
+              <h3 class="case-item__title">47 trips without breaking the&nbsp;cold chain</h3>
               <span class="case-item__date">February 2026</span>
             </div>
             <div class="case-item__body">
@@ -150,11 +188,14 @@
               <p class="case-item__result"><strong>Result:</strong> 47 trips in a year, no deviation from the required temperature. The contract was extended.</p>
 
               <div class="case-stats">
-                <img src="../assets/img/1 400 km.png" alt="1400 km" class="case-stat__img">
+                <img src="../assets/img/1 400 km.png" alt="1400 km" class="case-stat__img case-stat__img--desktop">
+                <img src="../assets/img/1 400 km-mobile-en.png" alt="1400 km" class="case-stat__img case-stat__img--mobile">
                 <div class="case-stats__divider"></div>
-                <img src="../assets/img/Lviv → Hamburg.png" alt="Lviv → Hamburg" class="case-stat__img">
+                <img src="../assets/img/Lviv → Hamburg.png" alt="Lviv → Hamburg" class="case-stat__img case-stat__img--desktop">
+                <img src="../assets/img/Lviv → Hamburg-mobile-en.png" alt="Lviv → Hamburg" class="case-stat__img case-stat__img--mobile">
                 <div class="case-stats__divider"></div>
-                <img src="../assets/img/47 flights.png" alt="47 trips" class="case-stat__img">
+                <img src="../assets/img/47 flights.png" alt="47 trips" class="case-stat__img case-stat__img--desktop">
+                <img src="../assets/img/47 flights-mobile-en.png" alt="47 trips" class="case-stat__img case-stat__img--mobile">
               </div>
             </div>
           </article>
@@ -164,7 +205,7 @@
         <div class="case__inner">
           <article class="case-item">
             <div class="case-item__header">
-              <h3 class="case-item__title">A 14-tonne machine tool to Prague in 5 days</h3>
+              <h3 class="case-item__title">A&nbsp;14-tonne machine tool to&nbsp;Prague in&nbsp;5 days</h3>
               <span class="case-item__date">March 2026</span>
             </div>
             <div class="case-item__body">
@@ -172,9 +213,11 @@
               <p class="case-item__result"><strong>Result:</strong> arrival in 5 days instead of the planned 7. Installation started on schedule.</p>
 
               <div class="case-stats">
-                <img src="../assets/img/1 700 km.png" alt="1700 km" class="case-stat__img">
+                <img src="../assets/img/1 700 km.png" alt="1700 km" class="case-stat__img case-stat__img--desktop">
+                <img src="../assets/img/1 700 km-mobile-en.png" alt="1700 km" class="case-stat__img case-stat__img--mobile">
                 <div class="case-stats__divider"></div>
-                <img src="../assets/img/Kharkiv→ Prague.png" alt="Kharkiv → Prague" class="case-stat__img">
+                <img src="../assets/img/Kharkiv→ Prague.png" alt="Kharkiv → Prague" class="case-stat__img case-stat__img--desktop">
+                <img src="../assets/img/Kharkiv → Prague-mobile-en.png" alt="Kharkiv → Prague" class="case-stat__img case-stat__img--mobile">
                 <div class="case-stats__divider"></div>
                 <img src="../assets/img/14 T.png" alt="14 t" class="case-stat__img">
               </div>
@@ -187,7 +230,7 @@
         <div class="case__inner">
           <article class="case-item">
             <div class="case-item__header">
-              <h3 class="case-item__title">47 trips without breaking the cold chain</h3>
+              <h3 class="case-item__title">47 trips without breaking the&nbsp;cold chain</h3>
               <span class="case-item__date">February 2026</span>
             </div>
             <div class="case-item__body">
@@ -195,11 +238,14 @@
               <p class="case-item__result"><strong>Result:</strong> 47 trips in a year, no deviation from the required temperature. The contract was extended.</p>
 
               <div class="case-stats">
-                <img src="../assets/img/1 400 km.png" alt="1400 km" class="case-stat__img">
+                <img src="../assets/img/1 400 km.png" alt="1400 km" class="case-stat__img case-stat__img--desktop">
+                <img src="../assets/img/1 400 km-mobile-en.png" alt="1400 km" class="case-stat__img case-stat__img--mobile">
                 <div class="case-stats__divider"></div>
-                <img src="../assets/img/Lviv → Hamburg.png" alt="Lviv → Hamburg" class="case-stat__img">
+                <img src="../assets/img/Lviv → Hamburg.png" alt="Lviv → Hamburg" class="case-stat__img case-stat__img--desktop">
+                <img src="../assets/img/Lviv → Hamburg-mobile-en.png" alt="Lviv → Hamburg" class="case-stat__img case-stat__img--mobile">
                 <div class="case-stats__divider"></div>
-                <img src="../assets/img/47 flights.png" alt="47 trips" class="case-stat__img">
+                <img src="../assets/img/47 flights.png" alt="47 trips" class="case-stat__img case-stat__img--desktop">
+                <img src="../assets/img/47 flights-mobile-en.png" alt="47 trips" class="case-stat__img case-stat__img--mobile">
               </div>
             </div>
           </article>
@@ -221,8 +267,8 @@
 
       <div class="container">
         <div class="contact-card">
-          <h2 class="contact-card__title" data-anim="wipe">Submit a request</h2>
-          <p class="contact-card__subtitle subheading" data-anim="wipe">We reply within an hour during working hours</p>
+          <h2 class="contact-card__title" data-anim="wipe">Submit a&nbsp;request</h2>
+          <p class="contact-card__subtitle subheading" data-anim="wipe">We&nbsp;reply within an&nbsp;hour during working hours</p>
 
           <form class="contact-form" data-anim="stagger">
             <div class="contact-form__row">

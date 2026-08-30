@@ -292,7 +292,10 @@
   }
 
   .prices-hero__subtitle {
-    font-size: 13px;
+    font-size: var(--mobile-text-subheading);
+    line-height: var(--mobile-text-subheading-line-height);
+    letter-spacing: var(--mobile-text-subheading-letter-spacing);
+    color: var(--mobile-text-subheading-color);
   }
 
   .prices-marquee__img {
@@ -312,11 +315,20 @@
   }
 
   .calculator-card__title {
-    font-size: 28px;
+    font-size: var(--mobile-text-heading);
+    line-height: var(--mobile-text-heading-line-height);
+    letter-spacing: var(--mobile-text-heading-letter-spacing);
+    color: var(--mobile-text-heading-color);
     text-align: center;
+    margin-bottom: 0;
   }
 
   .calculator-card__subtitle {
+    margin-top: var(--mobile-heading-gap);
+    font-size: var(--mobile-text-subheading);
+    line-height: var(--mobile-text-subheading-line-height);
+    letter-spacing: var(--mobile-text-subheading-letter-spacing);
+    color: var(--mobile-text-subheading-color);
     text-align: center;
   }
 
@@ -358,26 +370,39 @@
 
   .rates__header {
     flex-direction: column;
-    gap: 12px;
+    gap: var(--mobile-heading-gap);
   }
 
   .rates__title {
-    font-size: 28px;
+    font-size: var(--mobile-text-heading);
+    line-height: var(--mobile-text-heading-line-height);
+    letter-spacing: var(--mobile-text-heading-letter-spacing);
+    color: var(--mobile-text-heading-color);
   }
 
   .rates__desc {
     max-width: 100%;
+    font-size: var(--mobile-text-subheading);
+    line-height: var(--mobile-text-subheading-line-height);
+    letter-spacing: var(--mobile-text-subheading-letter-spacing);
+    color: var(--mobile-text-subheading-color);
   }
 
   .rates-table__row--head {
     display: none;
   }
 
+  /* Лінія перед першим рядком — на десктопі це рамка прихованого тут .rates-table__row--head. */
+  .rates-table {
+    border-top: 1px solid #ececec;
+  }
+
   .rates-table__row,
   .rates-table--two-col .rates-table__row {
     grid-template-columns: 1fr;
-    row-gap: 12px;
-    padding-block: 22px;
+    row-gap: 6px;
+    padding-block: 14px;
+    border-bottom-color: #ececec;
   }
 
   .rates-table__name,
@@ -388,6 +413,14 @@
     justify-content: space-between;
     gap: 12px;
     text-align: left;
+  }
+
+  .rates-table__name {
+    font-size: 15px;
+  }
+
+  .rates-table__capacity {
+    font-size: 13px;
   }
 
   .rates-table__name::after,
@@ -404,6 +437,6 @@
   }
 
   .rates-table__price {
-    font-size: 20px;
+    font-size: 18px;
   }
 }

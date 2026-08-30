@@ -5,6 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About us — Tempo</title>
 
+  <style>
+    html.is-preloading { overflow: hidden; }
+    html:not(.is-preloading) .preloader { display: none; }
+    .preloader { position: fixed; inset: 0; z-index: 999; display: flex; align-items: center; justify-content: center; background: #0E0E0E; }
+  </style>
+  <script>
+    // Синхронно, ДО першого пофарбування body: прелоадер показується на
+    // КОЖЕН вхід/перезавантаження сайту, ОКРІМ переходу з іншої сторінки
+    // сайту по внутрішньому лінку (навігація, перемикач мови) — js/main.js
+    // (клік-хендлер initInternalLinkSkip) перед таким переходом виставляє
+    // прапорець tempoSkipPreloader в sessionStorage; тут він одноразово
+    // читається й одразу видаляється, щоб не вплинути на наступне
+    // перезавантаження. Клас is-preloading додається лише коли прапорця
+    // немає — саме він визначає, чи взагалі показувати прелоадер (і тут,
+    // і далі в js/main.js: initPreloader читає той самий клас).
+    (function () {
+      try {
+        if (sessionStorage.getItem('tempoSkipPreloader') === '1') {
+          sessionStorage.removeItem('tempoSkipPreloader');
+        } else {
+          document.documentElement.classList.add('is-preloading');
+        }
+      } catch (e) {
+        document.documentElement.classList.add('is-preloading');
+      }
+    })();
+  </script>
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Onest:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
@@ -13,6 +42,13 @@
   <link rel="stylesheet" href="../css/about.css">
 </head>
 <body>
+
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <div class="preloader__logo"><canvas class="preloader__canvas"></canvas></div>
+      <p class="preloader__counter">loading... <span>0</span> %</p>
+    </div>
+  </div>
 
   <header class="header">
     <div class="container header__inner">
@@ -64,7 +100,7 @@
       <div class="container about-hero__inner">
         <div class="about-hero__content">
           <h1 class="about-hero__title">About us</h1>
-          <p class="about-hero__subtitle subheading">A look at the company, the team and the fleet: everything worth knowing before your first shipment.</p>
+          <p class="about-hero__subtitle subheading">A&nbsp;look at&nbsp;the&nbsp;company, the&nbsp;team and&nbsp;the&nbsp;fleet: everything worth knowing before your first shipment.</p>
           <a href="#fleet" class="btn btn--primary">See our fleet</a>
         </div>
         <div class="about-hero__media">
@@ -76,7 +112,7 @@
     <section class="about-story" data-header-theme="light">
       <div class="container about-story__inner">
         <div class="about-story__text">
-          <h2 class="about-story__title" data-anim="wipe">How it started</h2>
+          <h2 class="about-story__title" data-anim="wipe">How it&nbsp;started</h2>
           <div class="about-story__paragraphs text-body">
             <p>Until 2013, Andrii Kovalchuk worked as a logistics manager at a large freight forwarding company. Every day he saw the same thing: an order came in, was handed to a subcontractor, who passed it to someone else, and by the third pair of hands the load had slipped off schedule. The client would call asking where the truck was, and nobody had an answer.</p>
             <p class="about-story__paragraphs--muted">Taras Benko came at it from the other side. A long-haul international driver with ten years behind the wheel, he knew the routes, the border crossings, and how customs paperwork actually works.</p>
@@ -95,7 +131,7 @@
           <img src="../assets/img/grow-about.png" alt="">
         </div>
         <div class="about-growth__text">
-          <h2 class="about-growth__title" data-anim="wipe">How it grew</h2>
+          <h2 class="about-growth__title" data-anim="wipe">How it&nbsp;grew</h2>
           <ul class="about-growth__list text-body" data-anim="stagger">
             <li>2013: two tractor units, one route, Poland</li>
             <li>2015: first refrigerated trailers, expansion into Czechia and Slovakia</li>
@@ -119,14 +155,14 @@
     <section class="about-today" data-header-theme="dark">
       <div class="container about-today__inner">
         <h2 class="about-today__title">Today</h2>
-        <p class="about-today__text subheading">48 people on the team: 32 drivers, 6 logistics coordinators, 4 client managers, a customs clearance specialist, mechanics and accounting. Office and repair base in Lviv. Trucks on the road every day.</p>
+        <p class="about-today__text subheading">48 people on&nbsp;the&nbsp;team: 32 drivers, 6 logistics coordinators, 4 client managers, a&nbsp;customs clearance specialist, mechanics and&nbsp;accounting. Office and&nbsp;repair base in&nbsp;Lviv. Trucks on&nbsp;the&nbsp;road every day.</p>
       </div>
     </section>
 
     <section class="fleet" data-header-theme="light">
       <div class="container fleet__header">
         <h2 class="fleet__title" data-anim="wipe">Our<br>fleet</h2>
-        <p class="fleet__desc subheading" data-anim="wipe">Every vehicle is our own, none of it rented. The average truck is 4 years old and serviced at our own facility.</p>
+        <p class="fleet__desc subheading" data-anim="wipe">Every vehicle is&nbsp;our own, none of&nbsp;it&nbsp;rented. The&nbsp;average truck is&nbsp;4 years old and&nbsp;serviced at&nbsp;our own facility.</p>
       </div>
 
       <div class="container">
@@ -154,7 +190,7 @@
     <section class="about-team" data-header-theme="light">
       <div class="container about-team__header">
         <h2 class="about-team__title" data-anim="wipe">Meet<br>our team</h2>
-        <p class="about-team__desc subheading" data-anim="wipe">48 people on staff — drivers, logistics coordinators, managers and the people who handle the documents. Every trip is run by a specific person.</p>
+        <p class="about-team__desc subheading" data-anim="wipe">48 people on staff — drivers, logistics coordinators, managers and&nbsp;the&nbsp;people who handle the&nbsp;documents. Every trip is&nbsp;run by&nbsp;a&nbsp;specific person.</p>
       </div>
 
       <div class="about-team__list-wrap">
@@ -231,6 +267,7 @@
           <span class="team-photo"><img src="../assets/img/Rectangle 36.png" alt=""></span>
           <span class="team-photo"><img src="../assets/img/Rectangle 38.png" alt=""></span>
           <span class="team-photo"><img src="../assets/img/Rectangle 39.png" alt=""></span>
+          <span class="team-photo"><img src="../assets/img/Rectangle 24-5.png" alt=""></span>
         </div>
       </div>
     </section>
@@ -241,8 +278,8 @@
 
       <div class="container">
         <div class="contact-card">
-          <h2 class="contact-card__title" data-anim="wipe">Submit a request</h2>
-          <p class="contact-card__subtitle subheading" data-anim="wipe">We reply within an hour during working hours</p>
+          <h2 class="contact-card__title" data-anim="wipe">Submit a&nbsp;request</h2>
+          <p class="contact-card__subtitle subheading" data-anim="wipe">We&nbsp;reply within an&nbsp;hour during working hours</p>
 
           <form class="contact-form" data-anim="stagger">
             <div class="contact-form__row">

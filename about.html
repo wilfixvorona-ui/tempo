@@ -5,6 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Про нас — Tempo</title>
 
+  <style>
+    html.is-preloading { overflow: hidden; }
+    html:not(.is-preloading) .preloader { display: none; }
+    .preloader { position: fixed; inset: 0; z-index: 999; display: flex; align-items: center; justify-content: center; background: #0E0E0E; }
+  </style>
+  <script>
+    // Синхронно, ДО першого пофарбування body: прелоадер показується на
+    // КОЖЕН вхід/перезавантаження сайту, ОКРІМ переходу з іншої сторінки
+    // сайту по внутрішньому лінку (навігація, перемикач мови) — js/main.js
+    // (клік-хендлер initInternalLinkSkip) перед таким переходом виставляє
+    // прапорець tempoSkipPreloader в sessionStorage; тут він одноразово
+    // читається й одразу видаляється, щоб не вплинути на наступне
+    // перезавантаження. Клас is-preloading додається лише коли прапорця
+    // немає — саме він визначає, чи взагалі показувати прелоадер (і тут,
+    // і далі в js/main.js: initPreloader читає той самий клас).
+    (function () {
+      try {
+        if (sessionStorage.getItem('tempoSkipPreloader') === '1') {
+          sessionStorage.removeItem('tempoSkipPreloader');
+        } else {
+          document.documentElement.classList.add('is-preloading');
+        }
+      } catch (e) {
+        document.documentElement.classList.add('is-preloading');
+      }
+    })();
+  </script>
+
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Onest:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
@@ -13,6 +42,13 @@
   <link rel="stylesheet" href="css/about.css">
 </head>
 <body>
+
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <div class="preloader__logo"><canvas class="preloader__canvas"></canvas></div>
+      <p class="preloader__counter">loading... <span>0</span> %</p>
+    </div>
+  </div>
 
   <header class="header">
     <div class="container header__inner">
@@ -73,8 +109,8 @@
     <section class="about-hero" data-header-theme="light">
       <div class="container about-hero__inner">
         <div class="about-hero__content">
-          <h1 class="about-hero__title">Про нас</h1>
-          <p class="about-hero__subtitle subheading">Розкажемо про компанію, команду й автопарк — усе, що варто знати перед першим рейсом.</p>
+          <h1 class="about-hero__title">Про&nbsp;нас</h1>
+          <p class="about-hero__subtitle subheading">Розкажемо про&nbsp;компанію, команду й&nbsp;автопарк — усе, що&nbsp;варто знати перед першим рейсом.</p>
           <a href="#fleet" class="btn btn--primary">Подивитись автопарк</a>
         </div>
         <div class="about-hero__media">
@@ -100,7 +136,7 @@
     <section class="about-story" data-header-theme="light">
       <div class="container about-story__inner">
         <div class="about-story__text">
-          <h2 class="about-story__title" data-anim="wipe">Як все почалось</h2>
+          <h2 class="about-story__title" data-anim="wipe">Як&nbsp;все почалось</h2>
           <div class="about-story__paragraphs text-body">
             <p>Андрій Ковальчук до 2013 року працював логістом у великій експедиторській компанії. Щодня бачив те саме: замовлення бралося, потім передавалося субпідряднику, той — ще комусь, і на третій руці вантаж губився в графіку. Клієнт дзвонив і питав, де машина, а відповіді не було ні в кого.</p>
             <p class="about-story__paragraphs--muted">Тарас Бенько прийшов з іншого боку — водій-міжнародник з десятилітнім стажем, знав маршрути, кордони й те, як реально працює документообіг на митниці.</p>
@@ -129,7 +165,7 @@
           <img src="assets/img/grow-about.png" alt="">
         </div>
         <div class="about-growth__text">
-          <h2 class="about-growth__title" data-anim="wipe">Як росло</h2>
+          <h2 class="about-growth__title" data-anim="wipe">Як&nbsp;росло</h2>
           <ul class="about-growth__list text-body" data-anim="stagger">
             <li>2013 — два тягачі, один напрямок: Польща</li>
             <li>2015 — перші рефрижератори, вихід на Чехію та Словаччину</li>
@@ -154,7 +190,7 @@
     -->
     <section class="about-principles" data-header-theme="light">
       <div class="container">
-        <h2 class="about-principles__title" data-anim="wipe">Принципи які не змінились</h2>
+        <h2 class="about-principles__title" data-anim="wipe">Принципи які не&nbsp;змінились</h2>
         <p class="about-principles__text text-body">Ми не передаємо вантаж субпідрядникам. Водії працюють у штаті, а не залучаються під рейс. Ціна фіксується в договорі й не змінюється після підписання. Документи оформлюємо на своєму боці — саме тому вантаж не стоїть на кордоні через чужу помилку.</p>
       </div>
     </section>
@@ -174,14 +210,14 @@
     <section class="about-today" data-header-theme="dark">
       <div class="container about-today__inner">
         <h2 class="about-today__title">Сьогодні</h2>
-        <p class="about-today__text subheading">48 людей у команді: 32 водії, 6 логістів, 4 менеджери з роботи з клієнтами, спеціаліст з митного оформлення, механіки, бухгалтерія. Офіс і ремонтна база у Львові. Машини на маршрутах щодня.</p>
+        <p class="about-today__text subheading">48 людей у&nbsp;команді: 32 водії, 6 логістів, 4 менеджери з&nbsp;роботи з&nbsp;клієнтами, спеціаліст з&nbsp;митного оформлення, механіки, бухгалтерія. Офіс і&nbsp;ремонтна база у&nbsp;Львові. Машини на&nbsp;маршрутах щодня.</p>
       </div>
     </section>
 
     <section class="fleet" data-header-theme="light">
       <div class="container fleet__header">
-        <h2 class="fleet__title" data-anim="wipe">Наш<br>автопарк</h2>
-        <p class="fleet__desc subheading" data-anim="wipe">Увесь транспорт власний, не орендований. Середній вік машин — 4 роки, обслуговування на власній базі.</p>
+        <h2 class="fleet__title" data-anim="wipe">Наш автопарк</h2>
+        <p class="fleet__desc subheading" data-anim="wipe">Увесь транспорт власний, не&nbsp;орендований. Середній вік машин — 4 роки, обслуговування на&nbsp;власній базі.</p>
       </div>
 
       <div class="container">
@@ -208,8 +244,8 @@
 
     <section class="about-team" data-header-theme="light">
       <div class="container about-team__header">
-        <h2 class="about-team__title" data-anim="wipe">Познайомтесь з<br>нашою командою</h2>
-        <p class="about-team__desc subheading" data-anim="wipe">48 людей у штаті — водії, логісти, менеджери й ті, хто оформлює документи. Кожен рейс веде конкретна людина.</p>
+        <h2 class="about-team__title" data-anim="wipe">Познайомтесь<br>з&nbsp;нашою командою</h2>
+        <p class="about-team__desc subheading" data-anim="wipe">48 людей у&nbsp;штаті — водії, логісти, менеджери й&nbsp;ті, хто оформлює документи. Кожен рейс веде конкретна людина.</p>
       </div>
 
       <div class="about-team__list-wrap">
@@ -286,6 +322,7 @@
           <span class="team-photo"><img src="assets/img/Rectangle 36.png" alt=""></span>
           <span class="team-photo"><img src="assets/img/Rectangle 38.png" alt=""></span>
           <span class="team-photo"><img src="assets/img/Rectangle 39.png" alt=""></span>
+          <span class="team-photo"><img src="assets/img/Rectangle 24-5.png" alt=""></span>
         </div>
 
         <div class="about-section-footer about-section-footer--team-grid">
@@ -301,7 +338,7 @@
       <div class="container">
         <div class="contact-card">
           <h2 class="contact-card__title" data-anim="wipe">Залишити заявку</h2>
-          <p class="contact-card__subtitle subheading" data-anim="wipe">Відповідаємо протягом години в робочий час</p>
+          <p class="contact-card__subtitle subheading" data-anim="wipe">Відповідаємо протягом години в&nbsp;робочий час</p>
 
           <form class="contact-form" data-anim="stagger">
             <div class="contact-form__row">

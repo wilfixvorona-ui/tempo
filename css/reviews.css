@@ -329,6 +329,11 @@
   object-fit: contain;
 }
 
+/* Деякі статистики мають окрему картинку під мобільний екран (--mobile) — інакше показується --desktop. */
+.case-stat__img--mobile {
+  display: none;
+}
+
 .case-stats__divider {
   width: 1px;
   height: auto;
@@ -400,7 +405,10 @@
   }
 
   .reviews-hero__subtitle {
-    font-size: 13px;
+    font-size: var(--mobile-text-subheading);
+    line-height: var(--mobile-text-subheading-line-height);
+    letter-spacing: var(--mobile-text-subheading-letter-spacing);
+    color: var(--mobile-text-subheading-color);
   }
 
   .reviews-hero__media {
@@ -423,23 +431,60 @@
     padding: 9px 14px;
   }
 
+  .reviews-list {
+    gap: 16px;
+  }
+
+  .reviews-list .review-card {
+    width: 100%;
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .reviews-list .review-card__text {
+    font-size: 15px;
+  }
+
+  .review-card__reply {
+    margin-top: 16px;
+    padding-top: 16px;
+  }
+
+  .review-card__reply-head {
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  /* .text-body тримає фіксовані 22px, не адаптивні під мобілку — перевизначаємо тут. */
+  .review-card__reply-text {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
   .cases {
     padding-block: 40px 24px;
   }
 
   .cases__header {
     flex-direction: column;
-    gap: 8px;
+    gap: var(--mobile-heading-gap);
     padding-bottom: 20px;
   }
 
   .cases__title {
-    font-size: 28px;
+    font-size: var(--mobile-text-heading);
+    line-height: var(--mobile-text-heading-line-height);
+    letter-spacing: var(--mobile-text-heading-letter-spacing);
+    color: var(--mobile-text-heading-color);
   }
 
   .cases__desc {
     max-width: 100%;
     text-align: left;
+    font-size: var(--mobile-text-subheading);
+    line-height: var(--mobile-text-subheading-line-height);
+    letter-spacing: var(--mobile-text-subheading-letter-spacing);
+    color: var(--mobile-text-subheading-color);
   }
 
   .case-item__header {
@@ -462,16 +507,25 @@
   }
 
   .case-stats {
-    grid-template-columns: 1fr;
-    row-gap: 20px;
+    grid-template-columns: 1fr 1px 1fr 1px 1fr;
+    column-gap: 8px;
+    row-gap: 0;
     padding-block: 24px;
   }
 
   .case-stat__img {
-    max-width: 220px;
+    max-width: 110px;
+  }
+
+  .case-stat__img--desktop {
+    display: none;
+  }
+
+  .case-stat__img--mobile {
+    display: block;
   }
 
   .case-stats__divider {
-    display: none;
+    display: block;
   }
 }
